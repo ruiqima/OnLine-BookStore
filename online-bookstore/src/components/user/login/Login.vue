@@ -1,14 +1,16 @@
 <template>
 <div class='loginbg'>
-  <a-form :form="form" @submit="handleSubmit" class='form'>
+  <div class="formlist">
+  <a-form :form="form" @submit="handleSubmit" >
     <div class="welcome">欢迎来到书的世界！</div>
-    <a-form-item  :label-col="{ span: 8 }" :wrapper-col="{ span: 4}" >
+    <div class='form'>
+    <a-form-item  :label-col="{ span: 8 }" :wrapper-col="{ span: 10}" >
       <a-input class='cover'
         v-decorator="['userName', { rules: [{ required: true, message: '请输入有效的用户名！' }] }]"
       placeholder="请输入您的用户名~"
       />
     </a-form-item>
-    <a-form-item  :label-col="{ span: 8 }" :wrapper-col="{ span: 4 }">
+    <a-form-item  :label-col="{ span: 8 }" :wrapper-col="{ span: 10 }">
       <a-input class='cover'
         v-decorator="[
           'password',
@@ -17,14 +19,16 @@
         placeholder="请输入您的密码~"
       />
     </a-form-item>
-    <a-form-item :wrapper-col="{ span: 6 }">
-      <a-button type="primary" html-type="确定" class="cover">
+    <a-form-item :wrapper-col="{ span: 10 }">
+      <a-button type="primary" html-type="confirm" class="cover">
         登录
       </a-button>
     </a-form-item>
+    </div>
     <router-link :to="{name:'Registry'}"><div class="tip">还没有账号？点我注册</div></router-link>
   </a-form>
   </div>
+</div>
 </template>
 
 <script>
@@ -37,6 +41,7 @@ export default {
   },
   methods: {
     handleSubmit(e) {
+      
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
@@ -63,18 +68,22 @@ export default {
   padding-top:100px;
   padding-bottom: 100px;
 }
-.form{
+.formlist{
   
-  background-color:whitesmoke;
+  background-color:rgba(245, 245, 245, 0.911);
   border-radius: 5px;
   box-shadow: #cdcdcd 2px;
   width:500px;
-  
   display:flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   
+  
+}
+.form{
+  
+  padding-left:18%;
 }
 .welcome{
   padding-top:10%;
@@ -84,14 +93,14 @@ export default {
 }
 .cover{
   width:300px !important;
-  margin-left:100px !important;
   height:45px !important;
   font-size: 16px !important;
-  
+  margin:5%;
 }
 .tip{
   font-size:15px;
   padding-bottom: 10%;
+  color:black;
 }
 
 
