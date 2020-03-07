@@ -36,8 +36,8 @@ export default {
   data() {
     return {
       formLayout: 'horizontal',
-      form: this.$form.createForm(this, { name: 'coordinated' }),
-    };
+      form: this.$form.createForm(this, { name: 'coordinated' })
+    }
   },
   methods: {
     handleSubmit(e) {
@@ -45,27 +45,32 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values);
+          console.log('Received values of form: ', values)
         }
-      });
-      }
-    },
+      })
+    }
+  }
 }
 </script>
 
 <style>
-
-.loginbg{
-  background:linear-gradient(62deg,#719669 0%,#4e8c41 50%,#58904c 50%, #3e8331 100%);
+.loginbg {
+  background: linear-gradient(
+    62deg,
+    #719669 0%,
+    #4e8c41 50%,
+    #58904c 50%,
+    #3e8331 100%
+  );
   background-position: center center;
-  background-attachment: scroll; 
+  background-attachment: scroll;
   background-size: cover;
   background-color: #3e8331;
-  height:642px;
+  height: 642px;
   display: flex;
   justify-content: center;
   text-align: center;
-  padding-top:100px;
+  padding-top: 100px;
   padding-bottom: 100px;
 }
 .formlist{
@@ -85,8 +90,8 @@ export default {
   
   padding-left:18%;
 }
-.welcome{
-  padding-top:10%;
+.welcome {
+  padding-top: 10%;
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -97,11 +102,9 @@ export default {
   font-size: 16px !important;
   margin:5%;
 }
-.tip{
-  font-size:15px;
+.tip {
+  font-size: 15px;
   padding-bottom: 10%;
   color:black;
 }
-
-
 </style>

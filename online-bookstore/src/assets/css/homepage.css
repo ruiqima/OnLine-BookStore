@@ -1,0 +1,46 @@
+.border {
+  border: 2px solid black;
+}
+.img-header-logo {
+  margin: 0px 20px;
+  width: 50px;
+  height: 60px;
+}
+.flex-colunm {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.ver-center {
+  display: flex;
+  align-items: center;
+}
+.hori-center {
+  display: flex;
+  justify-content: center;
+}
+.p-header-text {
+  width: 200px;
+  font-size: 40px;
+  /* margin-top: 20px; */
+}
+.hmp-title-text {
+  color: darkolivegreen;
+  font-size: large;
+  margin-right: 20px;
+}
+/* 走马灯 */
+.ant-carousel /deep/ .slick-slide {
+  text-align: center;
+  height: 240px;
+  line-height: 240px;
+  background: #364d79;
+  overflow: hidden;
+}
+
+.ant-carousel /deep/ .slick-slide h3 {
+  color: #ea1;
+}
