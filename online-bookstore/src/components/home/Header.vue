@@ -18,7 +18,7 @@
       <!-- 搜索框 -->
       <a-input-search
         placeholder="输入你想搜索的内容"
-        style="width: 500px;height:50px; margin-right:20px; margin-left:230px;"
+        style="width: 500px;height:50px; margin-right:20px; margin-left:170px;"
         @search="onsearch"
         size="small"
       />

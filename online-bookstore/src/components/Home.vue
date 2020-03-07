@@ -1,24 +1,30 @@
 <template>
   <a-layout>
+    <a-layout-sider style="background-color:#ECECEC;" width="100px">
+    </a-layout-sider>
     <!-- header -->
-    <Header />
-
-    <!-- 中部内容 -->
     <a-layout>
-      <a-layout-sider style="background-color:white;">
-        <!-- 左侧边栏 --><SubMenu />
-      </a-layout-sider>
+      <Header />
 
-      <a-layout-content>
-        <!-- 走马灯 --><Carousel />
-        <!-- 卡片 --><Card />
-      </a-layout-content>
+      <!-- 中部内容 -->
+      <a-layout>
+        <a-layout-sider style="background-color:white;">
+          <!-- 左侧边栏 --><SubMenu />
+        </a-layout-sider>
+        <a-layout-content> <!-- 走马灯 --><Carousel /> </a-layout-content>
+        <!-- sider -->
+        <a-layout-sider width="300px"></a-layout-sider>
+      </a-layout>
 
-      <!-- sider -->
-      <a-layout-sider width="300px"></a-layout-sider>
+      <a-layout>
+        <a-layout-content> <!-- 卡片 --><Card /> </a-layout-content>
+      </a-layout>
+
+      <a-layout-footer>Footer</a-layout-footer>
     </a-layout>
 
-    <a-layout-footer>Footer</a-layout-footer>
+    <a-layout-sider style="background-color:#ECECEC;" width="100px">
+    </a-layout-sider>
   </a-layout>
 </template>
 

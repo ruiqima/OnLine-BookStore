@@ -17,8 +17,8 @@ export default {}
 <style scoped>
 .ant-carousel /deep/ .slick-slide {
   text-align: center;
-  height: 380px;
-  line-height: 380px;
+  height: 450px;
+  line-height: 450px;
   background: #364d79;
   overflow: hidden;
 }
