@@ -35,8 +35,8 @@
 /* 走马灯 */
 .ant-carousel /deep/ .slick-slide {
   text-align: center;
-  height: 240px;
-  line-height: 240px;
+  height: 380px;
+  line-height: 380px;
   background: #364d79;
   overflow: hidden;
 }
