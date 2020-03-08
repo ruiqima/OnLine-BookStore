@@ -12,7 +12,6 @@
 <script>
 //import Home from '@/components/Home'
 import User from '@/components/user/User'
-
 export default {
   name: 'App',
   components: {
@@ -20,11 +19,6 @@ export default {
     User
   }
 }
-
-// 使用这个值作为屏幕宽度
-// alert(document.body.clientWidth);
-// 使用这个值作为屏幕高度
-// alert(document.body.clientHeight);
 </script>
 
 <style lang="less">
@@ -35,14 +29,11 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
 #nav {
   padding: 30px;
-
   a {
     font-weight: bold;
     color: #2c3e50;
-
     &.router-link-exact-active {
       color: #42b983;
     }
