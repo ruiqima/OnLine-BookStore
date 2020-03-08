@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Home from '../components/Home.vue'
+import SearchResult from '../components/SearchResult.vue'
+import BookDetail from '../components/BookDetail.vue'
 import User from '../components/user/User.vue'
 import Login from '../components/user/login/Login.vue'
 import Registry from '../components/user/login/Registry.vue'
@@ -16,6 +18,24 @@ const routes = [
   },
   {
     path: '/',
+    path: '/results',
+    name: 'SearchResult',
+    component: SearchResult
+  },
+  {
+    path: '/detail',
+    name: 'BookDetail',
+    component: BookDetail
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    // component: () =>
+    //   import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: Cart
+  },
+  {
+    path: '/user',
     name: 'User',
     component: User
   },
