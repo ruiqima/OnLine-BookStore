@@ -1,24 +1,53 @@
 <template>
-  <a-card :bordered="false"
-          style="width: 83vw;margin-top:0.5vw;">
-    <template>
-      <div class="flex-row ver-center">
+  <a-row style="margin:0 20px;"
+         type="flex"
+         justify="start">
+    <a-col :xs="24"
+           :sm="24"
+           :md="24"
+           :lg="8"
+           :xl="8">
+      <a-card :bordered="false"
+              style="margin-top:7px;">
+
         <!-- 封面图片 -->
-        <div class="img-cover-div-detail"><img src="../../assets/imgs/pic2.jpg"
-               slot="cover"
-               class="img-cover-detail"></div>
+        <img src="../../assets/imgs/pic2.jpg"
+             object-fit="contain"
+             class="img-cover-detail">
 
         <!-- 右侧正文 -->
-        <a-card-meta class="rec-content"
-                     align="left">
+
+      </a-card>
+    </a-col>
+
+    <a-col :xs="24"
+           :sm="24"
+           :md="24"
+           :lg="16"
+           :xl="16">
+      <a-card :bordered="false">
+        <a-card-meta align="left">
           <template slot="description">
-            <span style="color:black;line-height:35px;font-size:1.7vw;font-weight:bold;line-height:3.5vw;">{{book.title}}</span><br />
+            <span style="color:black;line-height:35px;font-size:large;font-weight:bold;">{{book.title}}</span><br />
 
             <p align="left"
-               style="line-height:1.4px;letter-spacing: 0.07vw;color:#555555;font-size:1.1vw;line-height:1.8vw;"> {{book.introduction}}
+               style="letter-spacing: 1px;color:#555555;font-size:1.1vw;line-height:25px;"> {{book.introduction}}
             </p>
-            <span style="color:#555555;line-height:1.4vw; font-size:0.91vw;">作者：{{book.author}}</span>
-            <span style="color:#555555;line-height:1.4vw; font-size:0.91vw;margin-left:1.4vw;">出版社：{{book.publisher}}</span><br />
+            <a-row type="flex"
+                   justify="start">
+              <a-col :xs="24"
+                     :sm="12"
+                     :md="12"
+                     :lg="12"
+                     :xl="12">
+                <span style="color:#555555;line-height:20px; font-size:small;">作者：{{book.author}}</span></a-col>
+              <a-col :xs="24"
+                     :sm="12"
+                     :md="12"
+                     :lg="12"
+                     :xl="12"><span style="color:#555555;line-height:20px; font-size:small;">出版社：{{book.publisher}}</span>
+              </a-col>
+            </a-row><br />
 
             <!-- 评分 -->
             <a-rate v-model='value'
@@ -27,30 +56,28 @@
             <br />
 
             <a-tag color="cyan"
-                   style="margin-top:0.35vw;margin-bottom:0.7vw;">{{book.category}}</a-tag><br />
+                   style="margin-top:0.35vw;margin-bottom:10px;">{{book.category}}</a-tag><br />
             <span style="font-size:small;color:#999999;">价格 </span>
-            <span style="font-weight:600;color:#ea1;line-height:2.1vw;font-size:2.1vw;margin-left:0.7vw;">￥{{book.price}}</span><br />
+            <span style="font-weight:600;color:#ea1;line-height:20px;font-size:large;margin-left:10px;">￥{{book.price}}</span><br />
 
-            <span style="font-size:0.9vw;color:#999999; line-height:2.8vw;">本店活动 </span>
-            <span style="color:#B5621B; margin-left:1.4vw;letter-spacing:0.07vw;"
+            <span style="font-size:x-small;color:#999999; line-height:40px;">本店活动 </span>
+            <span style="color:#B5621B; margin-left:20px;letter-spacing:1px;"
                   v-for="(item, index) in discounts"
                   :key="index">满{{item.total}}减{{item.discount}}</span><br />
-            <span style="font-size:0.9vw;color:#999999;">销量</span>
-            <span style="font-size:0.9vw;color:#999999;margin-left:0.7vw;">{{book.sales}}</span><br />
-            <span style="font-size:0.9vw;color:#999999; line-height:2.8vw;">库存 </span>
-            <span style="font-size:0.9vw;color:#999999;margin-left:0.7vw;">{{book.stock}}</span><br /><br />
+            <span style="font-size:x-small;color:#999999;">销量</span>
+            <span style="font-size:x-small;color:#999999;margin-left:10px;">{{book.sales}}</span><br />
+            <span style="font-size:x-small;color:#999999; line-height:40px;">库存 </span>
+            <span style="font-size:x-small;color:#999999;margin-left:10px;">{{book.stock}}</span><br />
 
-            <a-button style="background-color:#EAF4EB;margin-top:0.35vw;">加入购物车</a-button>
-            <a-button style="margin-left:1.4vw;">立即购买</a-button>
-            <a-button style="margin-left:1.4vw;">收藏</a-button>
+            <a-button style="background-color:#EAF4EB;margin-top:40px;">加入购物车</a-button>
+            <a-button style="margin-left:20px;margin-top:40px;">立即购买</a-button>
+            <a-button style="margin-left:20px;margin-top:40px;">收藏</a-button>
           </template>
 
         </a-card-meta>
-      </div>
-    </template>
-
-  </a-card>
-
+      </a-card>
+    </a-col>
+  </a-row>
 </template>
 
 <script>

@@ -5,7 +5,7 @@
                       width="100px">
       </a-layout-sider>
       <!-- header -->
-      <a-layout>
+      <a-layout class="">
         <Header />
 
         <!-- 中部内容 -->
