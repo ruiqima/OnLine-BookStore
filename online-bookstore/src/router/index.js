@@ -17,7 +17,6 @@ const routes = [
     component: Home
   },
   {
-    path: '/',
     path: '/results',
     name: 'SearchResult',
     component: SearchResult
@@ -26,13 +25,6 @@ const routes = [
     path: '/detail',
     name: 'BookDetail',
     component: BookDetail
-  },
-  {
-    path: '/cart',
-    name: 'Cart',
-    // component: () =>
-    //   import(/* webpackChunkName: "about" */ '../views/About.vue')
-    component: Cart
   },
   {
     path: '/user',
