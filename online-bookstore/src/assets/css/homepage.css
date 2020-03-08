@@ -2,9 +2,8 @@
   border: 2px solid black;
 }
 .img-header-logo {
-  margin: 0px 20px;
-  width: 50px;
-  height: 60px;
+  width: 3.5vw;
+  height: 4.2vw;
 }
 .flex-colunm {
   display: flex;
@@ -29,7 +28,8 @@
 }
 .hmp-title-text {
   color: darkolivegreen;
-  font-size: large;
+  font-size: 1.5vw;
+  margin-left: 1.4vw;
 }
 .card-title-div {
   height: 50px;
@@ -55,10 +55,11 @@
   width: 1200px;
 }
 .img-cover-div-detail {
-  height: 400px;
-  width: 450px;
+  height: 28vw;
+  width: 31.5vw;
 }
 .img-cover-detail {
-  height: 390px;
-  width: 440px;
+  height: 28vw;
+  width: 31vw;
+  margin-right: 2.1vw;
 }

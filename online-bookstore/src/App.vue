@@ -18,6 +18,11 @@ export default {
     BookDetail
   }
 }
+
+// 使用这个值作为屏幕宽度
+// alert(document.body.clientWidth);
+// 使用这个值作为屏幕高度
+// alert(document.body.clientHeight);
 </script>
 
 <style lang="less">
