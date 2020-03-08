@@ -66,7 +66,6 @@ import SubMenu from '@/components/home/SubMenu'
 import Header from '@/components/home/Header'
 import PicDivider from '@/components/home/PicDivider'
 import Recommend from '@/components/home/Recommend'
-// import List from '@/components/home/List'
 
 export default {
   components: {
@@ -76,7 +75,6 @@ export default {
     Header,
     PicDivider,
     Recommend,
-    // List
   },
 
   methods: {}
