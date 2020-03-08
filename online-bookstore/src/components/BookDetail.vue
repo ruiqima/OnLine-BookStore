@@ -12,12 +12,26 @@
         <a-layout>
           <a-layout-content style="background-color: white;">
             <DetailCard />
-            <Comments />
           </a-layout-content>
+        </a-layout>
 
+        <a-layout>
+          <a-layout-sider style="background-color: white;"
+                          width="100px">
+          </a-layout-sider>
+          <a-layout-content style="background-color: white;">
+            <!-- 显示评论 -->
+            <Comments />
+
+            <a-layout-sider style="background-color: white;"
+                            width="100px">
+            </a-layout-sider>
+          </a-layout-content>
+          <a-layout-sider style="background-color: white;"
+                          width="100px">
+          </a-layout-sider>
         </a-layout>
       </a-layout>
-
       <a-layout-sider style="background-color: #ececec;"
                       width="100px">
       </a-layout-sider>
