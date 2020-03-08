@@ -1,14 +1,5 @@
 <template>
   <div style="display:flex;justify-content:space-between;margin-top:30px;">
-    <!-- <a-radio-group :value="size"
-                   @change="handleSizeChange"
-                   style="margin-left:30px;">
-      <a-radio-button value="default">综合</a-radio-button>
-      <a-radio-button value="price"
-                      style="margin-left:10px;">按价格</a-radio-button>
-      <a-radio-button value="sell"
-                      style="margin-left:10px;">按销量</a-radio-button>
-    </a-radio-group> -->
     <span class="card-title-text"
           style="margin-left:30px;">搜索结果</span>
 
