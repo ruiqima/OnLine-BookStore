@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Home from '../components/Home.vue'
-import Cart from '../components/Cart.vue'
 import User from '../components/user/User.vue'
 import Login from '../components/user/login/Login.vue'
 import Registry from '../components/user/login/Registry.vue'
@@ -16,14 +15,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/cart',
-    name: 'Cart',
-    // component: () =>
-    //   import(/* webpackChunkName: "about" */ '../views/About.vue')
-    component: Cart
-  },
-  {
-    path: '/user',
+    path: '/',
     name: 'User',
     component: User
   },

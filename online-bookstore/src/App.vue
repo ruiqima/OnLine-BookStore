@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Home />
+    <User/>
     <!-- <div id="nav">
       <router-link to="/user/login">Login</router-link> |
       <router-link to="/about">About</router-link>
@@ -10,12 +10,13 @@
 </template>
 
 <script>
-import Home from '@/components/Home'
-
+//import Home from '@/components/Home'
+import User from '@/components/user/User'
 export default {
   name: 'App',
   components: {
-    Home
+   // Home,
+    User
   }
 }
 </script>
