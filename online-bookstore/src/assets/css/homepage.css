@@ -31,3 +31,26 @@
   color: darkolivegreen;
   font-size: large;
 }
+.card-title-div {
+  height: 50px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.card-title-text {
+  font-size: large;
+  color: #999999;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+.img-cover-div {
+  height: 200px;
+  width: 150px;
+}
+.img-cover {
+  height: 200px;
+  width: 150px;
+}
+.rec-content {
+  width: 1200px;
+}
