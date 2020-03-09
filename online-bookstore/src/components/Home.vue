@@ -1,32 +1,28 @@
 <template>
-  <a-layout style="background-color: #ececec;">
-    <a-layout style="background-color: #ececec;">
-      <a-layout-sider style="background-color: #ececec;"
+  <a-layout style="background-color: #F5F5F5;">
+    <a-layout style="background-color: #F5F5F5;">
+      <a-layout-sider style="background-color: #F5F5F5;"
                       width="100px">
       </a-layout-sider>
       <!-- header -->
-      <a-layout class="">
+      <a-layout style="background-color: #F5F5F5;">
         <Header />
-
+        <div style="height:50px;background-color:white;"></div>
         <!-- 中部内容 -->
-        <a-layout style="background-color: #ececec;">
-          <a-layout-sider style="background-color:white;">
-            <!-- 左侧边栏 -->
-            <SubMenu />
-          </a-layout-sider>
-          <a-layout-content style="background-color: #ececec;">
-            <!-- 走马灯 -->
-            <Carousel />
-          </a-layout-content>
-          <!-- 热书推荐
-          <a-layout-sider style="background-color: #ececec;"
-                          width="300px">
-            <List />
-          </a-layout-sider> -->
-        </a-layout>
+        <a-layout-content style="background-color: white;">
+          <!-- 左侧边栏 -->
+          <SubMenu />
+          <div style="height:20px;background-color:white;"></div>
+          <!-- 走马灯 -->
+          <Carousel style="margin: 0 20px;" />
+
+          <!-- </div> -->
+          <!-- </a-layout-content> -->
+          <div style="height:30px;background-color:white;"></div>
+        </a-layout-content>
 
         <a-layout>
-          <a-layout-content style="background-color: #ececec;">
+          <a-layout-content style="background-color: #F5F5F5;">
             <!-- 卡片 -->
             <Card />
             <!-- 分割图片 -->
@@ -37,7 +33,7 @@
         </a-layout>
 
         <a-layout>
-          <a-layout-content style="background-color: #ececec;">
+          <a-layout-content style="background-color: #F5F5F5;">
             <!-- 分割图片 -->
             <PicDivider />
             <!-- 推荐 -->
@@ -47,7 +43,7 @@
 
       </a-layout>
 
-      <a-layout-sider style="background-color: #ececec;"
+      <a-layout-sider style="background-color: #F5F5F5;"
                       width="100px">
       </a-layout-sider>
     </a-layout>

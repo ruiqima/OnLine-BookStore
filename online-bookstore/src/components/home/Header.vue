@@ -85,6 +85,7 @@ export default {
     //跳转到购物车页面
     tome: function () {
       alert('跳转到个人主页')
+      this.$router.push({ path: `/user` });
     },
     //跳转到全部订单页面
     toorders: function () {

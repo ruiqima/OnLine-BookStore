@@ -1,17 +1,46 @@
 <template>
   <div>
+    <SubMenu />
     <!-- 走马灯 -->
-    <a-carousel style="margin:10px 10px;" autoplay>
-      <div><h3>1</h3></div>
-      <div><h3>2</h3></div>
-      <div><h3>3</h3></div>
-      <div><h3>4</h3></div>
+    <a-carousel autoplay>
+      <div>
+        <img src="{caro.carouselUrl}"
+             style="width:100%;height:100%;"
+             v-for="caro in carousels"
+             :key="caro" />
+      </div>
+      <div>
+        <h3>2</h3>
+      </div>
+      <div>
+        <h3>3</h3>
+      </div>
+      <div>
+        <h3>4</h3>
+      </div>
     </a-carousel>
   </div>
 </template>
 
 <script>
-export default {}
+
+export default {
+  data () {
+
+    return {
+      carousels: [
+        {          carouselId: 1,
+          carouselUrl: "../../assets/imgs/car1.jpg"        },
+        {          carouselId: 2,
+          carouselUrl: "../../assets/imgs/car2.jpg"        },
+        {          carouselId: 3,
+          carouselUrl: "../../assets/imgs/car3.jpg"        },
+        {          carouselId: 4,
+          carouselUrl: "../../assets/imgs/car4.jpg"        }
+      ]
+    };
+  },
+}
 </script>
 
 <style scoped>

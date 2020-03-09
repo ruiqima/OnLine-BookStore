@@ -1,7 +1,7 @@
 <template>
-  <a-layout style="background-color: #ececec;">
-    <a-layout style="background-color: #ececec;">
-      <a-layout-sider style="background-color: #ececec;"
+  <a-layout style="background-color: #F5F5F5;">
+    <a-layout style="background-color: #F5F5F5;">
+      <a-layout-sider style="background-color: #F5F5F5;"
                       width="7vw">
       </a-layout-sider>
       <!-- header -->
@@ -32,7 +32,7 @@
           </a-layout-sider>
         </a-layout>
       </a-layout>
-      <a-layout-sider style="background-color: #ececec;"
+      <a-layout-sider style="background-color: #F5F5F5;"
                       width="7vw">
       </a-layout-sider>
     </a-layout>
