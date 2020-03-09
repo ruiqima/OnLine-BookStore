@@ -1,8 +1,8 @@
 <template>
-  <a-layout style="background-color: #ececec;">
-    <a-layout style="background-color: #ececec;">
-      <a-layout-sider style="background-color: #ececec;"
-                      width="100px">
+  <a-layout style="background-color: #F5F5F5;">
+    <a-layout style="background-color: #F5F5F5;">
+      <a-layout-sider style="background-color: #F5F5F5;"
+                      width="7vw">
       </a-layout-sider>
       <!-- header -->
       <a-layout>
@@ -17,26 +17,26 @@
 
         <a-layout>
           <a-layout-sider style="background-color: white;"
-                          width="100px">
+                          width="7vw">
           </a-layout-sider>
           <a-layout-content style="background-color: white;">
             <!-- 显示评论 -->
             <Comments />
 
             <a-layout-sider style="background-color: white;"
-                            width="100px">
+                            width="7vw">
             </a-layout-sider>
           </a-layout-content>
           <a-layout-sider style="background-color: white;"
-                          width="100px">
+                          width="7vw">
           </a-layout-sider>
         </a-layout>
       </a-layout>
-      <a-layout-sider style="background-color: #ececec;"
-                      width="100px">
+      <a-layout-sider style="background-color: #F5F5F5;"
+                      width="7vw">
       </a-layout-sider>
     </a-layout>
-    <a-layout-footer style="height:300px;background-color:white;margin-top:50px;">
+    <a-layout-footer style="height:300px;background-color:white;margin-top:3.5vw;">
       <a-divider><span style="letter-spacing:4px;color:#999999;">让每个人都能享受阅读的乐趣</span></a-divider>
     </a-layout-footer>
   </a-layout>

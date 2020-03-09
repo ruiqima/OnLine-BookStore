@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <User/>
+    <!-- <Home /> -->
+    <router-view />
+    <!-- <BookDetail /> -->
     <!-- <div id="nav">
       <router-link to="/user/login">Login</router-link> |
       <router-link to="/about">About</router-link>
@@ -10,13 +12,13 @@
 </template>
 
 <script>
-//import Home from '@/components/Home'
-import User from '@/components/user/User'
+// import Home from '@/components/Home'
+// import BookDetail from '@/components/BookDetail'
 export default {
   name: 'App',
   components: {
-   // Home,
-    User
+    // Home,
+    // BookDetail
   }
 }
 </script>
@@ -29,14 +31,11 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
 #nav {
   padding: 30px;
-
   a {
     font-weight: bold;
     color: #2c3e50;
-
     &.router-link-exact-active {
       color: #42b983;
     }

@@ -1,48 +1,58 @@
 <template>
-  <a-menu
-    @click="handleClick"
-    :defaultOpenKeys="['sub1']"
-    :openKeys.sync="openKeys"
-    mode="inline"
-  >
-    <a-sub-menu key="sub1" @titleClick="titleClick">
-      <span slot="title"> <a-icon type="bars" /><span>全部分类</span> </span>
-      <a-menu-item key="1">文艺</a-menu-item>
-      <a-menu-item key="2">心理</a-menu-item>
-      <a-menu-item key="3">社会</a-menu-item>
-      <a-menu-item key="4">法律</a-menu-item>
-      <a-menu-item key="5">科学</a-menu-item>
-      <a-menu-item key="6">科幻</a-menu-item>
-      <a-menu-item key="7">健康</a-menu-item>
-      <a-menu-item key="8">设计</a-menu-item>
-    </a-sub-menu>
-  </a-menu>
+
+  <!-- <a-collapse :bordered="false"
+              style="width:200px;">
+    <a-collapse-panel header="全部分类"
+                      key=""
+                      :showArrow="false">
+      <a-card>
+        <a-card-grid style="width:50%;textAlign:'center'"
+                     v-for="cate in categories"
+                     :key="cate">{{cate.category}}</a-card-grid>
+
+      </a-card>
+    </a-collapse-panel>
+  </a-collapse> -->
+
+  <div>
+    <a-checkable-tag v-model="checked1"
+                     @change="handleChange"
+                     v-for="cate in categories"
+                     :key="cate"
+                     style="font-size:15px;">{{cate.category}}</a-checkable-tag>
+  </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      current: ['mail'],
-      openKeys: ['sub1']
-    }
-  },
-  methods: {
-    watch: {
-      openKeys(val) {
-        console.log('openKeys', val)
-      }
-    },
+  data () {
 
-    // 侧面导航栏方法
-    handleClick: function(e) {
-      console.log('click', e)
+    return {
+      checked1: false,
+      checked2: false,
+      checked3: false,
+      categories: [
+        {          categoryId: 1,
+          category: '文学'        },
+        {          categoryId: 2,
+          category: '艺术'        },
+        {          categoryId: 3,
+          category: '科学'        },
+        {          categoryId: 4,
+          category: '健康'        },
+        {          categoryId: 5,
+          category: '生活'        },
+        {          categoryId: 6,
+          category: '运动'        },
+      ]
+    };
+  },
+  method: {
+    handleChange (checked) {
+      console.log(checked);
     },
-    titleClick: function(e) {
-      //点击：全部分类
-      console.log('titleClick', e)
-    }
   }
+
 }
 </script>
 

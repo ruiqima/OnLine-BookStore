@@ -2,7 +2,7 @@
   <div>
 
     <a-list class="comment-list"
-            style="text-align:left;"
+            style="text-align:left;font-size:1vw;"
             :header="`所有评价 ${data.length}`"
             itemLayout="horizontal"
             :dataSource="data">
@@ -32,7 +32,8 @@
       <br /><br />
       <a-pagination :defaultCurrent="6"
                     :total="500"
-                    size="small" />
+                    size="small"
+                    style="font-size:1vw;" />
       <br /><br />
     </div>
   </div>
