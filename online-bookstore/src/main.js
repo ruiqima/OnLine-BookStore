@@ -3,6 +3,10 @@ import App from './App.vue'
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.less';
 import router from './router';
+
+import VueVirtualScroller from 'vue-virtual-scroller'
+ 
+Vue.use(VueVirtualScroller)
 Vue.config.productionTip = false
 
 Vue.use(Antd);

@@ -15,7 +15,7 @@
                 <div class="nick" style="margin-top:5px;">昵称</div>
             </div>
             <a-menu v-model="current" mode="horizontal" class="menulist" >
-                <a-menu-item key="mail" class='amenu'> <a-icon type="mail" style="font-size:16px;"/>收货地址</a-menu-item>
+                <a-menu-item key="mail" class='amenu'><a @click="address" :checked="isLogin"> <a-icon type="mail" style="font-size:16px;" />收货地址</a></a-menu-item>
                 <a-menu-item key="app" class='amenu'> <a-icon type="appstore" style="font-size:16px;"/>我的订单</a-menu-item>
                 <a-menu-item key="alipay" class='amenu'>
                 <a href="#" target="_blank" rel="noopener noreferrer"
@@ -58,29 +58,25 @@
                     </a-menu>
                 </div>
                 <div class='content'>
-                <a-card title="购物清单" style="text-align:left">
-                    <p style="fontSize: 14px;color: rgba(0, 0, 0, 0.85); marginBottom: 16px;fontWeight: 500;">
-                        <a-icon type='home' style='margin:2px;'/>
-                    猫咪铛铛图书屋
-                    </p>
-                
-                <a-card title="小王子">
-                   
-                <a href="#" slot="extra">More</a>
-                 <a-checkbox >
-                <div class='detail'>
-                   
+                <a-list>
+                   <virtual-scroller
+                    style="height: 400px"
+                    :items="data"
+                    item-height="73"
+                    v-infinite-scroll="handleInfiniteOnLoad"
+                    :infinite-scroll-disabled="busy"
+                    :infinite-scroll-distance="10"
+                    >
+                    <a-list-item>
+                    <a-list-item-meta :description="lalalala">
+                    <a slot="title" >xiaowangzi</a>
                     <img src="../../assets/imgs/pic2.jpg" slot="cover" class='books'/>
-                    <div style="font-size:18px;">￥13.70</div>
-                    <div>
-                        <a-input-number id="inputNumber" :min="1" :max="10" v-model="value" @change="onChange" />
-                    </div>
-                    <div style="font-size:19px;color:#ea1;font-weight:bold">￥{{sum}}</div>
-                    <a-button type="link">删除</a-button>
-                </div>
-                </a-checkbox>
-                </a-card>
-                </a-card>
+                    </a-list-item-meta>
+                    <div>Content </div>
+                    </a-list-item>
+                   </virtual-scroller>
+                    
+                    </a-list>
       
                 </div>
             </div>
@@ -91,15 +87,10 @@
 
 
 
-	<!-- *****************下面一直到</template>都不用改****************** -->
-
-	<!-- 这是整个界面最右侧的灰色sider区域，不用改这里~ -->
         <a-layout-sider style="background-color: #ececec;"
                         width="100px">
         </a-layout-sider>
     </a-layout>
-    <!-- 这是整个界面的footer，咱俩的footer要不要统一？因为footer的内容跟界面没有关系（我感觉） -->
-    <!-- 可以之后一起新建一个比如说叫Footer.vue的啥的，这个可以先不慌 -->
     <a-layout-footer style="height:300px;background-color:white;margin-top:50px;">
         <a-divider><span style="letter-spacing:4px;color:#999999;">让每个人都能享受阅读的乐趣</span></a-divider>
     </a-layout-footer>
@@ -107,25 +98,70 @@
 </template>
 
 <script>
+const plainOptions = ['Apple', 'Pear', 'Orange'];
+const defaultCheckedList = [];
+
+import infiniteScroll from 'vue-infinite-scroll';
+import { VirtualScroller } from 'vue-virtual-scroller';
+//const fakeDataUrl = 'https://randomuser.me/api/?results=10&inc=name,gender,email,nat&noinfo';
 export default {
+directives: { infiniteScroll },
 data() {
       return {
         value: 3,
-        sum:23.1
+        sum:23.1,
+        checkedList: defaultCheckedList,
+        indeterminate: false,
+        checkAll: false,
+        plainOptions,
+        isLogin:true,
+        data: [],
+        loading: false,
+        busy: false,
       };
     },
-methods: {
+    methods: {
       handleClick(e) {
         console.log('click ', e);
       },
-    },
-   onChange(value) {
+   
+   onChange1(value) {
         console.log('changed', value);
       },
+    onChange(checkedList) {
+        this.indeterminate = !!checkedList.length && checkedList.length < plainOptions.length;
+        this.checkAll = checkedList.length === plainOptions.length;
+      },
+      onCheckAllChange(e) {
+        Object.assign(this, {
+          checkedList: e.target.checked ? plainOptions : [],
+          indeterminate: false,
+          checkAll: e.target.checked,
+        });
+      },
+      address:function(){
+         if(this.isLogin==false){
+                alert('请先登录鸭~')
+          }else{
+              this.$router.push({name:"Address"});
+          }
+
+      },
+      
+       },
+    components: {
+      'virtual-scroller': VirtualScroller,
+    },
 }
 </script>
 
 <style scoped>
+    .demo-loading {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    text-align: center;
+  }
 	.header{
       display:flex;
       flex-direction: row;

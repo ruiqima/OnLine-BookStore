@@ -7,7 +7,7 @@ import BookDetail from '../components/BookDetail.vue'
 import User from '../components/user/User.vue'
 import Login from '../components/user/login/Login.vue'
 import Registry from '../components/user/login/Registry.vue'
-
+import Address from '../components/user/login/Address.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -37,9 +37,15 @@ const routes = [
     component: Login
   },
   {
-    path: '/user/registry',
+    path: '/user/login',
     name: 'Registry',
     component: Registry
+  },
+  {
+    path:'/user/address',
+    name:'Address',
+    component:Address
+
   }
 ]
 
