@@ -36,6 +36,8 @@ import Header from '@/components/home/Header'
 import Result from '@/components/search/Result'
 import SearchFilter from '@/components/search/SearchFilter'
 
+// alert(this)
+
 export default {
   components: {
 

@@ -23,9 +23,11 @@
                  :lg="8"
                  :xl="6"
                  v-for="book in booksCard.books"
-                 :key="book">
+                 :key="book.title">
+
             <a-card hoverable
-                    style="margin-bottom:10px;">
+                    style="margin-bottom:10px;"
+                    @click="(key)=>searchBook(key)">
               <div class="hori-center">
                 <img alt="图片"
                      :src="book.coverUrl"
@@ -100,6 +102,11 @@ export default {
 
       }
     };
+  },
+  method: {
+    searchBook: function () {
+      alert('1')
+    }
   }
 }
 </script>

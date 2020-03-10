@@ -73,10 +73,12 @@ export default {
     // 跳转到主页
     tohome: function () {
       alert('跳转到主页')
+      this.$router.push({ name: `Home` });
     },
     // 点击搜索框，搜索
     onsearch: function (value) {
-      console.log(value)
+      alert('搜索' + value)
+      this.$router.push({ name: `SearchResult`, params: { keyword: value } });
     },
     // 跳转到购物车页面
     tocart: function () {
@@ -85,7 +87,6 @@ export default {
     //跳转到购物车页面
     tome: function () {
       alert('跳转到个人主页')
-      this.$router.push({ path: `/user` });
     },
     //跳转到全部订单页面
     toorders: function () {

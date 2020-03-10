@@ -6,6 +6,7 @@
       </a-layout-sider>
       <!-- header -->
       <a-layout style="background-color: #F5F5F5;">
+
         <Header />
         <div style="height:50px;background-color:white;"></div>
         <!-- 中部内容 -->
@@ -13,7 +14,7 @@
           <!-- 上部分类选择-->
           <template v-for=" tag in tags">
             <a-checkable-tag :key="tag"
-                             @change="(checked) => handleChange(tag, checked)"
+                             @change="(checked) => handleChange(tag)"
                              style="font-size:medium;">
               {{tag}}
             </a-checkable-tag>
