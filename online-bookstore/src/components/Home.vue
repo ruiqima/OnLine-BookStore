@@ -10,8 +10,15 @@
         <div style="height:50px;background-color:white;"></div>
         <!-- 中部内容 -->
         <a-layout-content style="background-color: white;">
-          <!-- 左侧边栏 -->
-          <SubMenu />
+          <!-- 上部分类选择-->
+          <template v-for=" tag in tags">
+            <a-checkable-tag :key="tag"
+                             @change="(checked) => handleChange(tag, checked)"
+                             style="font-size:medium;">
+              {{tag}}
+            </a-checkable-tag>
+          </template>
+
           <div style="height:20px;background-color:white;"></div>
           <!-- 走马灯 -->
           <Carousel style="margin: 0 20px;" />
@@ -54,11 +61,8 @@
 </template>
 
 <script>
-// import home from '../../static/home'
-// home.tohome()
 import Carousel from '@/components/home/Carousel'
 import Card from '@/components/home/Card'
-import SubMenu from '@/components/home/SubMenu'
 import Header from '@/components/home/Header'
 import PicDivider from '@/components/home/PicDivider'
 import Recommend from '@/components/home/Recommend'
@@ -67,13 +71,23 @@ export default {
   components: {
     Carousel,
     Card,
-    SubMenu,
     Header,
     PicDivider,
     Recommend,
   },
 
-  methods: {}
+  data () {
+    return {
+      tags: ['文学', '娱乐', '健康', '运动', '生活', '少儿', '科幻', '艺术', '科学'],
+    };
+  },
+
+  methods: {
+    handleChange (tag) {
+      alert('跳转到搜索结果页，搜索框要放：' + tag)
+      this.$router.push({ path: `/results` });
+    },
+  }
 }
 </script>
 

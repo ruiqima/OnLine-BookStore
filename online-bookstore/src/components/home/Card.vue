@@ -9,7 +9,7 @@
     </div>
     <div class="flex-row">
       <div style="width:210px; margin-right:20px; ">
-        <img src="../../assets/imgs/new.jpg"
+        <img :src="booksCard.titleImgUrl"
              slot="cover"
              style=" width:200px;height:100%;" />
       </div>
@@ -50,48 +50,48 @@ export default {
     return {
       booksCard: {
         totalTitle: '新书推荐',
-        titleImgUrl: '../../assets/imgs/new.jpg',
+        titleImgUrl: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/574c6643ab91c6618bfb2d0e2c761d0b.jpg?w=468&h=1228',
         books: [{
           title: '爱丽丝梦游仙境',
-          coverUrl: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0099822e42b4428cb25c4cdebc6ca53d.jpg',
+          coverUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583818140272&di=c4b76176481266c175cebf05fcdd5159&imgtype=0&src=http%3A%2F%2Fimg3m8.ddimg.cn%2F12%2F0%2F1231790088-1_u_1.jpg',
           author: '[美] 刘易斯·卡罗尔',
           price: 15.04
         },
         {
           title: '小王子',
-          coverUrl: '../../assets/imgs/pic2.jpg',
+          coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
           author: '[法] 安托万·圣·埃克苏佩里',
           price: 19.80
         }, {
           title: '狼图腾',
-          coverUrl: '../../assets/imgs/pic3.jpg',
+          coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
           author: '姜戎',
           price: 44.90
         }, {
           title: '爱丽丝梦游仙境',
-          coverUrl: '../../assets/imgs/pic1.jpg',
+          coverUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583818140272&di=c4b76176481266c175cebf05fcdd5159&imgtype=0&src=http%3A%2F%2Fimg3m8.ddimg.cn%2F12%2F0%2F1231790088-1_u_1.jpg',
           author: '[美] 刘易斯·卡罗尔',
           price: 15.04
         },
         {
           title: '小王子',
-          coverUrl: '../../assets/imgs/pic2.jpg',
+          coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
           author: '[法] 安托万·圣·埃克苏佩里',
           price: 19.80
         }, {
           title: '狼图腾',
-          coverUrl: '../../assets/imgs/pic3.jpg',
+          coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
           author: '姜戎',
           price: 44.90
         }, {
           title: '爱丽丝梦游仙境',
-          coverUrl: '../../assets/imgs/pic1.jpg',
+          coverUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583818140272&di=c4b76176481266c175cebf05fcdd5159&imgtype=0&src=http%3A%2F%2Fimg3m8.ddimg.cn%2F12%2F0%2F1231790088-1_u_1.jpg',
           author: '[美] 刘易斯·卡罗尔',
           price: 15.04
         },
         {
           title: '小王子',
-          coverUrl: '../../assets/imgs/pic2.jpg',
+          coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
           author: '[法] 安托万·圣·埃克苏佩里',
           price: 19.80
         }

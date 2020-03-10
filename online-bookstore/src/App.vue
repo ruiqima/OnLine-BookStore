@@ -1,24 +1,15 @@
 <template>
   <div id="app">
-    <!-- <Home /> -->
     <router-view />
-    <!-- <BookDetail /> -->
-    <!-- <div id="nav">
-      <router-link to="/user/login">Login</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>-->
-    <router-view /> 
   </div>
 </template>
 
 <script>
-// import Home from '@/components/Home'
-// import BookDetail from '@/components/BookDetail'
+
 export default {
   name: 'App',
   components: {
-    // Home,
-    // BookDetail
+
   }
 }
 </script>
