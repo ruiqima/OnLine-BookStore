@@ -6,7 +6,7 @@
     <a-row type="flex"
            justify="space-between"
            align="middle"
-           style="margin-left:70px;">
+           style="margin-left:70px;margin-top:20px;">
       <a-col :xs="24"
              :sm="10"
              :md="10"

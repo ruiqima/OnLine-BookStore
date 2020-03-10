@@ -15,6 +15,12 @@
             <SearchFilter />
             <!-- 搜索结果列表 -->
             <Result />
+            <Result />
+            <Result />
+            <Result />
+            <Result />
+            <Result />
+            <Result />
           </a-layout-content>
 
         </a-layout>
