@@ -50,9 +50,9 @@
             </a-row><br />
 
             <!-- 评分 -->
-            <a-rate v-model='value'
+            <a-rate v-model='stars'
                     disabled="true" />
-            <span style="font-size:0.9vw;color:#999999;">{{comments.totalElements}}条评论</span>
+            <span style="font-size:0.9vw;color:#999999;">{{stars}}星</span><br />
             <br />
 
             <a-tag color="cyan"
@@ -84,7 +84,7 @@
 export default {
   data () {
     return {
-      value: 2,
+      stars: 2,
       //书籍详细信息,接口：书籍详情
       book: {
         isbn: '9787201077642',
@@ -98,48 +98,7 @@ export default {
         category: '童话',
         stock: 127
       },
-      // 所有评论，接口：某本书的全部评论
-      comments: {
-        totalElements: 5,
-        totalPages: 2,
-        data: [
-          {
-            commendId: 1,
-            userId: 1,
-            content: '这本书好好看呀！',
-            stars: 5,
-            time: 1583669312,
-          },
-          {
-            commendId: 2,
-            userId: 2,
-            content: '小王子是我最喜欢的书，还有人送给我了这本书的韩语版~特别喜欢小王子',
-            stars: 5,
-            time: 1583669312,
-          },
-          {
-            commendId: 1,
-            userId: 1,
-            content: '小王子和他的玫瑰花，小狐狸呢',
-            stars: 5,
-            time: 1583669312,
-          },
-          {
-            commendId: 1,
-            userId: 1,
-            content: '小王子是我最喜欢的书，还有人送给我了这本书的韩语版~特别喜欢小王子',
-            stars: 5,
-            time: 1583669312,
-          },
-          {
-            commendId: 1,
-            userId: 1,
-            content: '小王子和他的玫瑰花，小狐狸呢',
-            stars: 5,
-            time: 1583669312,
-          }
-        ]
-      },
+
       //所有优惠
       discounts: [
         {

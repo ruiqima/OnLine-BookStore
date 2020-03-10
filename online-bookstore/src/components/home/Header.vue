@@ -6,25 +6,26 @@
     <a-row type="flex"
            justify="space-between"
            align="middle"
-           style="margin-left:70px;margin-top:20px;">
+           style="margin-left:20px;margin-top:20px;">
       <a-col :xs="24"
-             :sm="10"
-             :md="10"
-             :lg="6"
-             :xl="6">
+             :sm="12"
+             :md="12"
+             :lg="7"
+             :xl="7"
+             style="margin-top:10px;">
         <div class="flex-row">
           <a @click="tohome">
             <img src="../../assets/imgs/logo.png"
                  alt="网站图标"
-                 class="img-header-logo" /> <span class="hmp-title-text"
-                  style="margin-left:20px;">网上书店</span></a></div>
+                 class="img-header-logo" /> </a></div>
       </a-col>
 
       <a-col :xs="24"
              :sm="12"
              :md="12"
-             :lg="8"
-             :xl="8">
+             :lg="7"
+             :xl="7"
+             style="margin-top:10px;">
         <div class="flex-row">
           <!-- 搜索框 -->
           <a-input-search placeholder="输入你想搜索的内容"
@@ -37,7 +38,8 @@
              :sm="24"
              :md="24"
              :lg="10"
-             :xl="10">
+             :xl="10"
+             style="margin-top:10px;">
         <a-menu v-model="current"
                 mode="horizontal">
           <a-menu-item key="cart">
