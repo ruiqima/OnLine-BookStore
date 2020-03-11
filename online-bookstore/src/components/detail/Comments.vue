@@ -5,6 +5,7 @@
             style="text-align:left;font-size:1vw;"
             :header="`所有评价 ${data.length}`"
             itemLayout="horizontal"
+            :pagination="pagination"
             :dataSource="data">
       <a-list-item slot="renderItem"
                    slot-scope="item">
@@ -24,41 +25,20 @@
       </a-list-item>
     </a-list>
 
-    <!-- 分页 -->
-    <div>
-      <br /><br />
-      <a-pagination :defaultCurrent="6"
-                    :total="500"
-                    size="small"
-                    style="font-size:1vw;" />
-      <br /><br />
-    </div>
   </div>
 
 </template>
 
 <script>
-// import moment from 'moment'
-
-// const data = [
-//   {
-//     username: '小小小王子',
-//     profile: '我的愿望是拥有一只博美然后一只大金毛',
-//     content: '我最喜欢小王子这本书了！',
-//     stars: 5,
-//     time: 1583500980000
-//   },
-//   {
-//     username: '小小小王子',
-//     profile: '我的愿望是拥有一只博美然后一只大金毛',
-//     content: '我最喜欢小王子这本书了！',
-//     stars: 5,
-//     time: 1583500980000
-//   }
-// ]
 export default {
   data () {
     return {
+      pagination: {
+        onChange: page => {
+          alert(page)
+        },
+        pageSize: 1,
+      },
       data: [
         {
           author: '小小小王子',

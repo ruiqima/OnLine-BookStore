@@ -1,5 +1,5 @@
 <template>
-  <div style="display:flex;justify-content:space-between;margin-top:30px;">
+  <div style="display:flex;justify-content:space-between;margin-top:30px;background-color:#f5f5f5;">
     <span class="card-title-text"
           style="margin-left:30px;">搜索结果</span>
 

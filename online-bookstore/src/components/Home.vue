@@ -85,8 +85,7 @@ export default {
 
   methods: {
     handleChange (tag) {
-      alert('跳转到搜索结果页，搜索框要放：' + tag)
-      this.$router.push({ path: `/results` });
+      this.$router.push({ name: `SearchResult`, params: { keyword: tag } });
     },
   }
 }

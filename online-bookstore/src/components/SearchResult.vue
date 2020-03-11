@@ -6,11 +6,12 @@
       </a-layout-sider>
       <!-- header -->
       <a-layout>
-        <Header />
+        <Header :keyword="$route.params.keyword" />
+        <div style="height:20px;background-color:white;"></div>
 
         <a-layout>
           <!-- 搜索结果 -->
-          <a-layout-content style="background-color: white;">
+          <a-layout-content style="background-color:#f5f5f5;">
             <!-- 筛选栏 -->
             <SearchFilter />
             <!-- 搜索结果列表 -->

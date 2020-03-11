@@ -31,6 +31,7 @@
           <a-input-search placeholder="输入你想搜索的内容"
                           style="height:3.5vw; "
                           @search="onsearch"
+                          :defaultValue="keyword"
                           size="small" />
         </div>
       </a-col>
@@ -71,15 +72,18 @@
 
 <script>
 export default {
+  props: {
+    keyword: {
+      type: String
+    }
+  },
   methods: {
     // 跳转到主页
     tohome: function () {
-      alert('跳转到主页')
       this.$router.push({ name: `Home` });
     },
     // 点击搜索框，搜索
     onsearch: function (value) {
-      alert('搜索' + value)
       this.$router.push({ name: `SearchResult`, params: { keyword: value } });
     },
     // 跳转到购物车页面
