@@ -5,7 +5,16 @@
     </div>
 
     <a-card :bordered="false"
-            hoverable>
+            hoverable
+            size="small">
+      <template slot="extra"
+                :bordered="false">
+        <!-- 右上角跳转链接 -->
+        <router-link :to="{ name: `SearchResult`, params: { keyword: book.title } }">
+          <a-icon type="double-right"
+                  :style="{ fontSize: '10px', color: '#999' }" />
+        </router-link>
+      </template>
       <template>
         <a-row type="flex"
                justify="space-around"
@@ -37,7 +46,7 @@
                 <p align="left"
                    style="line-height:20px;letter-spacing: 2px;">{{book.introduction}}
                 </p>
-                <div></div>
+                <br />
               </template>
             </a-card-meta>
           </a-col>

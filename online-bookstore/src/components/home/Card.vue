@@ -27,7 +27,7 @@
 
             <a-card hoverable
                     style="margin-bottom:10px;"
-                    @click="(key)=>searchBook(key)">
+                    size="small">
               <div class="hori-center">
                 <img alt="图片"
                      :src="book.coverUrl"
@@ -36,7 +36,14 @@
               <a-card-meta :title="book.title"
                            :description="book.author">
               </a-card-meta>
-              <template><br /><span style="color:#ea1;font-size:small;">￥{{book.price}}</span></template>
+              <template><br /><span style="color:#ea1;font-size:small;">￥{{book.price}}</span><br /><br /></template>
+              <template slot="extra">
+                <!-- 右上角跳转链接 -->
+                <router-link :to="{ name: `SearchResult`, params: { keyword: book.title } }">
+                  <a-icon type="double-right"
+                          :style="{ fontSize: '10px', color: '#999' }" />
+                </router-link>
+              </template>
             </a-card>
           </a-col>
 
