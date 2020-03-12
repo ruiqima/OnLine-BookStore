@@ -81,6 +81,7 @@ export default {
     // 跳转到购物车页面
     tocart: function () {
       alert('跳转到购物车页面')
+      this.$router.push({ path:`/user/cart` });
     },
     //跳转到购物车页面
     tome: function () {

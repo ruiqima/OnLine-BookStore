@@ -1,7 +1,6 @@
 <template>
   <a-layout style="background-color: #ececec;">
     <a-layout style="background-color: #ececec;">
-    	<!-- 这是整个界面最左侧的灰色sider区域，不用改这里~ -->
       <a-layout-sider style="background-color: #ececec;"
                       width="100px">
       </a-layout-sider>
@@ -16,8 +15,65 @@
 		<!-- 正文内容写在这一块 -->
         <a-layout>
           <a-layout-content style="background-color: white;">
-            <!-- 这里是正中间的A区域，把你现有的代码（除了header）复制到这儿就可以啦 -->
-            <!-- 因为宽度变得比整个屏幕的宽度窄了，可能需要调整你的width之类的~ -->
+           <div class='userinfo'>
+               <!--这里是个人信息及收货等等的选项卡-->
+               <div class='left'>
+                   <img id='ava' src="../../assets/imgs/avatar.jpg" />
+                   <span style="margin:10px;">昵称</span>
+               </div>
+               <div class='right'>
+                    <a-card title="我的订单" :bordered="false" style="width: 180%; text-align:left; margin-top:2%;">
+                        <div style="display:flex;flex-direction:row; flex-wrap:wrap;">
+                        <a-card-grid style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                            <a-badge :count="count1">
+                            <a-icon type="credit-card" style="font-size:300%;padding:15%;"/>
+                            </a-badge>
+                            <span>待付款</span>
+                        </a-card-grid>
+                        
+                        <a-card-grid style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                            <a-badge :count="count2">
+                            <a-icon type="inbox" style="font-size:300%;padding:15%;"/>
+                            </a-badge>
+                            <span>待收货</span>
+                        </a-card-grid>
+
+                        <a-card-grid style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                            <a-badge :count="count3">
+                            <a-icon type="message" style="font-size:300%;padding:15%;"/>
+                            </a-badge>
+                            <span>待评价</span>
+                        </a-card-grid>
+
+                        <a-card-grid style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                            <a-badge :count="count4">
+                            <a-icon type="insurance" style="font-size:300%;padding:15%;"/>
+                            </a-badge>
+                            <span>退款/售后</span>
+                        </a-card-grid>
+                        </div>
+
+      
+                    </a-card>
+               </div>
+
+           </div>
+           <div class='recommand'>
+           <span style="font-size:18px;">猜你喜欢</span>
+           <img src='../../assets/imgs/bar.png' id='bear'/>
+           <div class="contend">
+               <!--猜你喜欢-->
+               <a-card hoverable style="width: 240px" class='card'>
+                <img
+                    src="../../assets/imgs/pic1.jpg"
+                    slot="cover"
+                />
+                <p style="font-size:16px;font-weight:bold;">{{name}}</p>
+                <p>出版社信息</p>
+                <p style="font-size:20px;font-weight:bold; color:#ea1;">￥{{price}}</p>
+                </a-card>
+           </div>
+           </div>
           </a-layout-content>
         </a-layout>
 
@@ -45,6 +101,18 @@ import Header from '@/components/home/Header'
 
 
 export default {
+    data(){
+        return{
+            count1:5,
+            count2:0,
+            count3:0,
+            count4:0,
+            name:"爱丽丝漫游奇遇记",
+            price:17.20
+            
+
+        }
+    },
   components: {
     Header
   },
@@ -52,6 +120,123 @@ export default {
 </script>
 
 <style scoped>
-	/*注意文件路径*/
-@import url("../assets/css/homepage.css");				
+.card{
+    margin:1%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.contend{
+    display: flex;
+    flex-direction: row;
+}
+.recommand{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width:90%;
+    margin-left:6%;
+}
+#bear{
+    width:90%;
+    box-shadow: 0px 0px 2px rgb(121, 121, 121);
+    margin-top:1%;
+    margin-bottom: 1%;
+}
+#ava{
+   margin:10px;
+   margin-left:35%;
+    border:whitesmoke solid 3px;
+    box-shadow:2px black ;
+    border-radius: 100%;
+    width:30%;
+    height:32%;
+}
+.userinfo{
+    display: flex;
+    flex-direction: row;
+   
+}
+.left{
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+     background: linear-gradient(
+    62deg,
+    #719669 0%,
+    #4e8c41 50%,
+    #58904c 50%,
+    #3e8331 100%
+  );
+  border-radius: 2px;
+  width:20%;
+  height:210px;
+ box-shadow: 0px 0px 2px 2px #a5a5a5;
+ margin-left:5%;
+ margin-top:2%;
+}
+.border {
+  border: 2px solid black;
+}
+.img-header-logo {
+  width: 60px;
+}
+.flex-colunm {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.ver-center {
+  display: flex;
+  align-items: center;
+}
+.hori-center {
+  display: flex;
+  justify-content: center;
+}
+.p-header-text {
+  width: 200px;
+  font-size: 40px;
+  /* margin-top: 20px; */
+}
+.hmp-title-text {
+  color: darkolivegreen;
+  font-size: large;
+}
+.card-title-div {
+  height: 50px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.card-title-text {
+  font-size: large;
+  color: #999999;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+/* .img-cover-div {
+  height: 200px;
+  width: 150px;
+}
+.img-cover {
+  height: 200px;
+  width: 150px;
+} */
+/* .rec-content {
+  width: 1200px;
+} */
+.img-cover-div-detail {
+  height: 400px;
+  width: 450px;
+}
+.img-cover-detail {
+  width: 100%;
+  margin-right: 30px;
+}
+
 </style>
