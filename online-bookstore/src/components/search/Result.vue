@@ -2,7 +2,6 @@
   <div style="background-color:#f5f5f5;">
 
     <a-list itemLayout="horizontal"
-            :pagination="pagination"
             :dataSource="books"
             style="width:100%;">
       <a-list-item slot="renderItem"
@@ -48,50 +47,116 @@
         </a-card>
       </a-list-item>
     </a-list>
-
+    <a-pagination v-model="current"
+                  :total="50"
+                  @change="onChange"
+                  :pageSize="1" />
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    bookDatas: {
+      type: Object
+    }
+  },
+  watch: {
+    'bookDatas': function (val) {
+      var _this = this
+      _this.books = val.data
+      console.log("更改")
+      console.log(_this.books.length)
+      _this.i = 0
+
+      for (; _this.i < _this.books.length; _this.i++) {
+        var isbn = _this.books[_this.i].isbn
+        // console.log(_this.books)
+        console.log(_this.i)
+        //获取总评论数
+        _this.axios.get('/api/comment/book/' + isbn, {
+          params: {
+            page: _this.current - 1,
+            size: 1
+          }
+        })
+          .then(function (response) {
+            //评论总数
+            // console.log(response.data.totalElements);
+            console.log(_this.i)
+            // console.log(_this.books[_this.i - 1])
+            _this.$set(_this.books[_this.i - 1], 'commentsNum', response.data.totalElements)
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .then(function () {
+            // always executed
+          });
+        //获取星级
+        _this.axios.get('/api/comment/book/' + isbn + '/stars', {
+        })
+          .then((response) => {
+            //星级
+            // console.log(response.data);
+            _this.$set(_this.books[_this.i - 1], 'value', response.data)
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .then(function () {
+            // always executed
+          });
+      }
+      console.log(_this.books)
+
+    }
+  },
   data () {
     return {
+      current: 1,
+      books: [],
+      i: 0,
+      //   size: 1,
+      //   pagination: {
+      //     onChange: page => {
+      //       this.$emit('sendPageInfo', { page: page - 1, size: 1 })
+      //     },
+      //     pageSize: 1,
+      //   },
+      //   books: [{
+      //     title: '小王子',
+      //     coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
+      //     price: 19.80,
+      //     introduction: '《小王子》是法国作家安托万·德·圣·埃克苏佩里于1942年写成的著名儿童文学短篇小说。本书的主人公是来自外星球的小王子。',
+      //     sales: 1835,
+      //     author: '[法] 安托万·圣·埃克苏佩里',
+      //     category: '童话',
+      //     stock: 384,
+      //     publisher: '天津人民出版社',
+      //     value: 2,
+      //     commentsNum: 19830,
+      //   },
+      //   {
+      //     title: '小王子2',
+      //     coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
+      //     price: 19.80,
+      //     introduction: '《小王子》是法国作家安托万·德·圣·埃克苏佩里于1942年写成的著名儿童文学短篇小说。本书的主人公是来自外星球的小王子。',
+      //     sales: 1835,
+      //     author: '[法] 安托万·圣·埃克苏佩里',
+      //     category: '童话',
+      //     stock: 384,
+      //     publisher: '天津人民出版社',
+      //     value: 2,
+      //     commentsNum: 19830,
+      //   },
 
-      size: 1,
-      pagination: {
-        onChange: page => {
-          this.$emit('sendPageInfo', { page: page - 1, size: 1 })
-        },
-        pageSize: 1,
-      },
-      books: [{
-        title: '小王子',
-        coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
-        price: 19.80,
-        introduction: '《小王子》是法国作家安托万·德·圣·埃克苏佩里于1942年写成的著名儿童文学短篇小说。本书的主人公是来自外星球的小王子。',
-        sales: 1835,
-        author: '[法] 安托万·圣·埃克苏佩里',
-        category: '童话',
-        stock: 384,
-        publisher: '天津人民出版社',
-        value: 2,
-        commentsNum: 19830,
-      },
-      {
-        title: '小王子2',
-        coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
-        price: 19.80,
-        introduction: '《小王子》是法国作家安托万·德·圣·埃克苏佩里于1942年写成的著名儿童文学短篇小说。本书的主人公是来自外星球的小王子。',
-        sales: 1835,
-        author: '[法] 安托万·圣·埃克苏佩里',
-        category: '童话',
-        stock: 384,
-        publisher: '天津人民出版社',
-        value: 2,
-        commentsNum: 19830,
-      },
-
-      ]
+      //   ]
+    }
+  },
+  methods: {
+    onChange (page) {
+      this.$emit('sendPageInfo', { page: page - 1, size: 1 })
     }
   }
 }

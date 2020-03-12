@@ -17,14 +17,16 @@
             <SearchFilter @sendorder='getorder'
                           @sendprice='getprice' />
             <!-- 搜索结果列表 -->
-            <Result @sendPageInfo='getpage' />
+            <Result @sendPageInfo='getpage'
+                    :bookDatas="bookDatas" />
 
           </a-layout-content>
 
         </a-layout>
       </a-layout>
 
-      <a-layout-sider style="background-color: #F5F5F5;"
+      <a-layout-sider style="
+                    background-color:#F5F5F5;"
                       width="100px">
       </a-layout-sider>
     </a-layout>
@@ -51,23 +53,22 @@ export default {
   components: {
     Header, Result, SearchFilter
   },
+
   data () {
     return {
       order: '',
       lowestPrice: 0,
       highestPrice: 0,
       page: 0,
-      size: 5,
+      size: 1,
+      bookDatas: {}
     }
   },
 
   //组件创建后调用
   created () {
     param.keyword = this.$route.params.keyword
-    console.log(param)
     this.search()
-
-
   },
   methods: {
     //连接后台，搜索
@@ -75,8 +76,10 @@ export default {
       this.axios.get('/api/search', {
         params: param
       })
-        .then(function (response) {
+        .then((response) => {
+          //书目列表结果
           console.log(response);
+          this.bookDatas = response.data
         })
         .catch(function (error) {
           console.log(error);
@@ -105,16 +108,19 @@ export default {
       }
       console.log(param)
 
+      this.search()
+
     },
     getpage (data) {
       console.log(data)
-      this.$set(param, 'page', data.page - 1)
-      this.$set(param, 'size', data.size)
-      this.$set(param, 'keyword', this.$route.params.keyword)
-      console.log(param)
+      param.page = data.page
+
+      this.search()
+
     },
     getnewkeyword (data) {
       param.keyword = data
+      param.page = 0
       this.search()
     }
   }
