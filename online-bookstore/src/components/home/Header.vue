@@ -41,8 +41,7 @@
              :lg="10"
              :xl="10"
              style="margin-top:10px;">
-        <a-menu v-model="current"
-                mode="horizontal">
+        <a-menu mode="horizontal">
           <a-menu-item key="cart">
             <a @click="tocart"
                target="_blank"

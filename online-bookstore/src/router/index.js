@@ -7,6 +7,7 @@ import BookDetail from '../components/BookDetail.vue'
 import Login from '../components/user/login/Login.vue'
 import Registry from '../components/user/login/Registry.vue'
 import Address from '../components/user/login/Address.vue'
+
 Vue.use(VueRouter)
 
 const routes = [

@@ -17,29 +17,35 @@
       <span>排序方式</span><br /><br />
 
       <a-button style="margin-left:5px;"
-                size="small">默认</a-button><br />
+                size="small"
+                @click="order2Parent('title')">默认</a-button><br />
       <a-button style="margin-left:5px;margin-top:15px;"
-                size="small">销量升序</a-button>
+                size="small"
+                @click="order2Parent('sales')">销量升序</a-button>
       <a-button style="margin-left:5px;"
-                size="small">销量降序</a-button><br />
+                size="small"
+                @click="order2Parent('sales_desc')">销量降序</a-button><br />
       <a-button style="margin-left:5px;margin-top:15px;"
-                size="small">价格升序</a-button>
+                size="small"
+                @click="order2Parent('price')">价格升序</a-button>
       <a-button style="margin-left:5px;"
-                size="small">价格降序</a-button>
+                size="small"
+                @click="order2Parent('price_desc')">价格降序</a-button>
       <a-divider />
       <span>价格区间</span><br /><br />
       <a-input-number size="large"
                       :min="1"
                       :max="100000"
-                      @change="onChangemin" />
+                      v-model="min" />
       <span style="color:#bbbbbb">——</span>
       <a-input-number size="large"
                       :min="1"
                       :max="100000"
-                      @change="onChangemax"
+                      v-model="max"
                       style="margin-left:10px;" />
       <a-button style="margin-left:180px;margin-top:20px;"
-                size="small">确定</a-button>
+                size="small"
+                @click="price2Parent">确定</a-button>
 
     </a-drawer>
   </div>
@@ -51,6 +57,8 @@ export default {
     return {
       size: 'default',
       visible: false,
+      max: '',
+      min: '',
     }
   },
   methods: {
@@ -63,13 +71,19 @@ export default {
     onClose () {
       this.visible = false
     },
-    // 数字输入框
-    onChangemin (value) {
-      console.log('changed', value);
+
+    //传order给父组件
+    order2Parent (type) {
+      this.$emit('sendorder', type)
     },
-    onChangemax (value) {
-      console.log('changed', value);
-    },
+    price2Parent () {
+      var price = {
+        'low': this.min,
+        'high': this.max
+      }
+      this.$emit('sendprice', price)
+      this.onClose()
+    }
   },
 }
 </script>

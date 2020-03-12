@@ -13,9 +13,10 @@
           <!-- 搜索结果 -->
           <a-layout-content style="background-color:#f5f5f5;">
             <!-- 筛选栏 -->
-            <SearchFilter />
+            <SearchFilter @sendorder='getorder'
+                          @sendprice='getprice' />
             <!-- 搜索结果列表 -->
-            <Result />
+            <Result @sendPageInfo='getpage' />
 
           </a-layout-content>
 
@@ -37,14 +38,62 @@ import Header from '@/components/home/Header'
 import Result from '@/components/search/Result'
 import SearchFilter from '@/components/search/SearchFilter'
 
-// alert(this)
 
 export default {
   components: {
-
     Header, Result, SearchFilter
-
   },
+  data () {
+    return {
+      order: '',
+      lowestPrice: 0,
+      highestPrice: 0,
+      page: 0,
+      size: 5,
+      param: {}
+
+    }
+  },
+
+  methods: {
+    getorder (data) {
+      //   alert(data)
+      this.order = data
+    },
+    getprice (data) {
+      if (data.low <= 0) {
+        if (data.high > 0) {
+          this.highestPrice = data.high
+        }
+      } else {
+        if (data.high <= 0) {
+          this.lowestPrice = data.low
+        } else {
+          this.highestPrice = data.high
+          this.lowestPrice = data.low
+        }
+      }
+
+      if (this.order != '') {
+        this.$set(this.param, 'order', this.order)
+      }
+      if (this.lowestPrice > 0) {
+        this.$set(this.param, 'lowestPrice', this.lowestPrice)
+      }
+      if (this.highestPrice > 0) {
+        this.$set(this.param, 'highestPrice', this.highestPrice)
+      }
+      console.log(this.param)
+
+    },
+    getpage (data) {
+      console.log(data)
+      this.$set(this.param, 'page', data.page - 1)
+      this.$set(this.param, 'size', data.size)
+      this.$set(this.param, 'keyword', this.$route.params.keyword)
+      console.log(this.param)
+    }
+  }
 }
 </script>
 
