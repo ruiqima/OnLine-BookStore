@@ -6,21 +6,17 @@
       </a-layout-sider>
       <!-- header -->
       <a-layout>
-        <Header />
+        <Header :keyword="$route.params.keyword" />
+        <div style="height:20px;background-color:white;"></div>
 
         <a-layout>
           <!-- 搜索结果 -->
-          <a-layout-content style="background-color: white;">
+          <a-layout-content style="background-color:#f5f5f5;">
             <!-- 筛选栏 -->
             <SearchFilter />
             <!-- 搜索结果列表 -->
             <Result />
-            <Result />
-            <Result />
-            <Result />
-            <Result />
-            <Result />
-            <Result />
+
           </a-layout-content>
 
         </a-layout>
@@ -40,6 +36,8 @@
 import Header from '@/components/home/Header'
 import Result from '@/components/search/Result'
 import SearchFilter from '@/components/search/SearchFilter'
+
+// alert(this)
 
 export default {
   components: {

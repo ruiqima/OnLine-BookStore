@@ -2,7 +2,7 @@
   border: 2px solid black;
 }
 .img-header-logo {
-  width: 60px;
+  width: 250px;
 }
 .flex-colunm {
   display: flex;
@@ -41,14 +41,14 @@
   font-weight: 300;
   letter-spacing: 2px;
 }
-/* .img-cover-div {
+.img-cover-div {
   height: 200px;
   width: 150px;
 }
 .img-cover {
   height: 200px;
   width: 150px;
-} */
+}
 /* .rec-content {
   width: 1200px;
 } */
