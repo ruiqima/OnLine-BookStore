@@ -12,15 +12,17 @@
           <template>
             <div class="flex-row ver-center">
 
-              <div class="img-cover-div"><img :src="book.coverUrl"
-                     slot="cover"
-                     class="img-cover"></div>
+              <!-- <div class="img-cover-div border"> -->
+              <img :src="book.coverUrl"
+                   slot="cover"
+                   class="img-cover"
+                   style="margin-right:30px;">
+              <!-- </div> -->
 
               <a-card-meta class="rec-content"
                            align="left">
                 <template slot="description">
                   <span style="color:black;line-height:35px;font-size:medium;">{{book.title}}</span><br />
-
                   <span style="font-weight:600;color:#ea1;line-height:30px;font-size:larger;">￥{{book.price}}</span>
                   <span style="font-size:smaller;color:#999999; margin-left:20px;">销量 {{book.sales}}</span><br />
                   <span style="color:#555555;line-height:20px; font-size:small;">{{book.author}}</span>
@@ -48,7 +50,7 @@
       </a-list-item>
     </a-list>
     <a-pagination v-model="current"
-                  :total="50"
+                  :total="bookDatas.totalElements"
                   @change="onChange"
                   :pageSize="1" />
   </div>
@@ -65,14 +67,14 @@ export default {
     'bookDatas': function (val) {
       var _this = this
       _this.books = val.data
-      console.log("更改")
-      console.log(_this.books.length)
+      //   console.log("更改")
+      //   console.log(_this.books.length)
       _this.i = 0
 
       for (; _this.i < _this.books.length; _this.i++) {
         var isbn = _this.books[_this.i].isbn
         // console.log(_this.books)
-        console.log(_this.i)
+        // console.log(_this.i)
         //获取总评论数
         _this.axios.get('/api/comment/book/' + isbn, {
           params: {
@@ -83,7 +85,7 @@ export default {
           .then(function (response) {
             //评论总数
             // console.log(response.data.totalElements);
-            console.log(_this.i)
+            // console.log(_this.i)
             // console.log(_this.books[_this.i - 1])
             _this.$set(_this.books[_this.i - 1], 'commentsNum', response.data.totalElements)
           })
@@ -117,41 +119,6 @@ export default {
       current: 1,
       books: [],
       i: 0,
-      //   size: 1,
-      //   pagination: {
-      //     onChange: page => {
-      //       this.$emit('sendPageInfo', { page: page - 1, size: 1 })
-      //     },
-      //     pageSize: 1,
-      //   },
-      //   books: [{
-      //     title: '小王子',
-      //     coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
-      //     price: 19.80,
-      //     introduction: '《小王子》是法国作家安托万·德·圣·埃克苏佩里于1942年写成的著名儿童文学短篇小说。本书的主人公是来自外星球的小王子。',
-      //     sales: 1835,
-      //     author: '[法] 安托万·圣·埃克苏佩里',
-      //     category: '童话',
-      //     stock: 384,
-      //     publisher: '天津人民出版社',
-      //     value: 2,
-      //     commentsNum: 19830,
-      //   },
-      //   {
-      //     title: '小王子2',
-      //     coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
-      //     price: 19.80,
-      //     introduction: '《小王子》是法国作家安托万·德·圣·埃克苏佩里于1942年写成的著名儿童文学短篇小说。本书的主人公是来自外星球的小王子。',
-      //     sales: 1835,
-      //     author: '[法] 安托万·圣·埃克苏佩里',
-      //     category: '童话',
-      //     stock: 384,
-      //     publisher: '天津人民出版社',
-      //     value: 2,
-      //     commentsNum: 19830,
-      //   },
-
-      //   ]
     }
   },
   methods: {
