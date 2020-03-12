@@ -56,13 +56,13 @@
 export default {
   data () {
     return {
-      currentPage: 0,
+
+      size: 1,
       pagination: {
         onChange: page => {
-          this.currentPage = page
-          this.$emit('sendPageInfo', { page: page, size: 5 })
+          this.$emit('sendPageInfo', { page: page - 1, size: 1 })
         },
-        pageSize: 5,
+        pageSize: 1,
       },
       books: [{
         title: '小王子',
@@ -93,7 +93,7 @@ export default {
 
       ]
     }
-  },
+  }
 }
 </script>
 

@@ -6,7 +6,8 @@
       </a-layout-sider>
       <!-- header -->
       <a-layout>
-        <Header :keyword="$route.params.keyword" />
+        <Header :keyword="$route.params.keyword"
+                @newkeyword='getnewkeyword' />
         <div style="height:20px;background-color:white;"></div>
 
         <a-layout>
@@ -39,6 +40,13 @@ import Result from '@/components/search/Result'
 import SearchFilter from '@/components/search/SearchFilter'
 
 
+const param = {
+  keyword: '',
+  order: 'title',
+  page: 0,
+  size: 1
+}
+
 export default {
   components: {
     Header, Result, SearchFilter
@@ -50,48 +58,64 @@ export default {
       highestPrice: 0,
       page: 0,
       size: 5,
-      param: {}
-
     }
   },
 
+  //组件创建后调用
+  created () {
+    param.keyword = this.$route.params.keyword
+    console.log(param)
+    this.search()
+
+
+  },
   methods: {
+    //连接后台，搜索
+    search () {
+      this.axios.get('/api/search', {
+        params: param
+      })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+    },
     getorder (data) {
-      //   alert(data)
-      this.order = data
+      if (data != '') {
+        this.$set(param, 'order', data)
+      }
     },
     getprice (data) {
       if (data.low <= 0) {
         if (data.high > 0) {
-          this.highestPrice = data.high
+          this.$set(param, 'highestPrice', data.high)
         }
       } else {
         if (data.high <= 0) {
-          this.lowestPrice = data.low
+          this.$set(param, 'lowestPrice', data.low)
         } else {
-          this.highestPrice = data.high
-          this.lowestPrice = data.low
+          this.$set(param, 'highestPrice', data.high)
+          this.$set(param, 'lowestPrice', data.low)
         }
       }
-
-      if (this.order != '') {
-        this.$set(this.param, 'order', this.order)
-      }
-      if (this.lowestPrice > 0) {
-        this.$set(this.param, 'lowestPrice', this.lowestPrice)
-      }
-      if (this.highestPrice > 0) {
-        this.$set(this.param, 'highestPrice', this.highestPrice)
-      }
-      console.log(this.param)
+      console.log(param)
 
     },
     getpage (data) {
       console.log(data)
-      this.$set(this.param, 'page', data.page - 1)
-      this.$set(this.param, 'size', data.size)
-      this.$set(this.param, 'keyword', this.$route.params.keyword)
-      console.log(this.param)
+      this.$set(param, 'page', data.page - 1)
+      this.$set(param, 'size', data.size)
+      this.$set(param, 'keyword', this.$route.params.keyword)
+      console.log(param)
+    },
+    getnewkeyword (data) {
+      param.keyword = data
+      this.search()
     }
   }
 }

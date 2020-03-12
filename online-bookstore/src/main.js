@@ -16,17 +16,17 @@ new Vue({
   router
 }).$mount('#app')
 
-axios({
-  method: 'post',
-  url: '/api/user/customer/authentication',
-  data: {
-    username: '小小小王子',
-    password: '111'
-  }
-})
-  .then(function(response) {
-    alert(response)
-  })
-  .catch(function(error) {
-    alert(error)
-  })
+// axios({
+//   method: 'post',
+//   url: '/api/user/customer/authentication',
+//   data: {
+//     username: '小小小王子',
+//     password: '111'
+//   }
+// })
+//   .then(function(response) {
+//     alert(response)
+//   })
+//   .catch(function(error) {
+//     alert(error)
+//   })

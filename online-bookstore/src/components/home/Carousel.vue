@@ -1,13 +1,12 @@
 <template>
   <div>
-    <SubMenu />
     <!-- 走马灯 -->
     <a-carousel autoplay>
       <div>
         <img src="{caro.carouselUrl}"
              style="width:100%;height:100%;"
              v-for="caro in carousels"
-             :key="caro" />
+             :key="caro.carouselUrl" />
       </div>
       <div>
         <h3>2</h3>

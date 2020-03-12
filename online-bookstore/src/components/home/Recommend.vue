@@ -41,7 +41,7 @@
                 <span style="letter-spacing: 2px;color:#555555;line-height:20px;">作者：{{book.author}}</span><br />
                 <!-- 评分 -->
                 <a-rate v-model='book.stars'
-                        disabled="true" />
+                        disabled />
                 <br /><br />
                 <p align="left"
                    style="line-height:20px;letter-spacing: 2px;">{{book.introduction}}
