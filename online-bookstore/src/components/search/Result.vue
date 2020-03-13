@@ -41,16 +41,16 @@
                 </template>
 
               </a-card-meta>
-              <template slot="extra">
-                <!-- 右上角跳转链接 -->
-                <router-link :to="{ name: `BookDetail`, params: { keyword:book.title,isbn:book.isbn } }">
-                  <a-icon type="double-right"
-                          :style="{ fontSize: '10px', color: '#999' }" />
-                </router-link>
-              </template>
+
             </div>
           </template>
-
+          <template slot="extra">
+            <!-- 右上角跳转链接 -->
+            <router-link :to="{ name: `BookDetail`, params: { keyword:book.title,isbn:book.isbn } }">
+              <a-icon type="double-right"
+                      :style="{ fontSize: '10px', color: '#999' }" />
+            </router-link>
+          </template>
         </a-card>
       </a-list-item>
     </a-list>

@@ -1,12 +1,12 @@
 <template>
-  <a-row style="margin:0 20px;"
+  <a-row style="margin:30px 20px;"
          type="flex"
          justify="start">
     <a-col :xs="24"
            :sm="24"
            :md="24"
            :lg="8"
-           :xl="8">
+           :xl="6">
       <a-card :bordered="false"
               style="margin-top:7px;">
 
@@ -24,7 +24,7 @@
            :sm="24"
            :md="24"
            :lg="16"
-           :xl="16">
+           :xl="18">
       <a-card :bordered="false">
         <a-card-meta align="left">
           <template slot="description">
@@ -52,7 +52,7 @@
             <!-- 评分 -->
             <a-rate v-model='stars'
                     disabled />
-            <span style="font-size:0.9vw;color:#999999;">{{stars}}星</span><br />
+            <span style="font-size:0.9vw;color:#999999;">{{stars}} 星</span><br />
             <br />
 
             <a-tag color="cyan"
@@ -60,18 +60,19 @@
             <span style="font-size:small;color:#999999;">价格 </span>
             <span style="font-weight:600;color:#ea1;line-height:20px;font-size:large;margin-left:10px;">￥{{book.price}}</span><br />
 
-            <span style="font-size:x-small;color:#999999; line-height:40px;">本店活动 </span>
+            <span style="font-size:x-small;color:#999999; line-height:40px;"
+                  v-if="discounts.length>0">本店活动 </span>
             <span style="color:#B5621B; margin-left:20px;letter-spacing:1px;"
                   v-for="(item, index) in discounts"
                   :key="index">满{{item.total}}减{{item.discount}}</span><br />
-            <span style="font-size:x-small;color:#999999;">销量</span>
+            <span style="font-size:x-small;color:#999999;">销量 </span>
             <span style="font-size:x-small;color:#999999;margin-left:10px;">{{book.sales}}</span><br />
             <span style="font-size:x-small;color:#999999; line-height:40px;">库存 </span>
             <span style="font-size:x-small;color:#999999;margin-left:10px;">{{book.stock}}</span><br />
 
-            <a-button style="background-color:#EAF4EB;margin-top:40px;">加入购物车</a-button>
-            <a-button style="margin-left:20px;margin-top:40px;">立即购买</a-button>
-            <a-button style="margin-left:20px;margin-top:40px;">收藏</a-button>
+            <a-button style="background-color:#EAF4EB;margin-top:30px;">加入购物车</a-button>
+            <a-button style="margin-left:20px;margin-top:30px;">立即购买</a-button>
+            <a-button style="margin-left:20px;margin-top:30px;">收藏</a-button>
           </template>
 
         </a-card-meta>
@@ -92,32 +93,8 @@ export default {
       stars: 0,
       //书籍详细信息,接口：书籍详情
       book: {},
-      //   book: {
-      //     isbn: '9787201077642',
-      //     title: '小王子',
-      //     coverUrl: '../../assets/imgs/pic2.jpg',
-      //     price: 19.80,
-      //     introduction: '书中以一位飞行员作为故事叙述者，讲述了小王子从自己星球出发前往地球的过程中，所经历的各种历险。作者以小王子的孩子式的眼光，透视出成人的空虚、盲目，愚妄和死板教条，用浅显天真的语言写出了人类的孤独寂寞、没有根基随风流浪的命运。同时，也表达出作者对金钱关系的批判，对真善美的讴歌。',
-      //     sales: 1835,
-      //     author: '[法] 安托万·圣·埃克苏佩里',
-      //     publisher: '天津人民出版社',
-      //     category: '童话',
-      //     stock: 127
-      //   },
-
       //所有优惠
-      discounts: [
-        // {
-        //   discountId: 1,
-        //   total: 300,
-        //   discount: 30
-        // },
-        // {
-        //   discountId: 2,
-        //   total: 500,
-        //   discount: 100
-        // }
-      ]
+      discounts: []
     }
   },
   mounted () {
@@ -130,8 +107,8 @@ export default {
       _this.axios.get('/api/book/' + _this.isbn)
         .then(function (response) {
           console.log(response.data)
-          _this.book = response.data.book
-        }.bind(this))
+          _this.book = response.data
+        })
         .catch(function (error) {
           console.log(error);
         });
@@ -139,7 +116,7 @@ export default {
       })
         .then(function (response) {
           _this.stars = response.data
-        }.bind(this))
+        })
         .catch(function (error) {
           console.log(error);
         });

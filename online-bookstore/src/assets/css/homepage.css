@@ -50,8 +50,8 @@
 .img-cover-detail {
   width: auto;
   height: auto;
-  max-width: 400px;
-  max-height: 450px;
+  max-width: 300px;
+  max-height: 350px;
 }
 .card-img {
   width: auto;
@@ -59,4 +59,8 @@
   max-height: 200px;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+.title-img {
+  height: 824px;
+  overflow: hidden;
 }

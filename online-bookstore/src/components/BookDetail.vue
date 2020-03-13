@@ -21,7 +21,7 @@
           </a-layout-sider>
           <a-layout-content style="background-color: white;">
             <!-- 显示评论 -->
-            <Comments />
+            <Comments :isbn="$route.params.isbn" />
             <div style="margin-bottom:50px;"></div>
 
             <a-layout-sider style="background-color: white;"

@@ -3,49 +3,63 @@
     <div class="card-title-div ver-center">
       <span class="card-title-text">{{totalTitle}}</span>
     </div>
-    <div class="flex-row">
-      <div style="width:210px; margin-right:20px; ">
-        <img :src="titleImgUrl"
-             slot="cover"
-             style="width:100%;" />
-      </div>
-      <div style="background-color: #f5f5f5;">
-        <a-row type="flex"
-               justify="space-between"
-               :gutter="15">
-          <a-col :xs="24"
-                 :sm="24"
-                 :md="12"
-                 :lg="8"
-                 :xl="6"
-                 v-for="book in booksCard"
-                 :key="book.title">
+    <a-row type="flex"
+           justify="space-between"
+           :gutter="15">
+      <a-col :xs="0"
+             :sm="0"
+             :md="0"
+             :lg="0"
+             :xl="3"
+             style="margin-right:20px;">
+        <div>
+          <img :src="titleImgUrl"
+               class="title-img" />
+        </div>
+      </a-col>
+      <a-col :xs="24"
+             :sm="24"
+             :md="24"
+             :lg="24"
+             :xl="20">
+        <div style="background-color: #f5f5f5;">
+          <a-row type="flex"
+                 justify="space-around"
+                 :gutter="15">
+            <a-col :xs="24"
+                   :sm="19"
+                   :md="12"
+                   :lg="6"
+                   :xl="6"
+                   v-for="book in booksCard"
+                   :key="book.title">
 
-            <a-card hoverable
-                    style="margin-bottom:10px;"
-                    size="small">
-              <div class="hori-center">
-                <img alt="图片"
-                     :src="book.coverUrl"
-                     slot="cover"
-                     class="card-img" /></div>
-              <a-card-meta :title="book.title"
-                           :description="book.author">
-              </a-card-meta>
-              <template><br /><span style="color:#ea1;font-size:small;">￥{{book.price}}</span><br /><br /></template>
-              <template slot="extra">
-                <!-- 右上角跳转链接 -->
-                <router-link :to="{ name: `SearchResult`, params: { keyword: book.title } }">
-                  <a-icon type="double-right"
-                          :style="{ fontSize: '10px', color: '#999' }" />
-                </router-link>
-              </template>
-            </a-card>
-          </a-col>
+              <a-card hoverable
+                      style="margin-bottom:10px;"
+                      size="small">
+                <div class="hori-center">
+                  <img alt="图片"
+                       :src="book.coverUrl"
+                       slot="cover"
+                       class="card-img" /></div>
+                <a-card-meta :title="book.title"
+                             :description="book.author">
+                </a-card-meta>
+                <template><br /><span style="color:#ea1;font-size:small;">￥{{book.price}}</span><br /><br /></template>
+                <template slot="extra">
+                  <!-- 右上角跳转链接 -->
+                  <router-link :to="{ name: `SearchResult`, params: { keyword: book.title } }">
+                    <a-icon type="double-right"
+                            :style="{ fontSize: '10px', color: '#999' }" />
+                  </router-link>
+                </template>
+              </a-card>
+            </a-col>
 
-        </a-row>
-      </div>
-    </div>
+          </a-row>
+        </div>
+      </a-col>
+    </a-row>
   </div>
 </template>
 
