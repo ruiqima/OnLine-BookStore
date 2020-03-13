@@ -11,7 +11,7 @@
               style="margin-top:7px;">
 
         <!-- 封面图片 -->
-        <img src="../../assets/imgs/pic2.jpg"
+        <img :src="book.coverUrl"
              object-fit="contain"
              class="img-cover-detail">
 
@@ -51,7 +51,7 @@
 
             <!-- 评分 -->
             <a-rate v-model='stars'
-                    disabled="true" />
+                    disabled />
             <span style="font-size:0.9vw;color:#999999;">{{stars}}星</span><br />
             <br />
 
@@ -82,38 +82,82 @@
 
 <script>
 export default {
+  props: {
+    isbn: {
+      type: String
+    }
+  },
   data () {
     return {
-      stars: 2,
+      stars: 0,
       //书籍详细信息,接口：书籍详情
-      book: {
-        isbn: '9787201077642',
-        title: '小王子',
-        coverUrl: '../../assets/imgs/pic2.jpg',
-        price: 19.80,
-        introduction: '书中以一位飞行员作为故事叙述者，讲述了小王子从自己星球出发前往地球的过程中，所经历的各种历险。作者以小王子的孩子式的眼光，透视出成人的空虚、盲目，愚妄和死板教条，用浅显天真的语言写出了人类的孤独寂寞、没有根基随风流浪的命运。同时，也表达出作者对金钱关系的批判，对真善美的讴歌。',
-        sales: 1835,
-        author: '[法] 安托万·圣·埃克苏佩里',
-        publisher: '天津人民出版社',
-        category: '童话',
-        stock: 127
-      },
+      book: {},
+      //   book: {
+      //     isbn: '9787201077642',
+      //     title: '小王子',
+      //     coverUrl: '../../assets/imgs/pic2.jpg',
+      //     price: 19.80,
+      //     introduction: '书中以一位飞行员作为故事叙述者，讲述了小王子从自己星球出发前往地球的过程中，所经历的各种历险。作者以小王子的孩子式的眼光，透视出成人的空虚、盲目，愚妄和死板教条，用浅显天真的语言写出了人类的孤独寂寞、没有根基随风流浪的命运。同时，也表达出作者对金钱关系的批判，对真善美的讴歌。',
+      //     sales: 1835,
+      //     author: '[法] 安托万·圣·埃克苏佩里',
+      //     publisher: '天津人民出版社',
+      //     category: '童话',
+      //     stock: 127
+      //   },
 
       //所有优惠
       discounts: [
-        {
-          discountId: 1,
-          total: 300,
-          discount: 30
-        },
-        {
-          discountId: 2,
-          total: 500,
-          discount: 100
-        }
+        // {
+        //   discountId: 1,
+        //   total: 300,
+        //   discount: 30
+        // },
+        // {
+        //   discountId: 2,
+        //   total: 500,
+        //   discount: 100
+        // }
       ]
     }
   },
+  mounted () {
+    this.getbookdetail()
+  },
+  methods: {
+    //获取书目详情、星级
+    getbookdetail () {
+      var _this = this
+      _this.axios.get('/api/book/' + _this.isbn)
+        .then(function (response) {
+          console.log(response.data)
+          _this.book = response.data.book
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error);
+        });
+      _this.axios.get('/api/comment/book/' + _this.isbn + '/stars', {
+      })
+        .then(function (response) {
+          _this.stars = response.data
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+
+    //获取满减优惠
+    getdiscount () {
+      var _this = this
+      _this.axios.get('/api/discount')
+        .then(function (response) {
+          console.log(response.data)
+          _this.discounts = response.data.discounts
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }
 }
 </script>
 

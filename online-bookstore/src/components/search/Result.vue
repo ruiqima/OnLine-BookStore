@@ -12,12 +12,10 @@
           <template>
             <div class="flex-row ver-center">
 
-              <!-- <div class="img-cover-div border"> -->
               <img :src="book.coverUrl"
                    slot="cover"
                    class="img-cover"
                    style="margin-right:30px;">
-              <!-- </div> -->
 
               <a-card-meta class="rec-content"
                            align="left">
@@ -43,6 +41,13 @@
                 </template>
 
               </a-card-meta>
+              <template slot="extra">
+                <!-- 右上角跳转链接 -->
+                <router-link :to="{ name: `BookDetail`, params: { keyword:book.title,isbn:book.isbn } }">
+                  <a-icon type="double-right"
+                          :style="{ fontSize: '10px', color: '#999' }" />
+                </router-link>
+              </template>
             </div>
           </template>
 
@@ -67,14 +72,10 @@ export default {
     'bookDatas': function (val) {
       var _this = this
       _this.books = val.data
-      //   console.log("更改")
-      //   console.log(_this.books.length)
       _this.i = 0
 
       for (; _this.i < _this.books.length; _this.i++) {
         var isbn = _this.books[_this.i].isbn
-        // console.log(_this.books)
-        // console.log(_this.i)
         //获取总评论数
         _this.axios.get('/api/comment/book/' + isbn, {
           params: {
@@ -84,34 +85,22 @@ export default {
         })
           .then(function (response) {
             //评论总数
-            // console.log(response.data.totalElements);
-            // console.log(_this.i)
-            // console.log(_this.books[_this.i - 1])
             _this.$set(_this.books[_this.i - 1], 'commentsNum', response.data.totalElements)
           })
           .catch(function (error) {
             console.log(error);
-          })
-          .then(function () {
-            // always executed
           });
         //获取星级
         _this.axios.get('/api/comment/book/' + isbn + '/stars', {
         })
           .then((response) => {
             //星级
-            // console.log(response.data);
             _this.$set(_this.books[_this.i - 1], 'value', response.data)
           })
           .catch(function (error) {
             console.log(error);
-          })
-          .then(function () {
-            // always executed
           });
       }
-      console.log(_this.books)
-
     }
   },
   data () {

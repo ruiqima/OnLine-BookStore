@@ -83,14 +83,15 @@ export default {
     },
     // 点击搜索框，搜索
     onsearch: function (value) {
-      if (this.$route.path != '/results') {
-        this.$router.push({ name: `SearchResult`, params: { keyword: value } });
+      if (value != '') {
+        if (this.$route.path != '/results') {
+          this.$router.push({ name: `SearchResult`, params: { keyword: value } });
+        }
+        else {                //在SearchResults页面不能再跳转，是同一个route.path
+          this.$route.params.keyword = value
+          this.$emit('newkeyword', value)
+        }
       }
-      else {                //在SearchResults页面不能再跳转，是同一个route.path
-        this.$route.params.keyword = value
-        this.$emit('newkeyword', value)
-      }
-
     },
     // 跳转到购物车页面
     tocart: function () {

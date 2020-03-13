@@ -78,7 +78,6 @@ export default {
       })
         .then((response) => {
           //书目列表结果
-          console.log(response);
           this.bookDatas = response.data
         })
         .catch(function (error) {
@@ -106,17 +105,12 @@ export default {
           this.$set(param, 'lowestPrice', data.low)
         }
       }
-      console.log(param)
-
       this.search()
 
     },
     getpage (data) {
-      console.log(data)
       param.page = data.page
-
       this.search()
-
     },
     getnewkeyword (data) {
       param.keyword = data
