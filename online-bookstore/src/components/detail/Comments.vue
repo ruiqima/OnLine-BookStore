@@ -2,7 +2,7 @@
   <div>
     <a-list class="comment-list"
             style="text-align:left;font-size:1vw;"
-            :header="`所有评价 ${data.length}`"
+            :header="`所有评价 ${totalElements}`"
             itemLayout="horizontal"
             :dataSource="data">
       <a-list-item slot="renderItem"
@@ -27,7 +27,7 @@
     <a-pagination v-model="current"
                   :total="totalElements"
                   @change="onChange"
-                  :pageSize="2" />
+                  :pageSize="5" />
   </div>
 </template>
 
@@ -57,7 +57,7 @@ export default {
       await _this.axios.get('/api/comment/book/' + _this.isbn, {
         params: {
           page: page - 1,
-          size: 2
+          size: 5
         }
       })
         .then(function (response) {

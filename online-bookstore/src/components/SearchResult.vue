@@ -18,7 +18,8 @@
                           @sendprice='getprice' />
             <!-- 搜索结果列表 -->
             <Result @sendPageInfo='getpage'
-                    :bookDatas="bookDatas" />
+                    :bookDatas="bookDatas"
+                    :current="page+1" />
 
           </a-layout-content>
 
@@ -46,7 +47,8 @@ const param = {
   keyword: '',
   order: 'title',
   page: 0,
-  size: 1
+  size: 1,
+
 }
 
 export default {
@@ -105,16 +107,20 @@ export default {
           this.$set(param, 'lowestPrice', data.low)
         }
       }
+      param.page = 0
+      this.page = 0
       this.search()
 
     },
     getpage (data) {
       param.page = data.page
+      this.page = data.page
       this.search()
     },
     getnewkeyword (data) {
       param.keyword = data
       param.page = 0
+      this.page = 0
       this.search()
     }
   }

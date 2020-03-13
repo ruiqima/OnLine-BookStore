@@ -66,6 +66,10 @@ export default {
   props: {
     bookDatas: {
       type: Object
+    },
+    current: {
+      type: Number,
+      default: 1
     }
   },
   watch: {
@@ -105,7 +109,6 @@ export default {
   },
   data () {
     return {
-      current: 1,
       books: [],
       i: 0,
     }
