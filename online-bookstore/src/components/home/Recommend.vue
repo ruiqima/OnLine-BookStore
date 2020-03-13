@@ -24,9 +24,9 @@
                  :md="4"
                  :lg="4"
                  :xl="4"
-                 class="ver-center">
+                 align="center">
             <img :src="book.coverUrl"
-                 style="width:100%;"
+                 class="reco-img"
                  alt="图片">
           </a-col>
           <a-col :xs="24"
