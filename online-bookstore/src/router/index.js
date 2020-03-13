@@ -8,6 +8,9 @@ import Login from '../components/user/login/Login.vue'
 import Registry from '../components/user/login/Registry.vue'
 import Address from '../components/user/login/Address.vue'
 import Cart from '../components/cart/Cart.vue'
+import User from '../components/user/User.vue'
+import Edit from '../components/user/Edit.vue'
+import Order from '../components/user/Order.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -46,6 +49,22 @@ const routes = [
     path:'user/cart',
     name:'Cart',
     component:Cart
+  },
+  {
+    path:'user',
+    name:'User',
+    component:User
+  },
+  {
+    path:'user/edit',
+    name:'Edit',
+    component:Edit
+  },
+  {
+    path:'user/order',
+    name:'Order',
+    component:Order
+
   }
 ]
 

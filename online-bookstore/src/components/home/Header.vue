@@ -89,11 +89,12 @@ export default {
     // 跳转到购物车页面
     tocart: function () {
       alert('跳转到购物车页面')
-      this.$router.push({ path:`/user/cart` });
+      this.$router.push({ name:`Cart` });
     },
     //跳转到购物车页面
     tome: function () {
       alert('跳转到个人主页')
+      this.$router.push({ name:`User` });
     },
     //跳转到全部订单页面
     toorders: function () {

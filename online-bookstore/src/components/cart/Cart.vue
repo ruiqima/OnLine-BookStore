@@ -37,6 +37,18 @@
                
              </div>
              <div class='cart-footer'>
+               <a-checkbox :indeterminate="indeterminate" @change="onCheckAllChange" :checked="checkAll">
+               全选
+               </a-checkbox>
+                 <a @click="onDelete">删除</a>
+                 <p>已选商品
+                   <span style="font-size:20px;font-weight:bold; color:rgb(216, 68, 42);">
+                   {{choose}}23
+                   </span>
+                   件</p>
+                 <p>合计：<span style="font-size:20px;font-weight:bold; color:rgb(216, 68, 42);">{{sum}}</span>
+                 </p>
+                 <a-button type="primary" style="width:10%;">结算</a-button>
              </div>
            </div>
           </a-layout-content>
@@ -104,15 +116,34 @@ import Header from '@/components/home/Header'
 
 <style scoped>
 	/*注意文件路径*/
-@import url("../../assets/css/homepage.css");		
+@import url("../../assets/css/homepage.css");	
+.cart-footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: whitesmoke;
+  text-align: center;
+  padding-top:1.5%;
+  padding-bottom:2%;
+  border-radius: 3px;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 70px;
+  background-color: #eee;
+  z-index: 9999;
+}	
 .cart-content{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  
+  width:95%;
   margin:1%;
+  margin-left:3%;
   padding-top:1%;
   border-radius: 3px;
+  align-items: center;
 
 }
 .cart-header{

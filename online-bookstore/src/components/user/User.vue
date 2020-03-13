@@ -18,34 +18,37 @@
            <div class='userinfo'>
                <!--这里是个人信息及收货等等的选项卡-->
                <div class='left'>
+                 <router-link :to="{name:'Edit'}">
                    <img id='ava' src="../../assets/imgs/avatar.jpg" />
-                   <span style="margin:10px;">昵称</span>
+                 </router-link>
+                   <span style="margin:10px;color:white;">昵称</span>
+                   <a @click="toAdd" style="color:white; border:1px solid; width:50%; padding:2%;border-radius:3px;">收货地址</a>
                </div>
                <div class='right'>
                     <a-card title="我的订单" :bordered="false" style="width: 180%; text-align:left; margin-top:2%;">
                         <div style="display:flex;flex-direction:row; flex-wrap:wrap;">
-                        <a-card-grid style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                        <a-card-grid  @click="toOrder" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
                             <a-badge :count="count1">
                             <a-icon type="credit-card" style="font-size:300%;padding:15%;"/>
                             </a-badge>
                             <span>待付款</span>
                         </a-card-grid>
                         
-                        <a-card-grid style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                        <a-card-grid  @click="toOrder" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
                             <a-badge :count="count2">
                             <a-icon type="inbox" style="font-size:300%;padding:15%;"/>
                             </a-badge>
                             <span>待收货</span>
                         </a-card-grid>
 
-                        <a-card-grid style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                        <a-card-grid @click="toOrder" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
                             <a-badge :count="count3">
                             <a-icon type="message" style="font-size:300%;padding:15%;"/>
                             </a-badge>
                             <span>待评价</span>
                         </a-card-grid>
 
-                        <a-card-grid style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                        <a-card-grid  @click="toOrder" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
                             <a-badge :count="count4">
                             <a-icon type="insurance" style="font-size:300%;padding:15%;"/>
                             </a-badge>
@@ -113,6 +116,14 @@ export default {
 
         }
     },
+    methods:{
+      toAdd(){
+        this.$router.push({ name:`Address` });
+      },
+      toOrder(){
+        this.$router.push({name:`Order`});
+      }
+    },
   components: {
     Header
   },
@@ -144,23 +155,24 @@ export default {
     margin-bottom: 1%;
 }
 #ava{
-   margin:10px;
-   margin-left:35%;
     border:whitesmoke solid 3px;
     box-shadow:2px black ;
     border-radius: 100%;
-    width:30%;
-    height:32%;
+    width:40%;
+    height:100px;
+
 }
 .userinfo{
     display: flex;
     flex-direction: row;
+    
    
 }
 .left{
     z-index: 99;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
      background: linear-gradient(
     62deg,
