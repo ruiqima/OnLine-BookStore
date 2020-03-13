@@ -47,7 +47,7 @@ const param = {
   keyword: '',
   order: 'title',
   page: 0,
-  size: 1,
+  size: 5,
 
 }
 
@@ -62,7 +62,7 @@ export default {
       lowestPrice: 0,
       highestPrice: 0,
       page: 0,
-      size: 1,
+      size: 5,
       bookDatas: {}
     }
   },
@@ -123,6 +123,13 @@ export default {
       this.page = 0
       this.search()
     }
+  },
+  beforeRouteLeave (to, from, next) {
+
+    delete param.lowestPrice
+    delete param.highestPrice
+    param.order = 'title'
+    next()
   }
 }
 </script>

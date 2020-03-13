@@ -16,6 +16,7 @@
         </router-link>
       </template>
       <template>
+        <div style="width:100%;height:40px;"></div>
         <a-row type="flex"
                justify="space-around"
                :gutter="16">
@@ -52,7 +53,7 @@
             </a-card-meta>
           </a-col>
         </a-row>
-
+        <div style="width:100%;height:40px;"></div>
       </template>
 
     </a-card>
