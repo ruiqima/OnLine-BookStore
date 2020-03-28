@@ -66,7 +66,7 @@
            <img src='../../assets/imgs/bar.png' id='bear'/>
            <div class="contend">
                <!--猜你喜欢-->
-               <a-card hoverable style="width: 240px" class='card'>
+               <a-card hoverable style="width: 240px" class='card' >
                 <img
                     src="../../assets/imgs/pic1.jpg"
                     slot="cover"

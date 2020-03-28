@@ -2,33 +2,31 @@
   <div style="background-color:#f5f5f5;">
 
     <a-list itemLayout="horizontal"
-            :pagination="pagination"
             :dataSource="books"
             style="width:100%;">
       <a-list-item slot="renderItem"
-                   slot-scope="book">
+                   slot-scope="book"
+                   style="display:flex;justify-content:space-around;">
         <a-card :bordered="false"
                 hoverable
-                style="width: 99%;">
+                size="small"
+                style="width:99%">
           <template>
             <div class="flex-row ver-center">
-
-              <div class="img-cover-div"><img :src="book.coverUrl"
-                     slot="cover"
-                     class="img-cover"></div>
-
-              <a-card-meta class="rec-content"
-                           align="left">
+              <img :src="book.coverUrl"
+                   slot="cover"
+                   class="img-cover"
+                   style="margin-right:30px;">
+              <a-card-meta align="left">
                 <template slot="description">
                   <span style="color:black;line-height:35px;font-size:medium;">{{book.title}}</span><br />
-
                   <span style="font-weight:600;color:#ea1;line-height:30px;font-size:larger;">￥{{book.price}}</span>
                   <span style="font-size:smaller;color:#999999; margin-left:20px;">销量 {{book.sales}}</span><br />
                   <span style="color:#555555;line-height:20px; font-size:small;">{{book.author}}</span>
                   <span style="color:#555555;line-height:20px; font-size:small;margin-left:20px;">{{book.publisher}}</span><br />
 
                   <a-rate v-model='book.value'
-                          disabled="true" />
+                          disabled />
                   <span style="font-size:small;color:#999999;">{{book.commentsNum}}条评论</span>
                   <br />
                   <a-tag color="cyan"
@@ -39,100 +37,88 @@
                   </p>
                   <a-button style="background-color:#EAF4EB;margin-top:5px;">加入购物车</a-button>
                   <a-button style="margin-left:20px;margin-top:5px;">收藏</a-button>
+                  <div style="height:20px;width:100%;"></div>
                 </template>
 
               </a-card-meta>
+
             </div>
           </template>
-
+          <template slot="extra">
+            <!-- 右上角跳转链接 -->
+            <router-link :to="{ name: `BookDetail`, params: { keyword:book.title,isbn:book.isbn } }"
+                         replace>
+              <a-icon type="double-right"
+                      :style="{ fontSize: '10px', color: '#999' }" />
+            </router-link>
+          </template>
         </a-card>
       </a-list-item>
     </a-list>
-    <!-- <a-card :bordered="false"
-            style="width: 97%;margin-top:7px;"
-            hoverable
-            v-for="book in books"
-            :key="book">
-      <template>
-        <div class="flex-row ver-center">
-
-          <div class="img-cover-div"><img :src="book.coverUrl"
-                 slot="cover"
-                 class="img-cover"></div>
-
-
-          <a-card-meta class="rec-content"
-                       align="left">
-            <template slot="description">
-              <span style="color:black;line-height:35px;font-size:medium;">{{book.title}}</span><br />
-
-              <span style="font-weight:600;color:#ea1;line-height:30px;font-size:larger;">￥{{book.price}}</span>
-              <span style="font-size:smaller;color:#999999; margin-left:20px;">销量 {{book.sales}}</span><br />
-              <span style="color:#555555;line-height:20px; font-size:small;">{{book.author}}</span>
-              <span style="color:#555555;line-height:20px; font-size:small;margin-left:20px;">{{book.publisher}}</span><br />
-
-              <a-rate v-model='book.value'
-                      disabled="true" />
-              <span style="font-size:small;color:#999999;">{{book.commentsNum}}条评论</span>
-              <br />
-              <a-tag color="cyan"
-                     style="margin-top:5px;">{{book.category}}</a-tag><br /><br />
-              <p align="left"
-                 style="line-height:20px;">
-                {{book.introduction}}
-              </p>
-              <a-button style="background-color:#EAF4EB;margin-top:5px;">加入购物车</a-button>
-              <a-button style="margin-left:20px;margin-top:5px;">收藏</a-button>
-            </template>
-
-          </a-card-meta>
-        </div>
-      </template>
-
-    </a-card> -->
+    <a-pagination v-model="current"
+                  :total="bookDatas.totalElements"
+                  @change="onChange"
+                  :pageSize="5" />
   </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      pagination: {
-        onChange: page => {
-          alert(page)
-        },
-        pageSize: 1,
-      },
-      books: [{
-        title: '小王子',
-        coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
-        price: 19.80,
-        introduction: '《小王子》是法国作家安托万·德·圣·埃克苏佩里于1942年写成的著名儿童文学短篇小说。本书的主人公是来自外星球的小王子。',
-        sales: 1835,
-        author: '[法] 安托万·圣·埃克苏佩里',
-        category: '童话',
-        stock: 384,
-        publisher: '天津人民出版社',
-        value: 2,
-        commentsNum: 19830,
-      },
-      {
-        title: '小王子2',
-        coverUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1796105480,3528245014&fm=26&gp=0.jpg',
-        price: 19.80,
-        introduction: '《小王子》是法国作家安托万·德·圣·埃克苏佩里于1942年写成的著名儿童文学短篇小说。本书的主人公是来自外星球的小王子。',
-        sales: 1835,
-        author: '[法] 安托万·圣·埃克苏佩里',
-        category: '童话',
-        stock: 384,
-        publisher: '天津人民出版社',
-        value: 2,
-        commentsNum: 19830,
-      },
-
-      ]
+  props: {
+    bookDatas: {
+      type: Object
+    },
+    current: {
+      type: Number,
+      default: 1
     }
   },
+  watch: {
+    'bookDatas': function (val) {
+      var _this = this
+      _this.books = val.data
+      _this.i = 0
+
+      for (; _this.i < _this.books.length; _this.i++) {
+        var isbn = _this.books[_this.i].isbn
+        //获取总评论数
+        _this.axios.get('/api/comment/book/' + isbn, {
+          params: {
+            page: _this.current - 1,
+            size: 5
+          }
+        })
+          .then(function (response) {
+            //评论总数
+            _this.$set(_this.books[_this.i - 1], 'commentsNum', response.data.totalElements)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        //获取星级
+        _this.axios.get('/api/comment/book/' + isbn + '/stars', {
+        })
+          .then((response) => {
+            //星级
+            _this.$set(_this.books[_this.i - 1], 'value', response.data)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    }
+  },
+  data () {
+    return {
+      books: [],
+      i: 0,
+    }
+  },
+  methods: {
+    onChange (page) {
+      this.$emit('sendPageInfo', { page: page - 1, size: 5 })
+    }
+  }
 }
 </script>
 

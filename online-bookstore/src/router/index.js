@@ -40,10 +40,9 @@ const routes = [
     component: Registry
   },
   {
-    path:'/user/address',
-    name:'Address',
-    component:Address
-
+    path: '/user/address',
+    name: 'Address',
+    component: Address
   },
   {
     path:'user/cart',

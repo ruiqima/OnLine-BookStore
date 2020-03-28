@@ -41,22 +41,28 @@
   font-weight: 300;
   letter-spacing: 2px;
 }
-.img-cover-div {
-  height: 200px;
-  width: 150px;
-}
 .img-cover {
-  height: 200px;
-  width: 150px;
-}
-/* .rec-content {
-  width: 1200px;
-} */
-.img-cover-div-detail {
-  height: 400px;
-  width: 450px;
+  width: auto;
+  height: auto;
+  max-width: 150px;
+  max-height: 150px;
 }
 .img-cover-detail {
-  width: 100%;
-  margin-right: 30px;
+  width: auto;
+  height: auto;
+  max-width: 300px;
+  max-height: 350px;
+}
+.card-img {
+  width: auto;
+  height: auto;
+  max-height: 200px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.reco-img {
+  width: auto;
+  height: auto;
+  max-width: 200px;
+  max-height: 200px;
 }

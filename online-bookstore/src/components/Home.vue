@@ -13,10 +13,10 @@
         <a-layout-content style="background-color: white;">
           <!-- 上部分类选择-->
           <template v-for=" tag in tags">
-            <a-checkable-tag :key="tag"
-                             @change="(checked) => handleChange(tag)"
+            <a-checkable-tag :key="tag.categoryId"
+                             @change="(checked) => handleChange(tag.category)"
                              style="font-size:medium;">
-              {{tag}}
+              {{tag.category}}
             </a-checkable-tag>
           </template>
 
@@ -32,11 +32,11 @@
         <a-layout>
           <a-layout-content style="background-color: #F5F5F5;">
             <!-- 卡片 -->
-            <Card />
+            <Card totalTitle="新书上架" />
             <!-- 分割图片 -->
             <PicDivider />
             <!-- 卡片 -->
-            <Card />
+            <Card totalTitle="热销推荐" />
           </a-layout-content>
         </a-layout>
 
@@ -79,14 +79,30 @@ export default {
 
   data () {
     return {
-      tags: ['文学', '娱乐', '健康', '运动', '生活', '少儿', '科幻', '艺术', '科学'],
+      //   tags: ['文学', '娱乐', '健康', '运动', '生活', '少儿', '科幻', '艺术', '科学'],
+      tags: []
     };
   },
-
+  created () {
+    this.getcate()
+  },
   methods: {
     handleChange (tag) {
       this.$router.push({ name: `SearchResult`, params: { keyword: tag } });
     },
+    getcate () {
+      var _this = this
+      _this.axios.get('/api/category')
+        .then((response) => {
+          _this.tags = response.data
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+    }
   }
 }
 </script>

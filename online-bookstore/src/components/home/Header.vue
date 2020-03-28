@@ -41,8 +41,7 @@
              :lg="10"
              :xl="10"
              style="margin-top:10px;">
-        <a-menu v-model="current"
-                mode="horizontal">
+        <a-menu mode="horizontal">
           <a-menu-item key="cart">
             <a @click="tocart"
                target="_blank"
@@ -84,7 +83,15 @@ export default {
     },
     // 点击搜索框，搜索
     onsearch: function (value) {
-      this.$router.push({ name: `SearchResult`, params: { keyword: value } });
+      if (value != '') {
+        if (this.$route.path != '/results') {
+          this.$router.push({ name: `SearchResult`, params: { keyword: value } });
+        }
+        else {                //在SearchResults页面不能再跳转，是同一个route.path
+          this.$route.params.keyword = value
+          this.$emit('newkeyword', value)
+        }
+      }
     },
     // 跳转到购物车页面
     tocart: function () {
