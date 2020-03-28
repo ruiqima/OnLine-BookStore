@@ -4,15 +4,13 @@
       <a-layout-sider style="background-color: #ececec;"
                       width="100px">
       </a-layout-sider>
-<!-- *****************上面都不用改****************** -->
+      <!-- *****************上面都不用改****************** -->
 
-
-
-	<!-- 这个a-layout是除了左右两个灰色sider，正中间那一块，包括header和它下面的正文部分 -->
+      <!-- 这个a-layout是除了左右两个灰色sider，正中间那一块，包括header和它下面的正文部分 -->
       <a-layout>
         <Header />
 
-		<!-- 正文内容写在这一块 -->
+        <!-- 正文内容写在这一块 -->
         <a-layout>
           <a-layout-content style="background-color: white;">
            <div class='userinfo'>
@@ -75,26 +73,43 @@
                 <p>出版社信息</p>
                 <p style="font-size:20px;font-weight:bold; color:#ea1;">￥{{price}}</p>
                 </a-card>
-           </div>
-           </div>
+              </div>
+
+            </div>
+            <div class='recommand'>
+              <span style="font-size:18px;">猜你喜欢</span>
+              <img src='../../assets/imgs/bar.png'
+                   id='bear' />
+              <div class="contend">
+                <!--猜你喜欢-->
+                <a-card hoverable
+                        style="width: 240px"
+                        class='card'>
+                  <img src="../../assets/imgs/pic1.jpg"
+                       slot="cover" />
+                  <p style="font-size:16px;font-weight:bold;">{{name}}</p>
+                  <p>出版社信息</p>
+                  <p style="font-size:20px;font-weight:bold; color:#ea1;">￥{{price}}</p>
+                </a-card>
+              </div>
+            </div>
           </a-layout-content>
         </a-layout>
 
       </a-layout>
 
+      <!-- *****************下面一直到</template>都不用改****************** -->
 
-
-	<!-- *****************下面一直到</template>都不用改****************** -->
-
-	<!-- 这是整个界面最右侧的灰色sider区域，不用改这里~ -->
+      <!-- 这是整个界面最右侧的灰色sider区域，不用改这里~ -->
       <a-layout-sider style="background-color: #ececec;"
                       width="100px">
       </a-layout-sider>
     </a-layout>
     <!-- 这是整个界面的footer，咱俩的footer要不要统一？因为footer的内容跟界面没有关系（我感觉） -->
     <!-- 可以之后一起新建一个比如说叫Footer.vue的啥的，这个可以先不慌 -->
-    <a-layout-footer style="height:300px;background-color:white;margin-top:50px;">
-      <a-divider><span style="letter-spacing:4px;color:#999999;">让每个人都能享受阅读的乐趣</span></a-divider>
+    <a-layout-footer style="margin-top:50px;margin-bottom:30px;background-color: #F5F5F5;">
+      <p style="font-size:medium;letter-spacing:3px;color:#ccc;margin-bottom:40px;">让每个人都能能享受阅读的乐趣</p>
+      <a-divider style="color:#ccc;font-size:x-small;">ONLINE BOOKSTORE ©2020 Created by Our Team</a-divider>
     </a-layout-footer>
   </a-layout>
 </template>
@@ -182,11 +197,11 @@ export default {
     #3e8331 100%
   );
   border-radius: 2px;
-  width:20%;
-  height:210px;
- box-shadow: 0px 0px 2px 2px #a5a5a5;
- margin-left:5%;
- margin-top:2%;
+  width: 20%;
+  height: 210px;
+  box-shadow: 0px 0px 2px 2px #a5a5a5;
+  margin-left: 5%;
+  margin-top: 2%;
 }
 .border {
   border: 2px solid black;
@@ -250,5 +265,4 @@ export default {
   width: 100%;
   margin-right: 30px;
 }
-
 </style>

@@ -31,8 +31,9 @@
                       width="100px">
       </a-layout-sider>
     </a-layout>
-    <a-layout-footer style="height:300px;background-color:white;margin-top:50px;">
-      <a-divider><span style="letter-spacing:4px;color:#999999;">让每个人都能享受阅读的乐趣</span></a-divider>
+    <a-layout-footer style="margin-top:50px;margin-bottom:30px;background-color: #F5F5F5;">
+      <p style="font-size:medium;letter-spacing:3px;color:#ccc;margin-bottom:40px;">让每个人都能能享受阅读的乐趣</p>
+      <a-divider style="color:#ccc;font-size:x-small;">ONLINE BOOKSTORE ©2020 Created by Our Team</a-divider>
     </a-layout-footer>
   </a-layout>
 </template>
