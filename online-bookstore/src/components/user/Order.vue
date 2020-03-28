@@ -20,7 +20,7 @@
               </a-table>
             </a-tab-pane>
             <a-tab-pane tab="待付款" key="1">待付款</a-tab-pane>
-            <a-tab-pane tab="待收货" key="2" forceRender>待收货</a-tab-pane>
+            <a-tab-pane tab="待收货" key="2">待收货</a-tab-pane>
             <a-tab-pane tab="待评价" key="3">待评价</a-tab-pane>
             <a-tab-pane tab="退款/售后" key="4">退款/售后</a-tab-pane>
 

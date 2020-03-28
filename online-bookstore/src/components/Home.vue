@@ -80,11 +80,15 @@ export default {
 
   data () {
     return {
-      tags: []
+      tags: [],
+      userId:0
     };
   },
   created () {
-    this.getcate()
+
+    this.getcate();
+    this.userId=this.$route.params.userId;
+    console.log("home"+this.userId)
   },
   methods: {
     handleChange (tag) {

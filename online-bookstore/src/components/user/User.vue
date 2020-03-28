@@ -17,9 +17,9 @@
                <!--这里是个人信息及收货等等的选项卡-->
                <div class='left'>
                  <router-link :to="{name:'Edit'}">
-                   <img id='ava' src="../../assets/imgs/avatar.jpg" />
+                   <img id='ava' :src="profile" />
                  </router-link>
-                   <span style="margin:10px;color:white;">昵称</span>
+                   <span style="margin:10px;color:white;">{{username}}</span>
                    <a @click="toAdd" style="color:white; border:1px solid; width:50%; padding:2%;border-radius:3px;">收货地址</a>
                </div>
                <div class='right'>
@@ -59,40 +59,68 @@
                </div>
 
            </div>
-           <div class='recommand'>
-           <span style="font-size:18px;">猜你喜欢</span>
-           <img src='../../assets/imgs/bar.png' id='bear'/>
-           <div class="contend">
-               <!--猜你喜欢-->
-               <a-card hoverable style="width: 240px" class='card' >
-                <img
-                    src="../../assets/imgs/pic1.jpg"
-                    slot="cover"
-                />
-                <p style="font-size:16px;font-weight:bold;">{{name}}</p>
-                <p>出版社信息</p>
-                <p style="font-size:20px;font-weight:bold; color:#ea1;">￥{{price}}</p>
-                </a-card>
-              </div>
+           <div class="flex-column">
+    <div class="card-title-div ver-center">
+      <span class="card-title-text" style="padding:3%;">猜你喜欢</span>
+    </div>
+    <a-row type="flex"
+           justify="space-between"
+           :gutter="15">
+      <!-- <a-col :xs="0"
+             :sm="0"
+             :md="0"
+             :lg="0"
+             :xl="4">
+        <div class="title-img-div border">
+          <img :src="titleImgUrl"
+               class="title-img" />
+        </div>
+      </a-col> -->
+      <!-- <a-col :xs="24"
+             :sm="24"
+             :md="24"
+             :lg="24"
+             :xl=""> -->
+      <div style="background-color: #f5f5f5;">
+        <a-row type="flex"
+               justify="space-around"
+               :gutter="15">
+          <a-col :xs="24"
+                 :sm="19"
+                 :md="12"
+                 :lg="6"
+                 :xl="6"
+                 v-for="book in booksCard"
+                 :key="book.title">
 
-            </div>
-            <div class='recommand'>
-              <span style="font-size:18px;">猜你喜欢</span>
-              <img src='../../assets/imgs/bar.png'
-                   id='bear' />
-              <div class="contend">
-                <!--猜你喜欢-->
-                <a-card hoverable
-                        style="width: 240px"
-                        class='card'>
-                  <img src="../../assets/imgs/pic1.jpg"
-                       slot="cover" />
-                  <p style="font-size:16px;font-weight:bold;">{{name}}</p>
-                  <p>出版社信息</p>
-                  <p style="font-size:20px;font-weight:bold; color:#ea1;">￥{{price}}</p>
-                </a-card>
-              </div>
-            </div>
+            <a-card hoverable
+                    style="margin-bottom:10px;"
+                    size="small">
+              <div class="hori-center">
+                <img alt="图片"
+                     :src="book.coverUrl"
+                     slot="cover"
+                     class="card-img" /></div>
+              <a-card-meta :title="book.title"
+                           :description="book.author">
+              </a-card-meta>
+              <template><br /><span style="color:#ea1;font-size:small;">￥{{book.price}}</span><br /><br /></template>
+              <template slot="extra">
+                <!-- 右上角跳转链接 -->
+                <router-link :to="{ name: `SearchResult`, params: { keyword: book.title } }">
+                  <a-icon type="double-right"
+                          :style="{ fontSize: '10px', color: '#999' }" />
+                </router-link>
+              </template>
+            </a-card>
+          </a-col>
+
+        </a-row>
+      </div>
+      <!-- </a-col> -->
+    </a-row>
+  </div>
+            
           </a-layout-content>
         </a-layout>
 
@@ -119,25 +147,69 @@ import Header from '@/components/home/Header'
 
 
 export default {
+  
     data(){
         return{
-            count1:5,
-            count2:0,
-            count3:0,
-            count4:0,
-            name:"爱丽丝漫游奇遇记",
-            price:17.20
-            
-
+          count1:1,
+          count2:2,
+          count3:3,
+          count4:4,
+          page:0,
+          size:5,
+            booksCard: [],
+            titleImgUrl: "",
+            //用户信息
+            userId:0,
+            username:"",
+            profile:"",
         }
     },
+    mounted () {
+    this.getcontent()
+  },
+    created(){
+        this.userId=this.$route.params.userId;
+        console.log(this.userId);
+        this.getUserInfo();
+    },
     methods:{
+      
       toAdd(){
         this.$router.push({ name:`Address` });
       },
       toOrder(){
         this.$router.push({name:`Order`});
-      }
+      },
+      getUserInfo(){
+        var _this=this;
+        _this.axios.get('/api/user/customer/'+_this.userId)
+        .then(function (response) {
+      console.log(response);
+      _this.username=response.data.username;
+      _this.profile=response.data.profile;
+      })
+      .catch(function (error) {
+      console.log(error);
+      })
+      },
+    getcontent () {
+      var _this=this;
+      _this.axios.get('/api/recommendation/user/'+_this.userId,
+      { 
+        params:{
+        page:_this.page,
+        size:_this.size
+        }
+      }).then(function (response) {
+      console.log(response);
+      _this.booksCard=response.data.data;
+        })
+      .catch(function (error) {
+      console.log(error);
+      })
+    }
+  
+
     },
   components: {
     Header
@@ -146,6 +218,11 @@ export default {
 </script>
 
 <style scoped>
+@import url("../../assets/css/homepage.css");
+
+#components-pagination-demo-mini .ant-pagination:not(:last-child) {
+  margin-bottom: 24px;
+}
 .card{
     margin:1%;
     display: flex;

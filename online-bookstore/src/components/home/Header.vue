@@ -70,19 +70,27 @@
 </template>
 
 <script>
+
 export default {
   props: {
     keyword: {
       type: String
+    },
+    userId:{
+      type:Number
     }
   },
+    
   methods: {
     // 跳转到主页
     tohome: function () {
-      this.$router.push({ name: `Home` });
+      this.$router.push({ name: `Home` ,params:{
+        userId:this.$route.params.userId
+      }});
     },
     // 点击搜索框，搜索
     onsearch: function (value) {
+      
       if (value != '') {
         if (this.$route.path != '/results') {
           this.$router.push({ name: `SearchResult`, params: { keyword: value } });
@@ -96,16 +104,28 @@ export default {
     // 跳转到购物车页面
     tocart: function () {
       alert('跳转到购物车页面')
-      this.$router.push({ name:`Cart` });
+      this.$router.push({ name:`Cart`,
+      params:{
+        userId:this.$route.params.userId
+      } });
     },
     //跳转到购物车页面
     tome: function () {
+     
       alert('跳转到个人主页')
-      this.$router.push({ name:`User` });
+      this.$router.push({ name:`User`,
+      params:{
+        userId:this.$route.params.userId
+      } });
+     
     },
     //跳转到全部订单页面
     toorders: function () {
       alert('跳转到全部订单页')
+      this.$router.push({ name:`Order`,
+      params:{
+        userId:this.$route.params.userId
+      } });
     }
   }
 }

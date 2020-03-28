@@ -6,7 +6,7 @@
     <div class='form'>
     <a-form-item  :label-col="{ span: 8 }" :wrapper-col="{ span: 10}" >
       <a-input class='cover'
-        v-decorator="['userName', { rules: [{ required: true, message: '请输入有效的用户名！' }] }]"
+        v-decorator="['username', { rules: [{ required: true, message: '请输入有效的用户名！' }] }]"
       placeholder="请输入您的用户名~"
       />
     </a-form-item>
@@ -16,6 +16,7 @@
           'password',
           { rules: [{ required: true, message: '请输入有效的密码！' }] },
         ]"
+        type="password"
         placeholder="请输入您的密码~"
       />
     </a-form-item>
@@ -41,12 +42,30 @@ export default {
   },
   methods: {
     handleSubmit(e) {
-      
+      var _this=this;
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values)
         }
+        _this.axios.post('/api/user/customer/authentication',{
+            username: values.username,
+            password: values.password
+        }).then(function(response){
+          console.log(response);
+          if(response.data.userId==0||response.data==""){
+            console.log("login failed");
+            alert("请输入正确的用户名或密码！")
+          }else{
+            _this.$router.push({
+            name:`Home`,
+            params: {userId:response.data.userId}
+            });
+
+          }
+        }).catch(function (error) {
+          console.log(error);
+          })
       })
     }
   }

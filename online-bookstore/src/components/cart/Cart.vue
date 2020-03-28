@@ -24,7 +24,6 @@
                 <p>数量</p>
                 <p>小计</p>
                 <p>操作</p>
-<<<<<<< HEAD
              </div>
              <div class='cart-content'>
                <a-checkbox :options="products" v-model="checkedList" @change="onChange" />
@@ -52,30 +51,6 @@
                  <a-button type="primary" style="width:10%;">结算</a-button>
              </div>
            </div>
-=======
-              </div>
-              <div class='cart-content'>
-                <a-checkbox :options="products"
-                            v-model="checkedList"
-                            @change="onChange" />
-                <img src="../../assets/imgs/pic1.jpg"
-                     style="width:10%;" />
-                <div style="font-size=16px;">￥21.20</div>
-                <div>
-                  <a-input-number id="inputNumber"
-                                  :min="1"
-                                  :max="10"
-                                  v-model="value"
-                                  @change="onChange1" />
-                </div>
-                <div style="color:#ea1;">小计</div>
-                <a @click="onDelete">删除</a>
-
-              </div>
-              <div class='cart-footer'>
-              </div>
-            </div>
->>>>>>> bdd861a9c01e7da06eb873a56e76a2f12cbad6e7
           </a-layout-content>
         </a-layout>
 
@@ -141,7 +116,6 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
 	/*注意文件路径*/
 @import url("../../assets/css/homepage.css");	
 .cart-footer{
@@ -171,14 +145,6 @@ export default {
   padding-top:1%;
   border-radius: 3px;
   align-items: center;
-=======
-/*注意文件路径*/
-@import url("../../assets/css/homepage.css");
-.cart-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
->>>>>>> bdd861a9c01e7da06eb873a56e76a2f12cbad6e7
 
   margin: 1%;
   padding-top: 1%;

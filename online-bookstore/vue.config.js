@@ -15,7 +15,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8081', //API服务器的地址
+        target: 'https://csquare.wang:8081', //API服务器的地址
         ws: true, //代理websockets
         changeOrigin: true, // cnpm 虚拟的站点需要更管origin
         pathRewrite: {
