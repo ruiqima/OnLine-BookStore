@@ -123,13 +123,12 @@ export default {
       this.$emit('sendPageInfo', { page: page - 1, size: 5 })
     },
     addtocart (isbn) {
-      console.log(this.userId)
+      console.log(isbn)
       var _this = this
       _this.axios.post('/api/cart/' + _this.userId, {
-        params: {
-          isbn: isbn,
-          count: 1
-        }
+
+        isbn: isbn,
+        count: 1
       })
         .then(function (response) {
           console.log(response)

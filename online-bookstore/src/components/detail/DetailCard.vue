@@ -141,10 +141,8 @@ export default {
     addtocart (isbn) {
       var _this = this
       _this.axios.post('/api/cart/' + _this.userId, {
-        params: {
-          isbn: isbn,
-          count: 1
-        }
+        isbn: isbn,
+        count: 1
       })
         .then(function (response) {
           if (response.data == true) {
