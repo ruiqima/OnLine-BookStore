@@ -25,14 +25,14 @@
                 <p>小计</p>
                 <p>操作</p>
              </div>
-             <div class='cart-content'>
+             <div class='cart-content' v-for="book in booklist" :key="book.title">
                <a-checkbox :options="products" v-model="checkedList" @change="onChange" />
-               <img src="../../assets/imgs/pic1.jpg" style="width:10%;"/>
-               <div style="font-size=16px;">￥21.20</div>
+               <img :src="book.coverUrl" style="width:10%;"/>
+               <div style="font-size=16px;">￥{{book.price}}</div>
                <div>
-                   <a-input-number id="inputNumber" :min="1" :max="10" v-model="value" @change="onChange1" />
+                   <a-input-number id="inputNumber" :min="1" :max="max" v-model="value" @change="onChange1" />
                </div>
-               <div style="color:#ea1;">小计</div>
+               <div style="color:#ea1;">￥{{itemsum}}</div>
                <a @click="onDelete" >删除</a>
                
              </div>
@@ -40,13 +40,13 @@
                <a-checkbox :indeterminate="indeterminate" @change="onCheckAllChange" :checked="checkAll">
                全选
                </a-checkbox>
-                 <a @click="onDelete">删除</a>
+                 <a @click="onDelete">删除选中商品</a>
                  <p>已选商品
                    <span style="font-size:20px;font-weight:bold; color:rgb(216, 68, 42);">
-                   {{choose}}23
+                   {{choose}}
                    </span>
                    件</p>
-                 <p>合计：<span style="font-size:20px;font-weight:bold; color:rgb(216, 68, 42);">{{sum}}</span>
+                 <p>合计：<span style="font-size:20px;font-weight:bold; color:rgb(216, 68, 42);">￥{{sum}}</span>
                  </p>
                  <a-button type="primary" style="width:10%;">结算</a-button>
              </div>
@@ -70,21 +70,28 @@
 <script>
 import Header from '@/components/home/Header'
 const defaultCheckedList = [];
-var product = {
-  isbn: "12345",
-  count: 2
-}
-var products = [product];
-
 export default {
   data () {
     return {
       checkedList: defaultCheckedList,
       indeterminate: false,
       checkAll: false,
-      value: 3
+      max:10,
+      value: 1,
+      userId:0,
+      products:[],
+      booklist:[],
+      itemsum:0,//小计
+      sum:0,//购物车选中物品的值的总和
+      choose:0,//已选择的件数
+
     };
   },
+  created(){
+  this.userId=this.$route.params.userId;
+  console.log(this.userId);
+  this.getProducts();
+},
   methods: {
     onDelete () {
       alert("删除当前元素");
@@ -92,13 +99,13 @@ export default {
     onChange1 (value) {
       console.log('changed', value);
     },
-    onChange (checkedList) {
-      this.indeterminate = !!checkedList.length && checkedList.length < products.length;
-      this.checkAll = checkedList.length === products.length;
+    onChange () {//checkedList
+      //this.indeterminate = !!checkedList.length && checkedList.length < products.length;
+      //this.checkAll = checkedList.length === products.length;
     },
     onCheckAllChange (e) {
       Object.assign(this, {
-        checkedList: e.target.checked ? products : [],
+        //checkedList: e.target.checked ? products : [],
         indeterminate: false,
         checkAll: e.target.checked,
       });
@@ -106,6 +113,18 @@ export default {
     getPlainOptions () {
       this.product.isbn = "12345";
       this.product.count = 5;
+    },
+    getProducts(){
+      var _this=this;
+      _this.axios.get('/api/cart/'+_this.userId)
+      .then(function (response) {
+      console.log(response);
+      _this.products=response.data;
+      })
+      .catch(function (error) {
+      console.log(error);
+      })
+
     }
   },
   components: {
