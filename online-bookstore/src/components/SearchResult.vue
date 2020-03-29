@@ -19,7 +19,8 @@
             <!-- 搜索结果列表 -->
             <Result @sendPageInfo='getpage'
                     :bookDatas="bookDatas"
-                    :current="page+1" />
+                    :current="page+1"
+                    :userId="$route.params.userId" />
 
           </a-layout-content>
 
@@ -48,8 +49,7 @@ const param = {
   keyword: '',
   order: 'title',
   page: 0,
-  size: 5,
-
+  size: 5
 }
 
 export default {

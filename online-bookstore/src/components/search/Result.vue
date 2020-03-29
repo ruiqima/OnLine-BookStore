@@ -35,7 +35,8 @@
                      style="line-height:20px;">
                     {{book.introduction}}
                   </p>
-                  <a-button style="background-color:#EAF4EB;margin-top:5px;">加入购物车</a-button>
+                  <a-button style="background-color:#EAF4EB;margin-top:5px;"
+                            @click="addtocart(book.isbn)">加入购物车</a-button>
                   <a-button style="margin-left:20px;margin-top:5px;">收藏</a-button>
                   <div style="height:20px;width:100%;"></div>
                 </template>
@@ -46,7 +47,7 @@
           </template>
           <template slot="extra">
             <!-- 右上角跳转链接 -->
-            <router-link :to="{ name: `BookDetail`, params: { keyword:book.title,isbn:book.isbn } }"
+            <router-link :to="{ name: `BookDetail`, params: { keyword:book.title,isbn:book.isbn,userId:userId } }"
                          replace>
               <a-icon type="double-right"
                       :style="{ fontSize: '10px', color: '#999' }" />
@@ -71,6 +72,9 @@ export default {
     current: {
       type: Number,
       default: 1
+    },
+    userId: {
+      type: Number
     }
   },
   watch: {
@@ -117,6 +121,28 @@ export default {
   methods: {
     onChange (page) {
       this.$emit('sendPageInfo', { page: page - 1, size: 5 })
+    },
+    addtocart (isbn) {
+      console.log(this.userId)
+      var _this = this
+      _this.axios.post('/api/cart/' + _this.userId, {
+        params: {
+          isbn: isbn,
+          count: 1
+        }
+      })
+        .then(function (response) {
+          console.log(response)
+          if (response.data == true) {
+            _this.$message.success('成功加入购物车', 2);
+          } else {
+            _this.$message.error('操作失败', 2);
+          }
+        })
+        .catch(function (error) {
+          console.log(error)
+        }
+        )
     }
   }
 }

@@ -70,7 +70,8 @@
             <span style="font-size:x-small;color:#999999; line-height:40px;">库存 </span>
             <span style="font-size:x-small;color:#999999;margin-left:10px;">{{book.stock}}</span><br />
 
-            <a-button style="background-color:#EAF4EB;margin-top:30px;">加入购物车</a-button>
+            <a-button style="background-color:#EAF4EB;margin-top:30px;"
+                      @click="addtocart(book.isbn)">加入购物车</a-button>
             <a-button style="margin-left:20px;margin-top:30px;">立即购买</a-button>
             <a-button style="margin-left:20px;margin-top:30px;">收藏</a-button>
           </template>
@@ -86,6 +87,9 @@ export default {
   props: {
     isbn: {
       type: String
+    },
+    userId: {
+      type: Number
     }
   },
   data () {
@@ -133,6 +137,22 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
+    },
+    addtocart (isbn) {
+      var _this = this
+      _this.axios.post('/api/cart/' + _this.userId, {
+        params: {
+          isbn: isbn,
+          count: 1
+        }
+      })
+        .then(function (response) {
+          if (response.data == true) {
+            _this.$message.success('成功加入购物车', 2);
+          } else {
+            this.$message.error('操作失败', 2);
+          }
+        })
     }
   }
 }

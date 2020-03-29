@@ -11,7 +11,8 @@
         <!-- 书目详情 -->
         <a-layout>
           <a-layout-content style="background-color: white;">
-            <DetailCard :isbn="$route.params.isbn" />
+            <DetailCard :isbn="$route.params.isbn"
+                        :userId="$route.params.userId" />
           </a-layout-content>
         </a-layout>
 
