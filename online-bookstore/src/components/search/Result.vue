@@ -122,27 +122,52 @@ export default {
     onChange (page) {
       this.$emit('sendPageInfo', { page: page - 1, size: 5 })
     },
-    addtocart (isbn) {
-      console.log(this.userId)
+    async addtocart (isbn) {
       var _this = this
-      _this.axios.post('/api/cart/' + _this.userId, {
-        params: {
-          isbn: isbn,
-          count: 1
-        }
-      })
-        .then(function (response) {
+      await _this.axios.get('/api/cart/' + _this.userId)
+        .then(async function (response) {
           console.log(response)
-          if (response.data == true) {
-            _this.$message.success('成功加入购物车', 2);
-          } else {
-            _this.$message.error('操作失败', 2);
+          let products = response.data
+          for (let i in products) {
+            if (products[i].isbn == isbn) {
+              _this.count = products[i].count + 1
+              _this.flag = true
+              break
+            }
           }
         })
         .catch(function (error) {
-          console.log(error)
-        }
-        )
+          console.log(error);
+        });
+
+      if (_this.flag) {     //修改数量，不重新加入
+        _this.axios.put('/api/cart/' + _this.userId, {
+          isbn: isbn,
+          count: _this.count
+        })
+          .then(function (response) {
+            console.log(response)
+            if (response.data == true) {
+              _this.$message.success('成功加入购物车', 2);
+            } else {
+              this.$message.error('操作失败', 2);
+            }
+          })
+      } else {          //加入购物车
+        _this.axios.post('/api/cart/' + _this.userId, {
+          isbn: isbn,
+          count: 1
+        })
+          .then(function (response) {
+            console.log(response)
+            if (response.data == true) {
+              _this.$message.success('成功加入购物车', 2);
+            } else {
+              this.$message.error('操作失败', 2);
+            }
+          })
+      }
+
     }
   }
 }
