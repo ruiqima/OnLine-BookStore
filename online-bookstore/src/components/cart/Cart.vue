@@ -33,7 +33,7 @@
                    <a-input-number id="inputNumber" :min="1" :max="max" v-model="value" @change="onChange1" />
                </div>
                <div style="color:#ea1;">￥{{itemsum}}</div>
-               <a @click="onDelete" >删除</a>
+               <a @click="onDelete">删除</a>
                
              </div>
              <div class='cart-footer'>
@@ -124,6 +124,8 @@ export default {
       .catch(function (error) {
       console.log(error);
       })
+     //通过isbn获取书籍详细信息
+      _this
 
     }
   },

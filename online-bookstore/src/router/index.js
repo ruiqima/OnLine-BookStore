@@ -11,6 +11,7 @@ import Cart from '../components/cart/Cart.vue'
 import User from '../components/user/User.vue'
 import Edit from '../components/user/Edit.vue'
 import Order from '../components/user/Order.vue'
+import Buynow from '../components/buynow/Buynow.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -30,7 +31,7 @@ const routes = [
     component: BookDetail
   },
   {
-    path: '/',
+    path: '/l',
     name: 'Login',
     component: Login
   },
@@ -64,6 +65,11 @@ const routes = [
     name:'Order',
     component:Order
 
+  },
+  {
+    path:'',
+    name:'Buynow',
+    component:Buynow
   }
 ]
 
