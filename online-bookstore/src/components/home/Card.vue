@@ -47,7 +47,7 @@
               <template><br /><span style="color:#ea1;font-size:small;">￥{{book.price}}</span><br /><br /></template>
               <template slot="extra">
                 <!-- 右上角跳转链接 -->
-                <router-link :to="{ name: `SearchResult`, params: { keyword: book.title } }">
+                <router-link :to="{ name: `SearchResult`, params: { keyword: book.title,userId:userId } }">
                   <a-icon type="double-right"
                           :style="{ fontSize: '10px', color: '#999' }" />
                 </router-link>
@@ -68,6 +68,9 @@ export default {
     totalTitle: {
       type: String,
       default: ''
+    },
+    userId: {
+      type: Number
     }
   },
   data () {

@@ -32,11 +32,13 @@
         <a-layout>
           <a-layout-content style="background-color: #F5F5F5;">
             <!-- 卡片 -->
-            <Card totalTitle="新书上架" />
+            <Card totalTitle="新书上架"
+                  :userId="$route.params.userId" />
             <!-- 分割图片 -->
             <PicDivider />
             <!-- 卡片 -->
-            <Card totalTitle="热销推荐" />
+            <Card totalTitle="热销推荐"
+                  :userId="$route.params.userId" />
           </a-layout-content>
         </a-layout>
 
@@ -81,18 +83,16 @@ export default {
   data () {
     return {
       tags: [],
-      userId:0
+      userId: 0
     };
   },
   created () {
 
     this.getcate();
-    this.userId=this.$route.params.userId;
-    console.log("home"+this.userId)
   },
   methods: {
     handleChange (tag) {
-      this.$router.push({ name: `SearchResult`, params: { keyword: tag } });
+      this.$router.push({ name: `SearchResult`, params: { keyword: tag, userId: this.$route.params.userId } });
     },
     getcate () {
       var _this = this
