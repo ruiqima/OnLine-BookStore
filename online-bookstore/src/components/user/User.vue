@@ -144,7 +144,7 @@
 
 <script>
 import Header from '@/components/home/Header'
-
+import Login from '@/components/user/login/Login.vue'
 
 export default {
   
@@ -159,18 +159,18 @@ export default {
             booksCard: [],
             titleImgUrl: "",
             //用户信息
-            userId:0,
+            userId:Login.userId,
             username:"",
             profile:"",
         }
     },
     mounted () {
-    this.getcontent()
+    
   },
     created(){
-        this.userId=this.$route.params.userId;
         console.log(this.userId);
         this.getUserInfo();
+        this.getcontent()
     },
     methods:{
       

@@ -117,6 +117,7 @@ export default {
       params:{
         userId:this.$route.params.userId
       } });
+      console.log(this.userId)
      
     },
     //跳转到全部订单页面

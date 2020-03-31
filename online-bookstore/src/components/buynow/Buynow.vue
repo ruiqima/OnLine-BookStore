@@ -11,7 +11,7 @@
 
 		<!-- 正文内容写在这一块 -->
         <a-layout>
-          <a-layout-content style="background-color: white;display:flex;flex-direction:column">
+          <a-layout-content style="background-color: white;display:flex;flex-direction:column;">
               
                 <a-steps :current="1" class="stepbar">
                     <a-step>

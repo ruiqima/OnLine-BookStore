@@ -25,22 +25,26 @@
                 <p>小计</p>
                 <p>操作</p>
              </div>
-             <div class='cart-content' v-for="book in booklist" :key="book.title">
-               <a-checkbox :options="products" v-model="checkedList" @change="onChange" />
-               <img :src="book.coverUrl" style="width:10%;"/>
-               <div style="font-size=16px;">￥{{book.price}}</div>
+             
+             <div class='cart-content' v-for="bitem in booklist" :key="bitem.book.title"  >
+               
+               <a-checkbox :checked="bitem.check" @change="onChange(bitem)"/>
+               <img :src="bitem.book.coverUrl" style="width:10%;"/>
+               <div style="font-size=16px;">￥{{bitem.book.price}}</div>
                <div>
-                   <a-input-number id="inputNumber" :min="1" :max="max" v-model="value" @change="onChange1" />
+                   <a-input-number id="inputNumber" :min="1" :max="10" v-model="bitem.count" @change="onChange1(bitem)" />
                </div>
-               <div style="color:#ea1;">￥{{itemsum}}</div>
-               <a @click="onDelete">删除</a>
+               <div style="color:#ea1;">￥{{bitem.itemsum}}</div>
+               <a @click="onDelete(bitem)">删除</a>
                
              </div>
+             
+             
              <div class='cart-footer'>
                <a-checkbox :indeterminate="indeterminate" @change="onCheckAllChange" :checked="checkAll">
                全选
                </a-checkbox>
-                 <a @click="onDelete">删除选中商品</a>
+                 <a @click="onDeleteAll">删除选中商品</a>
                  <p>已选商品
                    <span style="font-size:20px;font-weight:bold; color:rgb(216, 68, 42);">
                    {{choose}}
@@ -48,7 +52,7 @@
                    件</p>
                  <p>合计：<span style="font-size:20px;font-weight:bold; color:rgb(216, 68, 42);">￥{{sum}}</span>
                  </p>
-                 <a-button type="primary" style="width:10%;">结算</a-button>
+                 <a-button type="primary" style="width:10%;" @click="pay">结算</a-button>
              </div>
            </div>
           </a-layout-content>
@@ -69,66 +73,169 @@
 
 <script>
 import Header from '@/components/home/Header'
-const defaultCheckedList = [];
+
 export default {
   data () {
     return {
-      checkedList: defaultCheckedList,
+      checkedList: [],
       indeterminate: false,
       checkAll: false,
       max:10,
-      value: 1,
       userId:0,
       products:[],
       booklist:[],
-      itemsum:0,//小计
-      sum:0,//购物车选中物品的值的总和
+      sum:0.0,//购物车选中物品的值的总和
       choose:0,//已选择的件数
-
+      isbns:[""]
     };
   },
   created(){
   this.userId=this.$route.params.userId;
-  console.log(this.userId);
+  //console.log(this.userId);
   this.getProducts();
-},
+  },
   methods: {
-    onDelete () {
-      alert("删除当前元素");
-    },
-    onChange1 (value) {
-      console.log('changed', value);
-    },
-    onChange () {//checkedList
-      //this.indeterminate = !!checkedList.length && checkedList.length < products.length;
-      //this.checkAll = checkedList.length === products.length;
-    },
-    onCheckAllChange (e) {
-      Object.assign(this, {
-        //checkedList: e.target.checked ? products : [],
-        indeterminate: false,
-        checkAll: e.target.checked,
+    onDeleteAll(){
+      //删除选中商品
+      this.isbns=[];
+      this.checkedList.forEach(element => {
+        this.isbns.push(element.book.isbn)
       });
+      this.axios.delete('/api/cart/'+this.userId,
+        {
+          data:this.isbns
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+        })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
+
+
     },
-    getPlainOptions () {
-      this.product.isbn = "12345";
-      this.product.count = 5;
+    pay(){
+
+    },
+    onDelete (bitem) {
+      this.isbns=[""];
+      this.booklist.splice(this.booklist.indexOf(bitem),1)
+      this.isbns[0]=bitem.book.isbn;
+      console.log(this.isbns);
+      this.axios.delete('/api/cart/'+this.userId,
+        {
+          data:this.isbns
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+        })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    },
+    onChange1 (bitem) {
+      console.log(bitem.count);
+      //修改商品数量
+      var _this=this;
+      bitem.itemsum=bitem.book.price*bitem.count;
+      _this.axios.put('/api/cart/'+_this.userId,{
+        isbn:bitem.book.isbn,
+        count:bitem.count
+      })
+      .then(function (response) {
+      console.log(response);
+     })
+      .catch(function (error) {
+      console.log(error);
+     });
+    },
+    onChange (bitem) {//checkedList
+    bitem.check=!bitem.check;
+    console.log(bitem.check);
+     if(bitem.check==true){
+       this.checkedList.push(bitem);
+     }else{
+       this.checkedList.splice(this.checkedList.indexOf(bitem),1);
+     }
+     
+      this.indeterminate = !!this.checkedList.length && this.checkedList.length < this.products.length;
+      this.checkAll = this.checkedList.length === this.products.length;
+    
+      console.log(this.checkedList);
+      this.calculate();
+    },
+    onCheckAllChange () {
+      if(this.checkAll==false){
+        this.checkAll=true;
+        this.indeterminate=false;
+        this.checkedList=this.booklist;
+        this.booklist.forEach(element => {
+          element.check=true;
+          
+        });
+      }else{
+        this.checkAll=false;
+        this.checkedList=[];
+        this.booklist.forEach(element => {
+          element.check=false;
+        });
+      }
+      this.calculate();
+      console.log(this.checkedList)
+    },
+    calculate(){
+      //这个函数负责更新下面的bar
+      this.choose=0;
+      this.sum=0;
+      this.checkedList.forEach(element => {
+        this.choose+=element.count;
+        this.sum+=element.itemsum;
+        
+      });
+      this.sum = this.sum.toFixed(2);
+      
+      
     },
     getProducts(){
       var _this=this;
       _this.axios.get('/api/cart/'+_this.userId)
       .then(function (response) {
-      console.log(response);
-      _this.products=response.data;
+          _this.products=response.data;
+          for(let i=0;i<response.data.length;i++){
+            let item={
+              count:0,
+              book:{},
+              itemsum:0,
+              check:false
+            }
+            var isbn=response.data[i].isbn;
+            _this.axios.get('/api/book/'+isbn)
+            .then(function(response) {
+              console.log(i);
+            item.count=_this.products[i].count;
+            item.book=response.data;
+            item.itemsum=_this.products[i].count*response.data.price;
+            _this.booklist.push(item);
+            }
+            )
+            .catch(function (error) {
+            console.log(error);
+            })
+      }
+      console.log(_this.booklist);
       })
       .catch(function (error) {
       console.log(error);
       })
-     //通过isbn获取书籍详细信息
-      _this
-
-    }
+      },
+     
   },
+  
   components: {
     Header
   },
@@ -156,18 +263,22 @@ export default {
   background-color: #eee;
   z-index: 9999;
 }	
+.content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .cart-content{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width:95%;
+  width:100%;
   margin:1%;
-  margin-left:3%;
+  margin-right:20px;
   padding-top:1%;
-  border-radius: 3px;
+  padding-bottom: 15px;
   align-items: center;
-
-  margin: 1%;
+  border-bottom: 1px solid #cdcdcd;
   padding-top: 1%;
   border-radius: 3px;
 }

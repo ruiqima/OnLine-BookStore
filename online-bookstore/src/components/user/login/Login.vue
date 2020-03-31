@@ -33,11 +33,12 @@
 </template>
 
 <script>
+import '/OnLine-BookStore/online-bookstore/global.js'
 export default {
   data() {
     return {
       formLayout: 'horizontal',
-      form: this.$form.createForm(this, { name: 'coordinated' })
+      form: this.$form.createForm(this, { name: 'coordinated' }),
     }
   },
   methods: {
@@ -61,6 +62,9 @@ export default {
             name:`Home`,
             params: {userId:response.data.userId}
             });
+            console.log(global.userId)
+            global.userId=response.data.userId
+            console.log(global.userId)
 
           }
         }).catch(function (error) {

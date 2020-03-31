@@ -31,7 +31,7 @@ const routes = [
     component: BookDetail
   },
   {
-    path: '/l',
+    path: '/',
     name: 'Login',
     component: Login
   },
@@ -67,7 +67,7 @@ const routes = [
 
   },
   {
-    path:'',
+    path:'/detail/buynow',
     name:'Buynow',
     component:Buynow
   }
