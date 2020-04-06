@@ -12,9 +12,16 @@ import User from '../components/user/User.vue'
 import Edit from '../components/user/Edit.vue'
 import Order from '../components/user/Order.vue'
 import Buynow from '../components/buynow/Buynow.vue'
+import Comment from '../components/comment/Comment.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'/comment',
+    name:'Comment',
+    component:Comment
+
+  },
   {
     path: '/home',
     name: 'Home',

@@ -12,7 +12,9 @@
         <!-- 正文内容写在这一块 -->
         <a-layout>
           <a-layout-content style="background-color: white;">
+            
             <div class='content'>
+              
               <div class='cart-header'>
                 <a-checkbox :indeterminate="indeterminate"
                             @change="onCheckAllChange"
@@ -25,7 +27,7 @@
                 <p>小计</p>
                 <p>操作</p>
              </div>
-             
+             <div v-if="products.length==0" style="margin:10%;font-size:20px; color:#cdcdcd">购物车空空如也，快去选点东西吧~</div>
              <div class='cart-content' v-for="bitem in booklist" :key="bitem.book.title"  >
                
                <a-checkbox :checked="bitem.check" @change="onChange(bitem)"/>
@@ -44,7 +46,9 @@
                <a-checkbox :indeterminate="indeterminate" @change="onCheckAllChange" :checked="checkAll">
                全选
                </a-checkbox>
-                 <a @click="onDeleteAll">删除选中商品</a>
+              <a @click="onDeleteAll">删除选中商品</a>
+                
+                 
                  <p>已选商品
                    <span style="font-size:20px;font-weight:bold; color:rgb(216, 68, 42);">
                    {{choose}}
@@ -73,7 +77,7 @@
 
 <script>
 import Header from '@/components/home/Header'
-
+import '/OnLine-BookStore/online-bookstore/global'
 export default {
   data () {
     return {
@@ -90,7 +94,7 @@ export default {
     };
   },
   created(){
-  this.userId=this.$route.params.userId;
+  this.userId=global.userId
   //console.log(this.userId);
   this.getProducts();
   },
@@ -99,7 +103,9 @@ export default {
       //删除选中商品
       this.isbns=[];
       this.checkedList.forEach(element => {
-        this.isbns.push(element.book.isbn)
+        this.isbns.push(element.book.isbn),
+        this.booklist.splice(this.booklist.indexOf(element),1)
+
       });
       this.axios.delete('/api/cart/'+this.userId,
         {
@@ -118,6 +124,19 @@ export default {
 
     },
     pay(){
+      if(this.choose==0){
+        alert("请选择要购买的物品");
+      }else{
+        this.$router.push({ name:`Buynow`, params:{
+        bought:this.checkedList,
+        sum:this.sum,
+        choose:this.choose
+      }})
+      }
+      //删掉购物车里的物品
+      this.checkedList.forEach(element => {
+        this.onDelete(element);
+      });
 
     },
     onDelete (bitem) {

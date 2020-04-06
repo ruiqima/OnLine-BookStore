@@ -25,32 +25,30 @@
                <div class='right'>
                     <a-card title="我的订单" :bordered="false" style="width: 180%; text-align:left; margin-top:2%;">
                         <div style="display:flex;flex-direction:row; flex-wrap:wrap;">
-                        <a-card-grid  @click="toOrder" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                        <a-card-grid  @click="toOrder(1)" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                            <a-icon type="credit-card" style="font-size:300%;padding:15%;"/>
+                            <span>所有订单</span>
+                        </a-card-grid>
+
+                        <a-card-grid  @click="toOrder(2)" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
                             <a-badge :count="count1">
                             <a-icon type="credit-card" style="font-size:300%;padding:15%;"/>
                             </a-badge>
-                            <span>待付款</span>
+                            <span>已付款</span>
                         </a-card-grid>
                         
-                        <a-card-grid  @click="toOrder" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                        <a-card-grid  @click="toOrder(3)" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
                             <a-badge :count="count2">
                             <a-icon type="inbox" style="font-size:300%;padding:15%;"/>
                             </a-badge>
                             <span>待收货</span>
                         </a-card-grid>
 
-                        <a-card-grid @click="toOrder" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                        <a-card-grid @click="toOrder(4)" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
                             <a-badge :count="count3">
                             <a-icon type="message" style="font-size:300%;padding:15%;"/>
                             </a-badge>
                             <span>待评价</span>
-                        </a-card-grid>
-
-                        <a-card-grid  @click="toOrder" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
-                            <a-badge :count="count4">
-                            <a-icon type="insurance" style="font-size:300%;padding:15%;"/>
-                            </a-badge>
-                            <span>退款/售后</span>
                         </a-card-grid>
                         </div>
 
@@ -66,21 +64,6 @@
     <a-row type="flex"
            justify="space-between"
            :gutter="15">
-      <!-- <a-col :xs="0"
-             :sm="0"
-             :md="0"
-             :lg="0"
-             :xl="4">
-        <div class="title-img-div border">
-          <img :src="titleImgUrl"
-               class="title-img" />
-        </div>
-      </a-col> -->
-      <!-- <a-col :xs="24"
-             :sm="24"
-             :md="24"
-             :lg="24"
-             :xl=""> -->
       <div style="background-color: #f5f5f5;">
         <a-row type="flex"
                justify="space-around"
@@ -144,22 +127,20 @@
 
 <script>
 import Header from '@/components/home/Header'
-import Login from '@/components/user/login/Login.vue'
-
+import '/OnLine-BookStore/online-bookstore/global'
 export default {
   
     data(){
         return{
-          count1:1,
-          count2:2,
-          count3:3,
-          count4:4,
+          count1:0,
+          count2:0,
+          count3:0,
           page:0,
           size:5,
             booksCard: [],
             titleImgUrl: "",
             //用户信息
-            userId:Login.userId,
+            userId:0,
             username:"",
             profile:"",
         }
@@ -168,30 +149,82 @@ export default {
     
   },
     created(){
+      this.userId=global.userId;
         console.log(this.userId);
         this.getUserInfo();
-        this.getcontent()
+        this.getcontent();
+        this.getCount();
     },
     methods:{
-      
+      getCount(){
+        //已付款
+        var _this=this;
+        this.axios.get('/api/order/user/'+this.userId,{
+          params:{
+            page:0,
+            size:10,
+            status:'已付款',
+          }
+        })
+        .then(function (response) {
+        // handle success
+        _this.count1=response.data.data.length;
+        }).catch(function (error) {
+        // handle error
+        console.log(error);
+          })
+        //待收货
+        this.axios.get('/api/order/user/'+this.userId,{
+          params:{
+            page:0,
+            size:10,
+            status:'待收货',
+          }
+        })
+        .then(function (response) {
+        // handle success
+        _this.count2=response.data.data.length;
+        }).catch(function (error) {
+        // handle error
+        console.log(error);
+          })
+          //待评价
+          this.axios.get('/api/order/user/'+this.userId,{
+          params:{
+            page:0,
+            size:10,
+            status:'待评价',
+          }
+        })
+        .then(function (response) {
+        // handle success
+        _this.count3=response.data.data.length;
+        }).catch(function (error) {
+        // handle error
+        console.log(error);
+          })
+
+      },
       toAdd(){
         this.$router.push({ name:`Address` });
       },
-      toOrder(){
-        this.$router.push({name:`Order`});
+      toOrder(key){
+        this.$router.push({name:`Order`,params:{
+        key:key
+      }});
       },
       getUserInfo(){
         var _this=this;
         _this.axios.get('/api/user/customer/'+_this.userId)
         .then(function (response) {
-      console.log(response);
-      _this.username=response.data.username;
-      _this.profile=response.data.profile;
-      })
-      .catch(function (error) {
-      console.log(error);
-      })
-      },
+        console.log(response);
+        _this.username=response.data.username;
+        _this.profile=response.data.profile;
+        })
+        .catch(function (error) {
+        console.log(error);
+         })
+        },
     getcontent () {
       var _this=this;
       _this.axios.get('/api/recommendation/user/'+_this.userId,

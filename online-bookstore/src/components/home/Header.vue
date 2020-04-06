@@ -114,19 +114,14 @@ export default {
      
       alert('跳转到个人主页')
       this.$router.push({ name:`User`,
-      params:{
-        userId:this.$route.params.userId
-      } });
+       });
       console.log(this.userId)
      
     },
     //跳转到全部订单页面
     toorders: function () {
       alert('跳转到全部订单页')
-      this.$router.push({ name:`Order`,
-      params:{
-        userId:this.$route.params.userId
-      } });
+      this.$router.push({ name:`Order` });
     }
   }
 }

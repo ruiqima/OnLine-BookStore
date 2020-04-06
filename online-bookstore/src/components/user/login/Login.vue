@@ -58,13 +58,14 @@ export default {
             console.log("login failed");
             alert("请输入正确的用户名或密码！")
           }else{
+            global.isLogin=true;
             _this.$router.push({
             name:`Home`,
             params: {userId:response.data.userId}
             });
             console.log(global.userId)
             global.userId=response.data.userId
-            console.log(global.userId)
+            console.log(global.isLogin)
 
           }
         }).catch(function (error) {

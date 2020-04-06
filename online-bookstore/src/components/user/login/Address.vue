@@ -14,25 +14,11 @@
             <span style="color:#3e8331;text-align:left;margin-left:10%;">新增收货地址</span>
             <div class='form'>
               <a-form :form="form" @submit="handleSubmit">
-                <a-form-item v-bind="formItemLayout" label="收货地址：">
-                <a-cascader
-                  v-decorator="[
-                    'residence',
-                    {
-                  initialValue: ['湖北省', '武汉市'],
-                  rules: [
-                  { type: 'array', required: true, message: '请选择收货地址' },
-                          ],
-                    },
-                              ]"
-                      :options="residences"
-                    />
+                  <a-form-item v-bind="formItemLayout" label="收货地址：">
+                <a-textarea v-model="address"/>
                   </a-form-item>
-                  <a-form-item v-bind="formItemLayout" label="详细地址：">
-                <a-textarea/>
-                  </a-form-item>
-                  <a-form-item v-bind="formItemLayout" label="收货人姓名：">
-                <a-input
+                  <a-form-item  v-bind="formItemLayout" label="收货人姓名：">
+                <a-input v-model='name'
                   v-decorator="[
                     {
                   rules: [
@@ -43,7 +29,7 @@
                     />
                   </a-form-item>
                   <a-form-item v-bind="formItemLayout" label="手机号码：">
-                    <a-input
+                    <a-input v-model='phone'
                     v-decorator="[
                     'phone',
                     {
@@ -76,9 +62,16 @@
             <span style="color:#3e8331;text-align:left;margin-left:10%;">已保存的地址</span>
             <div class="table" style="width:90%;">
               <a-table bordered :dataSource="dataSource" :columns="columns">
-              <template>
-              <editable-cell :text="text"/>
+              <template slot="operation" slot-scope="text, record">
+              <a-popconfirm
+               v-if="dataSource.length"
+                title="Sure to delete?"
+                @confirm="() => onDelete(record.key)"
+                >
+                <a href="javascript:;">Delete</a>
+                </a-popconfirm>
               </template>
+            
               
               </a-table>
 
@@ -108,45 +101,15 @@
 
 <script>
 import Header from '@/components/home/Header'
-const residences = [
-  {
-    value: '浙江',
-    label: '浙江',
-    children: [
-      {
-        value: '杭州市',
-        label: '杭州市',
-        children: [
-          {
-            value: '西湖区',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: '湖北省',
-    label: 'Hubei',
-    children: [
-      {
-        value: '武汉市',
-        label: 'Wuhan',
-        children: [
-          {
-            value: '洪山区',
-            label: 'Hongshanqu',
-          },
-        ],
-      },
-    ],
-  },
-];
+import '/OnLine-BookStore/online-bookstore/global'
 
 export default {
   data(){
     return{
-    residences,
+      phone:'',
+      address:'',
+      name:'',
+      userId:0,
     formItemLayout: {
         labelCol: {
           xs: { span: 24 },
@@ -157,21 +120,8 @@ export default {
           sm: { span: 16 },
         },
       },
-    dataSource: [
-          {
-            key: '0',
-            name: 'Edward King 0',
-            age: '32',
-            address: 'London, Park Lane no. 0',
-          },
-          {
-            key: '1',
-            name: 'Edward King 1',
-            age: '32',
-            address: 'London, Park Lane no. 1',
-          },
-        ],
-        columns: [
+    dataSource: [],
+      columns: [
           {
             title: '收货人',
             dataIndex: 'name',
@@ -179,12 +129,8 @@ export default {
             scopedSlots: { customRender: 'name' },
           },
           {
-            title: '所在地区',
-            dataIndex: 'address1',
-          },
-          {
             title: '详细地址',
-            dataIndex: 'address2',
+            dataIndex: 'address',
           },
           {
             title: '电话/手机',
@@ -199,15 +145,60 @@ export default {
         ],
     }
   },
+  mounted(){
+    this.userId=global.userId;
+    this.loadData();
+  },
   methods:{
+    onDelete(key) {
+        const dataSource = [...this.dataSource];
+        this.dataSource = dataSource.filter(item => item.key !== key);
+      },
     handleSubmit(e) {
+      var _this=this;
       e.preventDefault();
-      this.form.validateFieldsAndScroll((err, values) => {
-        if (!err) {
-          console.log('Received values of form: ', values);
+      console.log(this.name);
+      console.log(this.address);
+      console.log(this.phone);
+      this.axios.post('/api/address/user/'+this.userId,{
+        name:this.name,
+        address:this.address,
+        phone:this.phone
+      })
+      .then(function (response) {
+        console.log(response);
+        if(response.data==true){
+          alert("保存成功！");
         }
-      });
+        _this.loadData();
+        })
+      .catch(function (error) {
+        console.log(error);
+        });
     },
+    loadData(){
+      var _this=this;
+       this.axios.get('/api/address/user/'+this.userId,
+        {
+          params:{
+            page:0,
+            size:10,
+          }
+        })
+        .then(function (response) {
+        // handle success
+        
+        console.log(response.data.data);
+        let val=response.data.data;
+        console.log(val);
+        _this.dataSource=response.data.data;
+        console.log(this.dataSource);
+        })
+        .catch(function (error) {
+        // handle error
+        console.log(error);
+          })
+    }
 
   },
   components: {
