@@ -70,7 +70,7 @@ import Card from '@/components/home/Card'
 import Header from '@/components/home/Header'
 import PicDivider from '@/components/home/PicDivider'
 import Recommend from '@/components/home/Recommend'
-
+import '../../global'
 export default {
   components: {
     Carousel,
@@ -87,7 +87,7 @@ export default {
     };
   },
   created () {
-
+    console.log('userId:' + global.userId)
     this.getcate();
   },
   methods: {

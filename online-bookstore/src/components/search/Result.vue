@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import '../../../global'
 export default {
   props: {
     bookDatas: {
@@ -74,7 +75,8 @@ export default {
       default: 1
     },
     userId: {
-      type: Number
+      type: Number,
+      default: global.userId
     }
   },
   watch: {
@@ -124,7 +126,7 @@ export default {
     },
     async addtocart (isbn) {
       var _this = this
-      await _this.axios.get('/api/cart/' + _this.userId)
+      await _this.axios.get('/api/cart/' + global.userId)
         .then(async function (response) {
           console.log(response)
           let products = response.data
@@ -141,7 +143,7 @@ export default {
         });
 
       if (_this.flag) {     //修改数量，不重新加入
-        _this.axios.put('/api/cart/' + _this.userId, {
+        _this.axios.put('/api/cart/' + global.userId, {
           isbn: isbn,
           count: _this.count
         })
@@ -154,7 +156,7 @@ export default {
             }
           })
       } else {          //加入购物车
-        _this.axios.post('/api/cart/' + _this.userId, {
+        _this.axios.post('/api/cart/' + global.userId, {
           isbn: isbn,
           count: 1
         })

@@ -1,2 +1,2 @@
-window.userId=0;
-window.isLogin=false;
+window.userId = 0
+window.isLogin = false

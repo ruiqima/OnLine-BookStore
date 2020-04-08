@@ -13,97 +13,109 @@
         <!-- 正文内容写在这一块 -->
         <a-layout>
           <a-layout-content style="background-color: white;">
-           <div class='userinfo'>
-               <!--这里是个人信息及收货等等的选项卡-->
-               <div class='left'>
-                 <router-link :to="{name:'Edit'}">
-                   <img id='ava' :src="profile" />
-                 </router-link>
-                   <span style="margin:10px;color:white;">{{username}}</span>
-                   <a @click="toAdd" style="color:white; border:1px solid; width:50%; padding:2%;border-radius:3px;">收货地址</a>
-               </div>
-               <div class='right'>
-                    <a-card title="我的订单" :bordered="false" style="width: 180%; text-align:left; margin-top:2%;">
-                        <div style="display:flex;flex-direction:row; flex-wrap:wrap;">
-                        <a-card-grid  @click="toOrder(1)" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
-                            <a-icon type="credit-card" style="font-size:300%;padding:15%;"/>
-                            <span>所有订单</span>
-                        </a-card-grid>
-
-                        <a-card-grid  @click="toOrder(2)" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
-                            <a-badge :count="count1">
-                            <a-icon type="credit-card" style="font-size:300%;padding:15%;"/>
-                            </a-badge>
-                            <span>已付款</span>
-                        </a-card-grid>
-                        
-                        <a-card-grid  @click="toOrder(3)" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
-                            <a-badge :count="count2">
-                            <a-icon type="inbox" style="font-size:300%;padding:15%;"/>
-                            </a-badge>
-                            <span>待收货</span>
-                        </a-card-grid>
-
-                        <a-card-grid @click="toOrder(4)" style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
-                            <a-badge :count="count3">
-                            <a-icon type="message" style="font-size:300%;padding:15%;"/>
-                            </a-badge>
-                            <span>待评价</span>
-                        </a-card-grid>
-                        </div>
-
-      
-                    </a-card>
-               </div>
-
-           </div>
-           <div class="flex-column">
-    <div class="card-title-div ver-center">
-      <span class="card-title-text" style="padding:3%;">猜你喜欢</span>
-    </div>
-    <a-row type="flex"
-           justify="space-between"
-           :gutter="15">
-      <div style="background-color: #f5f5f5;">
-        <a-row type="flex"
-               justify="space-around"
-               :gutter="15">
-          <a-col :xs="24"
-                 :sm="19"
-                 :md="12"
-                 :lg="6"
-                 :xl="6"
-                 v-for="book in booksCard"
-                 :key="book.title">
-
-            <a-card hoverable
-                    style="margin-bottom:10px;"
-                    size="small">
-              <div class="hori-center">
-                <img alt="图片"
-                     :src="book.coverUrl"
-                     slot="cover"
-                     class="card-img" /></div>
-              <a-card-meta :title="book.title"
-                           :description="book.author">
-              </a-card-meta>
-              <template><br /><span style="color:#ea1;font-size:small;">￥{{book.price}}</span><br /><br /></template>
-              <template slot="extra">
-                <!-- 右上角跳转链接 -->
-                <router-link :to="{ name: `SearchResult`, params: { keyword: book.title } }">
-                  <a-icon type="double-right"
-                          :style="{ fontSize: '10px', color: '#999' }" />
+            <div class='userinfo'>
+              <!--这里是个人信息及收货等等的选项卡-->
+              <div class='left'>
+                <router-link :to="{name:'Edit'}">
+                  <img id='ava'
+                       :src="profile" />
                 </router-link>
-              </template>
-            </a-card>
-          </a-col>
+                <span style="margin:10px;color:white;">{{username}}</span>
+                <a @click="toAdd"
+                   style="color:white; border:1px solid; width:50%; padding:2%;border-radius:3px;">收货地址</a>
+              </div>
+              <div class='right'>
+                <a-card title="我的订单"
+                        :bordered="false"
+                        style="width: 180%; text-align:left; margin-top:2%;">
+                  <div style="display:flex;flex-direction:row; flex-wrap:wrap;">
+                    <a-card-grid @click="toOrder(1)"
+                                 style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                      <a-icon type="credit-card"
+                              style="font-size:300%;padding:15%;" />
+                      <span>所有订单</span>
+                    </a-card-grid>
 
-        </a-row>
-      </div>
-      <!-- </a-col> -->
-    </a-row>
-  </div>
-            
+                    <a-card-grid @click="toOrder(2)"
+                                 style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                      <a-badge :count="count1">
+                        <a-icon type="credit-card"
+                                style="font-size:300%;padding:15%;" />
+                      </a-badge>
+                      <span>已付款</span>
+                    </a-card-grid>
+
+                    <a-card-grid @click="toOrder(3)"
+                                 style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                      <a-badge :count="count2">
+                        <a-icon type="inbox"
+                                style="font-size:300%;padding:15%;" />
+                      </a-badge>
+                      <span>待收货</span>
+                    </a-card-grid>
+
+                    <a-card-grid @click="toOrder(4)"
+                                 style="display:flex; flex-direction:column;width:25%;text-align:center;justify-content:center">
+                      <a-badge :count="count3">
+                        <a-icon type="message"
+                                style="font-size:300%;padding:15%;" />
+                      </a-badge>
+                      <span>待评价</span>
+                    </a-card-grid>
+                  </div>
+
+                </a-card>
+              </div>
+
+            </div>
+            <div class="flex-column">
+              <div class="card-title-div ver-center">
+                <span class="card-title-text"
+                      style="padding:3%;">猜你喜欢</span>
+              </div>
+              <a-row type="flex"
+                     justify="space-between"
+                     :gutter="15">
+                <div style="background-color: #f5f5f5;">
+                  <a-row type="flex"
+                         justify="space-around"
+                         :gutter="15">
+                    <a-col :xs="24"
+                           :sm="19"
+                           :md="12"
+                           :lg="6"
+                           :xl="6"
+                           v-for="book in booksCard"
+                           :key="book.title">
+
+                      <a-card hoverable
+                              style="margin-bottom:10px;"
+                              size="small">
+                        <div class="hori-center">
+                          <img alt="图片"
+                               :src="book.coverUrl"
+                               slot="cover"
+                               class="card-img" /></div>
+                        <a-card-meta :title="book.title"
+                                     :description="book.author">
+                        </a-card-meta>
+                        <template><br /><span style="color:#ea1;font-size:small;">￥{{book.price}}</span><br /><br /></template>
+                        <template slot="extra">
+                          <!-- 右上角跳转链接 -->
+                          <router-link :to="{ name: `SearchResult`, params: { keyword: book.title } }">
+                            <a-icon type="double-right"
+                                    :style="{ fontSize: '10px', color: '#999' }" />
+                          </router-link>
+                        </template>
+                      </a-card>
+                    </a-col>
+
+                  </a-row>
+                </div>
+                <!-- </a-col> -->
+              </a-row>
+            </div>
+
           </a-layout-content>
         </a-layout>
 
@@ -127,123 +139,123 @@
 
 <script>
 import Header from '@/components/home/Header'
-import '/OnLine-BookStore/online-bookstore/global'
+import '../../../global'
 export default {
-  
-    data(){
-        return{
-          count1:0,
-          count2:0,
-          count3:0,
-          page:0,
-          size:5,
-            booksCard: [],
-            titleImgUrl: "",
-            //用户信息
-            userId:0,
-            username:"",
-            profile:"",
-        }
-    },
-    mounted () {
-    
-  },
-    created(){
-      this.userId=global.userId;
-        console.log(this.userId);
-        this.getUserInfo();
-        this.getcontent();
-        this.getCount();
-    },
-    methods:{
-      getCount(){
-        //已付款
-        var _this=this;
-        this.axios.get('/api/order/user/'+this.userId,{
-          params:{
-            page:0,
-            size:10,
-            status:'已付款',
-          }
-        })
-        .then(function (response) {
-        // handle success
-        _this.count1=response.data.data.length;
-        }).catch(function (error) {
-        // handle error
-        console.log(error);
-          })
-        //待收货
-        this.axios.get('/api/order/user/'+this.userId,{
-          params:{
-            page:0,
-            size:10,
-            status:'待收货',
-          }
-        })
-        .then(function (response) {
-        // handle success
-        _this.count2=response.data.data.length;
-        }).catch(function (error) {
-        // handle error
-        console.log(error);
-          })
-          //待评价
-          this.axios.get('/api/order/user/'+this.userId,{
-          params:{
-            page:0,
-            size:10,
-            status:'待评价',
-          }
-        })
-        .then(function (response) {
-        // handle success
-        _this.count3=response.data.data.length;
-        }).catch(function (error) {
-        // handle error
-        console.log(error);
-          })
 
-      },
-      toAdd(){
-        this.$router.push({ name:`Address` });
-      },
-      toOrder(key){
-        this.$router.push({name:`Order`,params:{
-        key:key
-      }});
-      },
-      getUserInfo(){
-        var _this=this;
-        _this.axios.get('/api/user/customer/'+_this.userId)
+  data () {
+    return {
+      count1: 0,
+      count2: 0,
+      count3: 0,
+      page: 0,
+      size: 5,
+      booksCard: [],
+      titleImgUrl: "",
+      //用户信息
+      userId: 0,
+      username: "",
+      profile: "",
+    }
+  },
+  mounted () {
+
+  },
+  created () {
+    this.userId = global.userId;
+    console.log(this.userId);
+    this.getUserInfo();
+    this.getcontent();
+    this.getCount();
+  },
+  methods: {
+    getCount () {
+      //已付款
+      var _this = this;
+      this.axios.get('/api/order/user/' + this.userId, {
+        params: {
+          page: 0,
+          size: 10,
+          status: '已付款',
+        }
+      })
         .then(function (response) {
-        console.log(response);
-        _this.username=response.data.username;
-        _this.profile=response.data.profile;
+          // handle success
+          _this.count1 = response.data.data.length;
+        }).catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+      //待收货
+      this.axios.get('/api/order/user/' + this.userId, {
+        params: {
+          page: 0,
+          size: 10,
+          status: '待收货',
+        }
+      })
+        .then(function (response) {
+          // handle success
+          _this.count2 = response.data.data.length;
+        }).catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+      //待评价
+      this.axios.get('/api/order/user/' + this.userId, {
+        params: {
+          page: 0,
+          size: 10,
+          status: '待评价',
+        }
+      })
+        .then(function (response) {
+          // handle success
+          _this.count3 = response.data.data.length;
+        }).catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+
+    },
+    toAdd () {
+      this.$router.push({ name: `Address` });
+    },
+    toOrder (key) {
+      this.$router.push({        name: `Order`, params: {
+          key: key
+        }      });
+    },
+    getUserInfo () {
+      var _this = this;
+      _this.axios.get('/api/user/customer/' + _this.userId)
+        .then(function (response) {
+          console.log(response);
+          _this.username = response.data.username;
+          _this.profile = response.data.profile;
         })
         .catch(function (error) {
-        console.log(error);
-         })
-        },
-    getcontent () {
-      var _this=this;
-      _this.axios.get('/api/recommendation/user/'+_this.userId,
-      { 
-        params:{
-        page:_this.page,
-        size:_this.size
-        }
-      }).then(function (response) {
-      console.log(response);
-      _this.booksCard=response.data.data;
+          console.log(error);
         })
-      .catch(function (error) {
-      console.log(error);
-      })
-    }
-  
-
     },
+    getcontent () {
+      var _this = this;
+      _this.axios.get('/api/recommendation/user/' + _this.userId,
+        {
+          params: {
+            page: _this.page,
+            size: _this.size
+          }
+        }).then(function (response) {
+          console.log(response);
+          _this.booksCard = response.data.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    }
+
+
+  },
   components: {
     Header
   },
@@ -256,50 +268,47 @@ export default {
 #components-pagination-demo-mini .ant-pagination:not(:last-child) {
   margin-bottom: 24px;
 }
-.card{
-    margin:1%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+.card {
+  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
-.contend{
-    display: flex;
-    flex-direction: row;
+.contend {
+  display: flex;
+  flex-direction: row;
 }
-.recommand{
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    width:90%;
-    margin-left:6%;
+.recommand {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 90%;
+  margin-left: 6%;
 }
-#bear{
-    width:90%;
-    box-shadow: 0px 0px 2px rgb(121, 121, 121);
-    margin-top:1%;
-    margin-bottom: 1%;
+#bear {
+  width: 90%;
+  box-shadow: 0px 0px 2px rgb(121, 121, 121);
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
-#ava{
-    border:whitesmoke solid 3px;
-    box-shadow:2px black ;
-    border-radius: 100%;
-    width:40%;
-    height:100px;
-
+#ava {
+  border: whitesmoke solid 3px;
+  box-shadow: 2px black;
+  border-radius: 100%;
+  width: 40%;
+  height: 100px;
 }
-.userinfo{
-    display: flex;
-    flex-direction: row;
-    
-   
+.userinfo {
+  display: flex;
+  flex-direction: row;
 }
-.left{
-    z-index: 99;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-     background: linear-gradient(
+.left {
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
     62deg,
     #719669 0%,
     #4e8c41 50%,

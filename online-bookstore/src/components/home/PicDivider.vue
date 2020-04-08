@@ -1,6 +1,6 @@
 <template>
   <div class="pic-divider">
-    <img src="../../assets/imgs/picDivider.jpg"
+    <img src="https://s1.ax1x.com/2020/04/08/GRxPv6.jpg"
          class="img-divider"
          slot="cover" />
   </div>
