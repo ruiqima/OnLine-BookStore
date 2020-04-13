@@ -123,7 +123,9 @@ export default {
       _this.axios.get('/api/comment/book/' + _this.isbn + '/stars', {
       })
         .then(function (response) {
+          console.log(_this.isbn)
           _this.stars = response.data
+          console.log(_this.stars)
         })
         .catch(function (error) {
           console.log(error);

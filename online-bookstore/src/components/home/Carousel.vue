@@ -7,15 +7,6 @@
         <img :src="caro.carouselUrl"
              style="object-fit:contain;" />
       </div>
-      <!-- <div>
-        <h3>2</h3>
-      </div>
-      <div>
-        <h3>3</h3>
-      </div>
-      <div>
-        <h3>4</h3>
-      </div> -->
     </a-carousel>
   </div>
 </template>

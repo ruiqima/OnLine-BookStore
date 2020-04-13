@@ -6,21 +6,6 @@
     <a-row type="flex"
            justify="space-between"
            :gutter="15">
-      <!-- <a-col :xs="0"
-             :sm="0"
-             :md="0"
-             :lg="0"
-             :xl="4">
-        <div class="title-img-div border">
-          <img :src="titleImgUrl"
-               class="title-img" />
-        </div>
-      </a-col> -->
-      <!-- <a-col :xs="24"
-             :sm="24"
-             :md="24"
-             :lg="24"
-             :xl=""> -->
       <div style="background-color: #f5f5f5;">
         <a-row type="flex"
                justify="space-around"
@@ -57,7 +42,6 @@
 
         </a-row>
       </div>
-      <!-- </a-col> -->
     </a-row>
   </div>
 </template>

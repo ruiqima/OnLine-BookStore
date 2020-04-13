@@ -1,7 +1,4 @@
 <template>
-  <!-- <a-layout-header class="flex-row border"
-                   style="background-color:white;"> -->
-  <!-- 左上角网站首页入口 -->
   <div style="background-color:white;">
     <a-row type="flex"
            justify="space-between"
@@ -66,7 +63,6 @@
       </a-col>
     </a-row>
   </div>
-  <!-- </a-layout-header> -->
 </template>
 
 <script>
