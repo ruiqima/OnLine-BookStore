@@ -2,20 +2,10 @@
   <div>
     <!-- 走马灯 -->
     <a-carousel autoplay>
-      <div>
-        <img src="{caro.carouselUrl}"
-             style="width:100%;height:100%;"
-             v-for="caro in carousels"
-             :key="caro.carouselUrl" />
-      </div>
-      <div>
-        <h3>2</h3>
-      </div>
-      <div>
-        <h3>3</h3>
-      </div>
-      <div>
-        <h3>4</h3>
+      <div v-for="caro in carousels"
+           :key="caro.carouselUrl">
+        <img :src="caro.carouselUrl"
+             style="object-fit:contain;" />
       </div>
     </a-carousel>
   </div>
@@ -29,13 +19,13 @@ export default {
     return {
       carousels: [
         {          carouselId: 1,
-          carouselUrl: "../../assets/imgs/car1.jpg"        },
+          carouselUrl: "https://s1.ax1x.com/2020/04/08/GROCm4.jpg"        },
         {          carouselId: 2,
-          carouselUrl: "../../assets/imgs/car2.jpg"        },
+          carouselUrl: "https://s1.ax1x.com/2020/04/08/GRXAbQ.jpg"        },
         {          carouselId: 3,
-          carouselUrl: "../../assets/imgs/car3.jpg"        },
+          carouselUrl: "https://s1.ax1x.com/2020/04/08/GRXoZQ.jpg"        },
         {          carouselId: 4,
-          carouselUrl: "../../assets/imgs/car4.jpg"        }
+          carouselUrl: "https://s1.ax1x.com/2020/04/08/GRjteg.jpg"        }
       ]
     };
   },

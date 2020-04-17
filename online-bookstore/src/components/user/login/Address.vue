@@ -10,87 +10,90 @@
       </a-layout-sider>
       <a-layout>
         <Header />
-		<!-- 正文内容写在这一块 -->
+        <!-- 正文内容写在这一块 -->
         <a-layout>
           <a-layout-content style="background-color: white;">
             <div class="content">
-            <span id='tip'><p style="margin-left:3%;margin-top:2%;">收货地址</p></span>
-            <span style="color:#3e8331;text-align:left;margin-left:10%;">新增收货地址</span>
-            <div class='form'>
-              <a-form :form="form" @submit="handleSubmit">
-                  <a-form-item v-bind="formItemLayout" label="收货地址：">
-                <a-textarea v-model="address"/>
+              <span id='tip'>
+                <p style="margin-left:3%;margin-top:2%;">收货地址</p>
+              </span>
+              <span style="color:#3e8331;text-align:left;margin-left:10%;">新增收货地址</span>
+              <div class='form'>
+                <a-form :form="form"
+                        @submit="handleSubmit">
+                  <a-form-item v-bind="formItemLayout"
+                               label="收货地址：">
+                    <a-textarea v-model="address" />
                   </a-form-item>
-                  <a-form-item  v-bind="formItemLayout" label="收货人姓名：">
-                <a-input v-model='name'
-                  v-decorator="[
+                  <a-form-item v-bind="formItemLayout"
+                               label="收货人姓名：">
+                    <a-input v-model='name'
+                             v-decorator="[
                     {
                   rules: [
                   { type: 'array', required: true, message: '请填写收货人姓名' },
                           ],
                     },
-                              ]"
-                    />
+                              ]" />
                   </a-form-item>
-                  <a-form-item v-bind="formItemLayout" label="手机号码：">
+                  <a-form-item v-bind="formItemLayout"
+                               label="手机号码：">
                     <a-input v-model='phone'
-                    v-decorator="[
+                             v-decorator="[
                     'phone',
                     {
                     rules: [{ required: true, message: '请输入您的电话号码！' }],
                       },
                       ]"
-                      style="width: 100%"
-                    >
-                    <a-select
-                      slot="addonBefore"
-                      v-decorator="['prefix', { initialValue: '86' }]"
-                      style="width: 150px"
-                    >
-                    <a-select-option value="86">
-                      中国大陆 +86
-                    </a-select-option>
-                    <a-select-option value="852">
-                      中国香港 +852
-                    </a-select-option>
-                    </a-select>
-                      </a-input>
-                    </a-form-item>
-                    <a-form-item v-bind="tailFormItemLayout">
-                    <a-button type="primary" html-type="submit" style="width:60%;">
-                    保存
+                             style="width: 100%">
+                      <a-select slot="addonBefore"
+                                v-decorator="['prefix', { initialValue: '86' }]"
+                                style="width: 150px">
+                        <a-select-option value="86">
+                          中国大陆 +86
+                        </a-select-option>
+                        <a-select-option value="852">
+                          中国香港 +852
+                        </a-select-option>
+                      </a-select>
+                    </a-input>
+                  </a-form-item>
+                  <a-form-item v-bind="tailFormItemLayout">
+                    <a-button type="primary"
+                              html-type="submit"
+                              style="width:60%;">
+                      保存
                     </a-button>
-                    </a-form-item>
-              </a-form>
-            </div>
-            <span style="color:#3e8331;text-align:left;margin-left:10%;">已保存的地址</span>
-            <div class="table" style="width:90%;">
-              <a-table bordered :dataSource="dataSource" :columns="columns">
-              <template slot="operation" slot-scope="text, record">
-              <a-popconfirm
-               v-if="dataSource.length"
-                title="Sure to delete?"
-                @confirm="() => onDelete(record.key)"
-                >
-                <a href="javascript:;">Delete</a>
-                </a-popconfirm>
-              </template>
-            
-              
-              </a-table>
+                  </a-form-item>
+                </a-form>
+              </div>
+              <span style="color:#3e8331;text-align:left;margin-left:10%;">已保存的地址</span>
+              <div class="table"
+                   style="width:90%;">
+                <a-table bordered
+                         :dataSource="dataSource"
+                         :columns="columns">
+                  <template slot="operation"
+                            slot-scope="text, record">
+                    <a-popconfirm v-if="dataSource.length"
+                                  title="Sure to delete?"
+                                  @confirm="() => onDelete(record.key)">
+                      <a href="javascript:;">Delete</a>
+                    </a-popconfirm>
+                  </template>
 
-            </div>
+                </a-table>
+
+              </div>
             </div>
           </a-layout-content>
         </a-layout>
 
       </a-layout>
 
+      <!-- *****************下面一直到</template>都不用改****************** -->
 
-
-	<!-- *****************下面一直到</template>都不用改****************** -->
-
-	<!-- 这是整个界面最右侧的灰色sider区域，不用改这里~ -->
+      <!-- 这是整个界面最右侧的灰色sider区域，不用改这里~ -->
       <a-layout-sider style="background-color: #ececec;"
                       width="100px">
       </a-layout-sider>
@@ -105,16 +108,16 @@
 
 <script>
 import Header from '@/components/home/Header'
-import '/OnLine-BookStore/online-bookstore/global'
+import '../../../../global'
 
 export default {
-  data(){
-    return{
-      phone:'',
-      address:'',
-      name:'',
-      userId:0,
-    formItemLayout: {
+  data () {
+    return {
+      phone: '',
+      address: '',
+      name: '',
+      userId: 0,
+      formItemLayout: {
         labelCol: {
           xs: { span: 24 },
           sm: { span: 8 },
@@ -124,84 +127,84 @@ export default {
           sm: { span: 16 },
         },
       },
-    dataSource: [],
+      dataSource: [],
       columns: [
-          {
-            title: '收货人',
-            dataIndex: 'name',
-            width: '20%',
-            scopedSlots: { customRender: 'name' },
-          },
-          {
-            title: '详细地址',
-            dataIndex: 'address',
-          },
-          {
-            title: '电话/手机',
-            dataIndex: 'phone',
-          },
-          {
-            title: '操作',
-            dataIndex: 'operation',
-            scopedSlots: { customRender: 'operation' },
-          },
-          
-        ],
+        {
+          title: '收货人',
+          dataIndex: 'name',
+          width: '20%',
+          scopedSlots: { customRender: 'name' },
+        },
+        {
+          title: '详细地址',
+          dataIndex: 'address',
+        },
+        {
+          title: '电话/手机',
+          dataIndex: 'phone',
+        },
+        {
+          title: '操作',
+          dataIndex: 'operation',
+          scopedSlots: { customRender: 'operation' },
+        },
+
+      ],
     }
   },
-  mounted(){
-    this.userId=global.userId;
+  mounted () {
+    this.userId = global.userId;
     this.loadData();
   },
-  methods:{
-    onDelete(key) {
-        const dataSource = [...this.dataSource];
-        this.dataSource = dataSource.filter(item => item.key !== key);
-      },
-    handleSubmit(e) {
-      var _this=this;
+  methods: {
+    onDelete (key) {
+      const dataSource = [...this.dataSource];
+      this.dataSource = dataSource.filter(item => item.key !== key);
+    },
+    handleSubmit (e) {
+      var _this = this;
       e.preventDefault();
       console.log(this.name);
       console.log(this.address);
       console.log(this.phone);
-      this.axios.post('/api/address/user/'+this.userId,{
-        name:this.name,
-        address:this.address,
-        phone:this.phone
+      this.axios.post('/api/address/user/' + this.userId, {
+        name: this.name,
+        address: this.address,
+        phone: this.phone
       })
-      .then(function (response) {
-        console.log(response);
-        if(response.data==true){
-          alert("保存成功！");
-        }
-        _this.loadData();
+        .then(function (response) {
+          console.log(response);
+          if (response.data == true) {
+            alert("保存成功！");
+          }
+          _this.loadData();
         })
-      .catch(function (error) {
-        console.log(error);
+        .catch(function (error) {
+          console.log(error);
         });
     },
-    loadData(){
-      var _this=this;
-       this.axios.get('/api/address/user/'+this.userId,
+    loadData () {
+      var _this = this;
+      this.axios.get('/api/address/user/' + this.userId,
         {
-          params:{
-            page:0,
-            size:10,
+          params: {
+            page: 0,
+            size: 10,
           }
         })
         .then(function (response) {
-        // handle success
-        
-        console.log(response.data.data);
-        let val=response.data.data;
-        console.log(val);
-        _this.dataSource=response.data.data;
-        console.log(this.dataSource);
+          // handle success
+
+          console.log(response.data.data);
+          let val = response.data.data;
+          console.log(val);
+          _this.dataSource = response.data.data;
+          console.log(this.dataSource);
         })
         .catch(function (error) {
-        // handle error
-        console.log(error);
-          })
+          // handle error
+          console.log(error);
+        })
     }
 
   },
@@ -212,29 +215,27 @@ export default {
 </script>
 
 <style scoped>
-	/*注意文件路径*/
-@import url("../../../assets/css/homepage.css");	
-.table{
-  margin-left:5%;
-  margin-top:2%;
+/*注意文件路径*/
+@import url("../../../assets/css/homepage.css");
+.table {
+  margin-left: 5%;
+  margin-top: 2%;
 }
-.form{
+.form {
   display: inline-flex;
   justify-content: center;
-  width:70%;
-  margin:5%;
-
+  width: 70%;
+  margin: 5%;
 }
-.content{
+.content {
   display: flex;
   flex-direction: column;
-
-}		
-#tip{
-    font-size:18px;
-    text-align: left;
-    background-color: whitesmoke;
-    width:90%;
-    margin:2%;
-}	
+}
+#tip {
+  font-size: 18px;
+  text-align: left;
+  background-color: whitesmoke;
+  width: 90%;
+  margin: 2%;
+}
 </style>

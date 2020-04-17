@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import '../../../global'
 export default {
   props: {
     bookDatas: {
@@ -74,19 +75,21 @@ export default {
       default: 1
     },
     userId: {
-      type: Number
+      type: Number,
+      default: global.userId
     }
   },
   watch: {
-    'bookDatas': function (val) {
+    'bookDatas': async function (val) {
       var _this = this
       _this.books = val.data
       _this.i = 0
+      console.log(_this.books)
 
       for (; _this.i < _this.books.length; _this.i++) {
         var isbn = _this.books[_this.i].isbn
         //获取总评论数
-        _this.axios.get('/api/comment/book/' + isbn, {
+        await _this.axios.get('/api/comment/book/' + isbn, {
           params: {
             page: _this.current - 1,
             size: 5
@@ -94,17 +97,21 @@ export default {
         })
           .then(function (response) {
             //评论总数
-            _this.$set(_this.books[_this.i - 1], 'commentsNum', response.data.totalElements)
+            console.log(_this.i)
+            _this.$set(_this.books[_this.i], 'commentsNum', response.data.totalElements)
           })
           .catch(function (error) {
             console.log(error);
           });
         //获取星级
-        _this.axios.get('/api/comment/book/' + isbn + '/stars', {
+        await _this.axios.get('/api/comment/book/' + _this.books[_this.i].isbn + '/stars', {
         })
           .then((response) => {
+            console.log(isbn)
+            console.log(response)
             //星级
-            _this.$set(_this.books[_this.i - 1], 'value', response.data)
+            _this.$set(_this.books[_this.i], 'value', response.data)
+            console.log(_this.books[_this.i])
           })
           .catch(function (error) {
             console.log(error);
@@ -124,7 +131,7 @@ export default {
     },
     async addtocart (isbn) {
       var _this = this
-      await _this.axios.get('/api/cart/' + _this.userId)
+      await _this.axios.get('/api/cart/' + global.userId)
         .then(async function (response) {
           console.log(response)
           let products = response.data
@@ -141,7 +148,7 @@ export default {
         });
 
       if (_this.flag) {     //修改数量，不重新加入
-        _this.axios.put('/api/cart/' + _this.userId, {
+        _this.axios.put('/api/cart/' + global.userId, {
           isbn: isbn,
           count: _this.count
         })
@@ -154,7 +161,7 @@ export default {
             }
           })
       } else {          //加入购物车
-        _this.axios.post('/api/cart/' + _this.userId, {
+        _this.axios.post('/api/cart/' + global.userId, {
           isbn: isbn,
           count: 1
         })
