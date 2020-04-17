@@ -1,8 +1,9 @@
-// *****************************************
-
-//  作者：马睿祺、胡思成
-
-// *****************************************
+/*
+--Created by 
+--Hu Sicheng 2017302580096--
+--          and         ---
+-- 马睿祺 2017302580166 ----
+*/
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -20,18 +21,3 @@ new Vue({
   render: (h) => h(App),
   router,
 }).$mount('#app')
-
-// axios({
-//   method: 'post',
-//   url: '/api/user/customer/authentication',
-//   data: {
-//     username: '小小小王子',
-//     password: '111'
-//   }
-// })
-//   .then(function(response) {
-//     alert(response)
-//   })
-//   .catch(function(error) {
-//     alert(error)
-//   })

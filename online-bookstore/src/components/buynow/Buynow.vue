@@ -1,3 +1,7 @@
+<!--
+--Created by Hu Sicheng 2017302580096--
+-- on 2020/4/17
+-->
 <!--这个页面即是结算页，也是立即购买页-->
 <template>
   <a-layout style="background-color: #ececec;">

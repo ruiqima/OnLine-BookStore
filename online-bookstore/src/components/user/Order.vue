@@ -1,3 +1,7 @@
+<!--
+--Created by Hu Sicheng 2017302580096--
+-- on 2020/4/17
+-->
 <template>
   <a-layout style="background-color: #ececec;">
     <a-layout style="background-color: #ececec;">
@@ -10,50 +14,101 @@
         <a-layout>
           <a-layout-content style="background-color: white;">
             <div style="margin:2%; font-size:16px;">
-              <a-tabs :defaultActiveKey="key"
-                      @change="callback">
-                <a-tab-pane tab="所有订单"
-                            key="1">
-                  <div v-if="allOrders.length==0">没有符合要求的订单呢~</div>
-                  <div class='content'
-                       v-for="order in allOrders"
-                       :key="order.orderId">
-                    <div class='banner'>
-                      <span style="margin-right:5px">{{formatDate(order.time,order)}}</span>
-                      <span>订单号：{{order.orderId}}</span>
-                    </div>
-                    <div class='orderform'>
-                      <div style="width:55%">
-                        <div class='cart-content'
-                             v-for="pitem in order.products"
-                             :key="pitem.isbn">
-                          <div style="display:flex;flex-direction:row;justify-content:space-around;align-items:center;">
-                            <img :src='pitem.book.coverUrl'
-                                 style="width:10%;" />
-                            <div>{{pitem.book.title}}</div>
-                            <div>X{{pitem.count}}</div>
-                          </div>
-                        </div>
+            <a-tabs :defaultActiveKey="key" @change="callback">
+            <a-tab-pane tab="所有订单" key="1">
+              <div v-if="allOrders.length==0">没有符合要求的订单呢~</div>
+              <div class='content' v-for="order in allOrders" :key="order.orderId">
+                <div class='banner'>
+                  <span style="margin-right:5px">{{formatDate(order.time,order)}}</span>
+                  <span>订单号：{{order.orderId}}</span>
+                </div>
+                <div class='orderform'>
+                  <div style="width:55%" >
+                    <div class='cart-content' v-for="pitem in order.products" :key="pitem.isbn">
+                      <div style="display:flex;flex-direction:row;justify-content:space-around;align-items:center;">
+                        <img :src='pitem.book.coverUrl' style="width:10%;" />
+                        <div>{{pitem.book.title}}</div>
+                        <div>X{{pitem.count}}</div>
                       </div>
-                      <div class='others'>
-                        <a-popover :title='order.name'
-                                   placement="leftTop">
-                          <template slot="content">
-                            <p>{{order.address}}</p>
-                            <p>{{order.phone}}</p>
-                          </template>
-                          <span>收货人</span>
-                          <br />
-                          <a-button style="margin:4%;"
-                                    type="primary">{{order.name}}</a-button>
-                        </a-popover>
-                      </div>
-                      <div style="width:10%;padding-top:1%;  border: #cdcdcd solid 1px;">
-                        <span>总额：￥{{order.paidPrice}}</span>
-                        <hr style="width:80%;" />
-                        <span>在线支付</span>
+                  </div>
+                  </div>
+              <div class='others'>
+               <a-popover :title='order.name' placement="leftTop">
+                <template slot="content">
+                <p>{{order.address}}</p>
+                <p>{{order.phone}}</p>
+                </template>
+                <span>收货人</span>
+                <br/>
+                  <a-button style="margin:4%;" type="primary">{{order.name}}</a-button>
+                </a-popover>
+              </div>
+              <div style="width:10%;padding-top:1%;  border: #cdcdcd solid 1px;">
+                <span>总额：￥{{order.paidPrice}}</span>
+                <hr style="width:80%;"/>
+                <span>在线支付</span>
 
-                      </div>
+              </div>
+              <div style="width:10%;padding-top:1%;  border: #cdcdcd solid 1px;">
+                <a-popover placement="leftTop" >
+                <template slot="content" v-if="order.status=='待收货' ">
+                  <a-timeline>
+                  <a-timeline-item>已付款</a-timeline-item>
+                  <a-timeline-item>待收货</a-timeline-item>
+                  <a-timeline-item>待评价</a-timeline-item>
+                  <a-timeline-item>已完成</a-timeline-item>
+                </a-timeline>
+                <p>派送中...</p>
+                <p>您现在在待收货状态，请耐心等待</p>
+                </template>
+                <template slot="content" v-if="order.status=='已付款' ">
+                  <a-timeline>
+                  <a-timeline-item>已付款</a-timeline-item>
+                  <a-timeline-item>待收货</a-timeline-item>
+                  <a-timeline-item>待评价</a-timeline-item>
+                  <a-timeline-item>已完成</a-timeline-item>
+                </a-timeline>
+                <p>您现在在已付款状态~</p>
+                <p>耐心等待发货吧~</p>
+                </template>
+                <template slot="content" v-if="order.status=='待评价'">
+                  <a-timeline>
+                  <a-timeline-item>已付款</a-timeline-item>
+                  <a-timeline-item>待收货</a-timeline-item>
+                  <a-timeline-item>待评价</a-timeline-item>
+                  <a-timeline-item>已完成</a-timeline-item>
+                </a-timeline>
+                <p>商品已经收到啦，还满意吗？</p>
+                </template>
+                <template slot="content" v-if="order.status=='已评价'">
+                  <a-timeline>
+                  <a-timeline-item>已付款</a-timeline-item>
+                  <a-timeline-item>待收货</a-timeline-item>
+                  <a-timeline-item>待评价</a-timeline-item>
+                  <a-timeline-item>已完成</a-timeline-item>
+                </a-timeline>
+                <p>您的订单已完成</p>
+                </template>
+                  <span slot="title">物流信息</span>
+                  <a-icon type="car" />物流信息
+                </a-popover>
+              </div>
+              <div class='buttons' v-if="order.status=='已付款'">
+                <a-button type="primary" style="width:50%;margin:2%;" @click="ensure(order)">确认收货</a-button>
+                <a @click="deleteOrder(order)">取消订单</a>
+              </div>
+              <div class='button' v-if="order.status=='待收货'" >
+                <a-button type="primary" style="width:50%;margin:2%;" @click="ensure(order)">确认收货</a-button>
+              </div>
+              <div class='buttons' v-if="order.status=='待评价'">
+                <a-button type="primary" style="width:50%;margin:2%;" @click="comment(order)">点击评论</a-button>
+                <a @click="deleteOrder(order)">删除订单</a>
+              </div>
+              <div class='buttons' v-if="order.status=='已评价'">
+                <a @click="deleteOrder(order)">删除订单</a>
+              </div>
+
+              
                       <div style="width:10%;padding-top:1%;  border: #cdcdcd solid 1px;">
                         <a-popover placement="leftTop">
                           <template slot="content"
@@ -116,6 +171,7 @@
 
                     </div>
 
+                  
                   </div>
                 </a-tab-pane>
 
