@@ -1,3 +1,8 @@
+// *****************************************
+
+//  作者：马睿祺、胡思成
+
+// *****************************************
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -17,73 +22,71 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path:'/comment',
-    name:'Comment',
-    component:Comment
-
+    path: '/comment',
+    name: 'Comment',
+    component: Comment,
   },
   {
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/results',
     name: 'SearchResult',
-    component: SearchResult
+    component: SearchResult,
   },
   {
     path: '/detail',
     name: 'BookDetail',
-    component: BookDetail
+    component: BookDetail,
   },
   {
     path: '/',
     name: 'Login',
-    component: Login
+    component: Login,
   },
   {
     path: '/user/registry',
     name: 'Registry',
-    component: Registry
+    component: Registry,
   },
   {
     path: '/user/address',
     name: 'Address',
-    component: Address
+    component: Address,
   },
   {
-    path:'user/cart',
-    name:'Cart',
-    component:Cart
+    path: 'user/cart',
+    name: 'Cart',
+    component: Cart,
   },
   {
-    path:'user',
-    name:'User',
-    component:User
+    path: 'user',
+    name: 'User',
+    component: User,
   },
   {
-    path:'user/edit',
-    name:'Edit',
-    component:Edit
+    path: 'user/edit',
+    name: 'Edit',
+    component: Edit,
   },
   {
-    path:'user/order',
-    name:'Order',
-    component:Order
-
+    path: 'user/order',
+    name: 'Order',
+    component: Order,
   },
   {
-    path:'/detail/buynow',
-    name:'Buynow',
-    component:Buynow
-  }
+    path: '/detail/buynow',
+    name: 'Buynow',
+    component: Buynow,
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router

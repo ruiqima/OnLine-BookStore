@@ -1,4 +1,9 @@
 // vue.config.js
+// *****************************************
+
+//  作者：马睿祺、胡思成
+
+// *****************************************
 module.exports = {
   css: {
     loaderOptions: {
@@ -6,11 +11,11 @@ module.exports = {
         modifyVars: {
           'primary-color': '#3e8331',
           'link-color': '##3e8331',
-          'border-radius-base': '2px'
+          'border-radius-base': '2px',
         },
-        javascriptEnabled: true
-      }
-    }
+        javascriptEnabled: true,
+      },
+    },
   },
   devServer: {
     proxy: {
@@ -20,9 +25,9 @@ module.exports = {
         changeOrigin: true, // cnpm 虚拟的站点需要更管origin
         pathRewrite: {
           //重写路径 比如'/api/aaa/ccc'重写为'/aaa/ccc'
-          '^/api': ''
-        }
-      }
-    }
-  }
+          '^/api': '',
+        },
+      },
+    },
+  },
 }

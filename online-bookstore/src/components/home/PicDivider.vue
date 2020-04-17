@@ -1,4 +1,9 @@
 <template>
+  <!-- *****************************************
+
+ 作者：马睿祺
+
+***************************************** -->
   <div class="pic-divider">
     <img src="https://s1.ax1x.com/2020/04/08/GRxPv6.jpg"
          class="img-divider"
