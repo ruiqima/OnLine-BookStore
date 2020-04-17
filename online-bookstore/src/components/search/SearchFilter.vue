@@ -1,9 +1,9 @@
 <template>
-  <!-- *****************************************
+  <!-- ********************************
 
- 作者：马睿祺
+        created by：马睿祺 2017302580166
 
-***************************************** -->
+    *********************************** -->
   <div style="display:flex;justify-content:space-between;margin-top:30px;background-color:#f5f5f5;">
     <span class="card-title-text"
           style="margin-left:30px;">搜索结果</span>
