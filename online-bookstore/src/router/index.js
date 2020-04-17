@@ -1,3 +1,10 @@
+/*
+--Created by 
+--Hu Sicheng 2017302580096--
+----------and---------------
+--Ma Ruiqi------------------
+-- on 2020/4/17
+*/
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -9,7 +16,6 @@ import Registry from '../components/user/login/Registry.vue'
 import Address from '../components/user/login/Address.vue'
 import Cart from '../components/cart/Cart.vue'
 import User from '../components/user/User.vue'
-import Edit from '../components/user/Edit.vue'
 import Order from '../components/user/Order.vue'
 import Buynow from '../components/buynow/Buynow.vue'
 import Comment from '../components/comment/Comment.vue'
@@ -61,11 +67,6 @@ const routes = [
     path:'user',
     name:'User',
     component:User
-  },
-  {
-    path:'user/edit',
-    name:'Edit',
-    component:Edit
   },
   {
     path:'user/order',

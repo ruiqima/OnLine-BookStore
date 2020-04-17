@@ -1,3 +1,7 @@
+<!--
+--Created by Hu Sicheng 2017302580096--
+-- on 2020/4/17
+-->
 <template>
   <a-layout style="background-color: #ececec;">
     <a-layout style="background-color: #ececec;">
@@ -52,6 +56,7 @@
                   <a-timeline-item>已付款</a-timeline-item>
                   <a-timeline-item>待收货</a-timeline-item>
                   <a-timeline-item>待评价</a-timeline-item>
+                  <a-timeline-item>已完成</a-timeline-item>
                 </a-timeline>
                 <p>派送中...</p>
                 <p>您现在在待收货状态，请耐心等待</p>
@@ -61,6 +66,7 @@
                   <a-timeline-item>已付款</a-timeline-item>
                   <a-timeline-item>待收货</a-timeline-item>
                   <a-timeline-item>待评价</a-timeline-item>
+                  <a-timeline-item>已完成</a-timeline-item>
                 </a-timeline>
                 <p>您现在在已付款状态~</p>
                 <p>耐心等待发货吧~</p>
@@ -70,8 +76,18 @@
                   <a-timeline-item>已付款</a-timeline-item>
                   <a-timeline-item>待收货</a-timeline-item>
                   <a-timeline-item>待评价</a-timeline-item>
+                  <a-timeline-item>已完成</a-timeline-item>
                 </a-timeline>
                 <p>商品已经收到啦，还满意吗？</p>
+                </template>
+                <template slot="content" v-if="order.status=='已评价'">
+                  <a-timeline>
+                  <a-timeline-item>已付款</a-timeline-item>
+                  <a-timeline-item>待收货</a-timeline-item>
+                  <a-timeline-item>待评价</a-timeline-item>
+                  <a-timeline-item>已完成</a-timeline-item>
+                </a-timeline>
+                <p>您的订单已完成</p>
                 </template>
                   <span slot="title">物流信息</span>
                   <a-icon type="car" />物流信息

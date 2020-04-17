@@ -1,12 +1,13 @@
+<!--
+--Created by Hu Sicheng 2017302580096--
+-- on 2020/4/17
+-->
 <template>
   <a-layout style="background-color: #ececec;">
     <a-layout style="background-color: #ececec;">
       <a-layout-sider style="background-color: #ececec;"
                       width="100px">
       </a-layout-sider>
-      <!-- *****************上面都不用改****************** -->
-
-      <!-- 这个a-layout是除了左右两个灰色sider，正中间那一块，包括header和它下面的正文部分 -->
       <a-layout>
         <Header />
         <!-- 正文内容写在这一块 -->
